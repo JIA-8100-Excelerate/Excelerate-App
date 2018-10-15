@@ -9,6 +9,7 @@ class Register extends Component {
     this.state = {
       email: '',
       password: '',
+      password_confirmation: '',
       firstName: '',
       lastName: '',
     }
@@ -28,11 +29,39 @@ class Register extends Component {
     //     }
     // });
     console.log("rip");
+    var params = {
+      email: this.state.email,
+      password: this.state.password,
+      password_confirmation: this.state.password_confirmation,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+    }
+    serverFetch('POST', 'signup', params)
+      .then((res) => {
+        if(res.message) {
+          Alert.alert("Invalid credentials");
+        }
+        else {
+          console.log("hello!");
+          navigate('Register', { name: 'Jane' });
+        }
+    });
+
   }
    render() {
     return(
       <View style={styles.container}>
         <Logo/>
+        <TextInput onChangeText={(value) => this.setState({firstName: value})}
+          style={styles.inputBox}
+          placeholder="First Name"
+          placeholderTextColor="white"
+          />
+          <TextInput onChangeText={(value) => this.setState({lastName: value})}
+          style={styles.inputBox}
+          placeholder="Last Name"
+          placeholderTextColor="white"
+          />
         <TextInput onChangeText={(value) => this.setState({email: value})}
         style={styles.inputBox}
           placeholder="Email"
@@ -43,17 +72,13 @@ class Register extends Component {
           placeholder="Password"
           secureTextEntry={true}
           placeholderTextColor="white"
-          />
-          <TextInput onChangeText={(value) => this.setState({firstName: value})}
+          />  
+          <TextInput onChangeText={(value) => this.setState({password_confirmation: value})}
           style={styles.inputBox}
-          placeholder="First Name"
+          placeholder="Confirm Password"
+          secureTextEntry={true}
           placeholderTextColor="white"
-          />
-          <TextInput onChangeText={(value) => this.setState({lastName: value})}
-          style={styles.inputBox}
-          placeholder="Last Name"
-          placeholderTextColor="white"
-          />
+          />  
           <View style={styles.button}>
             <Button   
             onPress={this.handleSubmit}
