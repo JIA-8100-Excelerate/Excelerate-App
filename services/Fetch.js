@@ -1,15 +1,12 @@
-export const serverFetch = (email, password) => {
+export const serverFetch = (method, endpoint, params) => {
   const apiBaseUrl = "https://excelerate-api.herokuapp.com/";
-  return fetch(apiBaseUrl + 'auth/login', {
-    method: 'POST',
+  return fetch(apiBaseUrl + endpoint, {
+    method: method,
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      email: email,
-      password: password,
-    }),
+    body: JSON.stringify(params)
   })
   .then((response) => response.json());
   // .then(res => res.text())          // convert to plain text

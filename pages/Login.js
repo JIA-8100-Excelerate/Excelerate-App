@@ -17,7 +17,11 @@ class Login extends Component {
   }
   handleSubmit() {
     const { navigate } = this.props.navigation;
-    serverFetch(this.state.email, this.state.password)
+    var params = {
+      email: this.state.email,
+      password: this.state.password
+    }
+    serverFetch('POST', 'auth/login', params)
       .then((res) => {
         if(res.message) {
           Alert.alert("Invalid credentials");
