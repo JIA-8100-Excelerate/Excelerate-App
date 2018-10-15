@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Alert, Text, View, StyleSheet, TextInput, TouchableOpacity, Button} from 'react-native';
 import {StackActions, NavigationActions} from 'react-navigation';
 import Logo from '../components/Logo';
+import { serverFetch } from '../services/Fetch';
 
 class Register extends Component {
   constructor(props) {
@@ -16,34 +17,22 @@ class Register extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleSubmit() {
-    // const { navigate } = this.props.navigation;
-    // serverFetch(this.state.email, this.state.password)
-    //   .then((res) => {
-    //     if(res.message) {
-    //       Alert.alert("Invalid credentials");
-    //     }
-    //     else {
-    //       console.log("hello!");
-    //       console.log(res.auth_token);
-    //       navigate('Register', { name: 'Jane' });
-    //     }
-    // });
-    console.log("rip");
+    const { navigate } = this.props.navigation;
     var params = {
       email: this.state.email,
       password: this.state.password,
       password_confirmation: this.state.password_confirmation,
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
+      firstname: this.state.firstName,
+      lastname: this.state.lastName,
     }
     serverFetch('POST', 'signup', params)
       .then((res) => {
-        if(res.message) {
-          Alert.alert("Invalid credentials");
+        if(!res.auth_token) {
+          console.log(res.message);
         }
         else {
-          console.log("hello!");
-          navigate('Register', { name: 'Jane' });
+          console.log("worked");
+          navigate('Login', { name: 'Jane' });
         }
     });
 
