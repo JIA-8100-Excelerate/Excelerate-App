@@ -29,10 +29,11 @@ class Register extends Component {
       .then((res) => {
         if(!res.auth_token) {
           console.log(res.message);
+          Alert.alert(res.message);
         }
         else {
           console.log("worked");
-          navigate('Login', { name: 'Jane' });
+          navigate('Set_Goal_Step1', { name: this.state.firstName });
         }
     });
 

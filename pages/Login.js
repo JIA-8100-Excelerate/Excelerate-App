@@ -19,7 +19,7 @@ class Login extends Component {
     const { navigate } = this.props.navigation;
     var params = {
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
     }
     serverFetch('POST', 'auth/login', params)
       .then((res) => {
@@ -29,7 +29,9 @@ class Login extends Component {
         else {
           console.log("hello!");
           console.log(res.auth_token);
-          navigate('Register', { name: 'Jane' });
+          navigate('Set_Goal_Step1', { 
+            name: "Bob"
+          });
         }
     });
   }
