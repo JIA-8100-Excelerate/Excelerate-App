@@ -25,30 +25,30 @@ class Set_Goal_Step1 extends Component {
         <View
           style={styles.line}
         /> 
-        <CheckBox rightTextStyle={styles.titleText}
+        <CheckBox style={{padding: 60, marginTop: 60}}
           style={{color: 'red', fontSize: 40}}
           label='Social'
-          checked={this.state.checked}
+          socialChecked={this.state.socialChecked}
           onChange={(value) => this.setState({socialChecked: !value})}
         />
         <CheckBox 
           label='Physical'
-          checked={this.state.checked}
+          physicalChecked={this.state.physicalChecked}
           onChange={(value) => this.setState({physicalChecked: !value})}
         />
         <CheckBox 
           label='Academic'
-          checked={this.state.checked}
+          academicChecked={this.state.academicChecked}
           onChange={(value) => this.setState({academicChecked: !value})}
         />
         <CheckBox 
           label='Cooking'
-          checked={this.state.checked}
+          cookingChecked={this.state.cookingChecked}
           onChange={(value) => this.setState({cookingChecked: !value})}
         />
         <CheckBox    
           label='Career'
-          checked={this.state.checked}
+          careerChecked={this.state.careerChecked}
           onChange={(value) => this.setState({careerChecked: !value})}
         />
       </View>
@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
     borderBottomColor: 'white',
     borderBottomWidth: 5,
     marginTop: 10,
+    marginBottom: 50
   },
   box: {
     marginTop: 50,
