@@ -3,8 +3,7 @@ import {Button, Text, View, StyleSheet, TextInput, TouchableOpacity, Alert} from
 import {StackActions, NavigationActions} from 'react-navigation';
 
 import Logo from '../components/Logo';
-import { serverFetch } from '../services/Fetch';
-//import LoginForm from '../components/LoginForm';
+import { serverFetch, serverGet } from '../services/Fetch';
 
 class Login extends Component {
   constructor(props) {
@@ -13,8 +12,17 @@ class Login extends Component {
       email: '',
       password: '',
     }
+    this.getName = this.getName.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  getName(token) {
+    serverGet('profile', token)
+      .then((res => {
+        return res.firstname;
+      }));
+  }
+
   handleSubmit() {
     const { navigate } = this.props.navigation;
     var params = {
@@ -27,10 +35,11 @@ class Login extends Component {
           Alert.alert("Invalid credentials");
         }
         else {
-          console.log("hello!");
-          console.log(res.auth_token);
+          myName = serverGet('profile', res.auth_token).then((res => {
+            res.firstname;
+          }));
           navigate('Set_Goal', { 
-            name: "Bob"
+            name: myName,
           });
         }
     });

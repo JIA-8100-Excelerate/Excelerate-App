@@ -22,6 +22,6 @@ export default createStackNavigator({
     screen: Action,
   },
 }, {
-    initialRouteName: 'Register',
+    initialRouteName: 'Login',
 });
 
