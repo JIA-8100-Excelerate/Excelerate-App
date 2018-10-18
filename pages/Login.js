@@ -29,7 +29,7 @@ class Login extends Component {
         else {
           console.log("hello!");
           console.log(res.auth_token);
-          navigate('Set_Goal_Step1', { 
+          navigate('Set_Goal', { 
             name: "Bob"
           });
         }

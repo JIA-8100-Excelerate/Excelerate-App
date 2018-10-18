@@ -5,8 +5,8 @@ import { createStackNavigator, StackActions, NavigationActions } from 'react-nav
 
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Set_Goal_Step1 from './pages/Set_Goal_Step1';
-
+import Set_Goal from './pages/Set_Goal';
+import Action from './pages/Action';
 
 export default createStackNavigator({
   Login: {
@@ -15,10 +15,13 @@ export default createStackNavigator({
   Register: {
     screen: Register,
   },
-  Set_Goal_Step1: {
-    screen: Set_Goal_Step1,
+  Set_Goal: {
+    screen: Set_Goal,
+  },
+  Action: {
+    screen: Action,
   },
 }, {
-    initialRouteName: 'Set_Goal_Step1',
+    initialRouteName: 'Register',
 });
 

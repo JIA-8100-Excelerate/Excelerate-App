@@ -33,7 +33,7 @@ class Register extends Component {
         }
         else {
           console.log("worked");
-          navigate('Set_Goal_Step1', { name: this.state.firstName });
+          navigate('Set_Goal', { name: this.state.firstName });
         }
     });
 

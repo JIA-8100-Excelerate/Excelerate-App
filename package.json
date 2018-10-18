@@ -1,5 +1,5 @@
 {
-  "name": "excelerate_zack",
+  "name": "excelerate",
   "version": "0.0.0",
   "description": "No description",
   "author": null,
@@ -9,6 +9,7 @@
     "expo": "^30.0.0",
     "react": "16.3.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
+    "react-native-check-box": "^2.1.5",
     "react-native-checkbox": "^2.0.0",
     "react-navigation": "2.7.0"
   }
