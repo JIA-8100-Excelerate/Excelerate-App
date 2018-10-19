@@ -12,6 +12,7 @@ class Action extends Component {
      }
   }
    render() {
+    const { navigate } = this.props.navigation;
     const firstName = this.props.navigation.getParam('name', 'BOB');
     console.log(firstName);
     console.log(this.state.socialChecked); 
@@ -46,12 +47,7 @@ class Action extends Component {
                 color='#ffffff'
                 fontSize = '30'
                 onPress={() => {
-                  this.props.navigation.dispatch(StackActions.reset({
-                    index: 0,
-                    actions: [
-                      NavigationActions.navigate({ routeName: 'Set_Goal' })
-                    ],
-              }))
+                  navigate('Set_Goal', { name: firstName });
             }}
           />       
         </View>    

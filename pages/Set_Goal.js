@@ -16,13 +16,13 @@ class Set_Goal extends Component {
      }
   }
    render() {
-    const name = this.props.navigation.getParam('name', 'BOB');
-    console.log(name);
+    const { navigate } = this.props.navigation;
+    const firstName = this.props.navigation.getParam('name', 'BOB');
     console.log(this.state.socialChecked); 
     
     return(
       <View style={styles.container}>
-        <Text style={styles.titleText}> Hi {name},</Text>
+        <Text style={styles.titleText}> Hi {firstName},</Text>
         <Text style={styles.titleText}> Let's Set a Goal! </Text> 
         <View
           style={styles.line}
@@ -109,12 +109,7 @@ class Set_Goal extends Component {
                 title= "Next"
                 color='#ffffff'
                 onPress={() => {
-                  this.props.navigation.dispatch(StackActions.reset({
-                    index: 0,
-                    actions: [
-                      NavigationActions.navigate({ routeName: 'Action' })
-                    ],
-              }))
+                  navigate('Action', { name: firstName });
             }}
           />       
         </View>   
