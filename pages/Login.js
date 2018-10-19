@@ -17,10 +17,11 @@ class Login extends Component {
   }
 
   getName(token) {
+    const { navigate } = this.props.navigation;
     serverGet('profile', token)
-      .then((res => {
-        return res.firstname;
-      }));
+      .then((res) => {
+        navigate('Set_Goal', { name: res.firstname });
+      })
   }
 
   handleSubmit() {
@@ -35,12 +36,7 @@ class Login extends Component {
           Alert.alert("Invalid credentials");
         }
         else {
-          myName = serverGet('profile', res.auth_token).then((res => {
-            res.firstname;
-          }));
-          navigate('Set_Goal', { 
-            name: myName,
-          });
+          this.getName(res.auth_token);      
         }
     });
   }
