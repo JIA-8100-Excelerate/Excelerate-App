@@ -114,16 +114,16 @@ class Set_Goal extends Component {
                   if(this.state.socialChecked && !this.state.physicalChecked && !this.state.academicChecked 
                     && !this.state.cookingChecked && !this.state.careerChecked && this.state.customizedGoal == '') {
                     navigate('Social_Action', { name: firstName });
-                  } else if(this.state.physicalChecked && !this.state.socicalChecked && !this.state.academicChecked 
+                  } else if(this.state.physicalChecked && !this.state.socialChecked && !this.state.academicChecked 
                     && !this.state.cookingChecked && !this.state.careerChecked && this.state.customizedGoal == '') {
                     navigate('Physical_Action', { name: firstName });
-                  } else if(this.state.academicChecked && !this.state.socicalChecked && !this.state.physicalChecked 
+                  } else if(this.state.academicChecked && !this.state.socialChecked && !this.state.physicalChecked 
                     && !this.state.cookingChecked && !this.state.careerChecked && this.state.customizedGoal == '') {
                     navigate('Academic_Action', { name: firstName });
-                  } else if(this.state.cookingChecked && !this.state.socicalChecked && !this.state.academicChecked 
+                  } else if(this.state.cookingChecked && !this.state.socialChecked && !this.state.academicChecked 
                     && !this.state.physicalChecked && !this.state.careerChecked && this.state.customizedGoal == '') {
                     navigate('Cooking_Action', { name: firstName });
-                  } else if(this.state.careerChecked && !this.state.socicalChecked && !this.state.academicChecked 
+                  } else if(this.state.careerChecked && !this.state.socialChecked && !this.state.academicChecked 
                     && !this.state.cookingChecked && !this.state.physicalChecked && this.state.customizedGoal == '') {
                     navigate('Career_Action', { name: firstName });
                   } else if(this.state.customizedGoal != '' && !this.state.socialChecked && !this.state.physicalChecked 
