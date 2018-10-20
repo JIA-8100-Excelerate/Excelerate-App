@@ -36,7 +36,7 @@ class Register extends Component {
     });
 
   }
-   render() {
+  render() {
     const { navigate } = this.props.navigation;
     return(
       <View style={styles.container}>
@@ -45,51 +45,49 @@ class Register extends Component {
           style={styles.inputBox}
           placeholder="First Name"
           placeholderTextColor="white"
-          />
-          <TextInput onChangeText={(value) => this.setState({lastName: value})}
+        />
+        <TextInput onChangeText={(value) => this.setState({lastName: value})}
           style={styles.inputBox}
           placeholder="Last Name"
           placeholderTextColor="white"
-          />
+        />
         <TextInput onChangeText={(value) => this.setState({email: value})}
-        style={styles.inputBox}
+          style={styles.inputBox}
           placeholder="Email"
           placeholderTextColor="white"
-          />
-          <TextInput onChangeText={(value) => this.setState({password: value})}
+        />
+        <TextInput onChangeText={(value) => this.setState({password: value})}
           style={styles.inputBox}
           placeholder="Password"
           secureTextEntry={true}
           placeholderTextColor="white"
-          />  
-          <TextInput onChangeText={(value) => this.setState({password_confirmation: value})}
+        />  
+        <TextInput onChangeText={(value) => this.setState({password_confirmation: value})}
           style={styles.inputBox}
           placeholder="Confirm Password"
           secureTextEntry={true}
           placeholderTextColor="white"
-          />  
-          <View style={styles.button}>
-            <Button   
+        />
+        <View style={styles.button}>
+          <Button   
             onPress={this.handleSubmit}
             title= "Register"
             color='#ffffff'
-            >
-            </Button>
-          </View>
+          />
+        </View>
         <View style={styles.signupTextCont}>
           <Text style={styles.signupText}> Already have an account?</Text>
-          <Button
+            <Button
               title= "Login here!"
               color='#ffffff'
               fontSize = '30'
               fontWeight = '900'
               onPress={() => {
                 navigate('Login');
-          }}
-        />
+              }}
+            />
         </View>
-      </View>
-    );
+      </View>);
   }
 }
 
@@ -104,7 +102,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     alignItems:'center',
     justifyContent:'center',
-    marginVertical: '16',
+    marginVertical: 16,
     flexDirection: 'row',
     marginBottom: 30,
     marginTop: 150,
