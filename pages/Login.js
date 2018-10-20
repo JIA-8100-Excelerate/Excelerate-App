@@ -3,7 +3,7 @@ import {Button, Text, View, StyleSheet, TextInput, TouchableOpacity, Alert} from
 import {StackActions, NavigationActions} from 'react-navigation';
 
 import Logo from '../components/Logo';
-import { serverFetch, serverGet } from '../services/Fetch';
+import { serverGet, serverUpdate } from '../services/Fetch';
 
 class Login extends Component {
   constructor(props) {
@@ -30,17 +30,18 @@ class Login extends Component {
       email: this.state.email,
       password: this.state.password,
     }
-    serverFetch('POST', 'auth/login', params)
+    serverUpdate('POST', 'auth/login', params)
       .then((res) => {
         if(res.message) {
           Alert.alert("Invalid credentials");
         }
         else {
-          this.getName(res.auth_token);      
+          this.getName(res.auth_token);
         }
     });
   }
    render() {
+    const { navigate } = this.props.navigation;
     return(
       <View style={styles.container}>
         <Logo/>
@@ -71,12 +72,7 @@ class Login extends Component {
               color='#ffffff'
               fontSize = '30'
               onPress={() => {
-                this.props.navigation.dispatch(StackActions.reset({
-                  index: 0,
-                  actions: [
-                    NavigationActions.navigate({ routeName: 'Register' })
-                  ],
-            }))
+                navigate('Register');
           }}
         />
         </View>

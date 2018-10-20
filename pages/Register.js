@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Alert, Text, View, StyleSheet, TextInput, TouchableOpacity, Button} from 'react-native';
 import {StackActions, NavigationActions} from 'react-navigation';
 import Logo from '../components/Logo';
-import { serverFetch } from '../services/Fetch';
+import { serverUpdate } from '../services/Fetch';
 
 class Register extends Component {
   constructor(props) {
@@ -25,20 +25,19 @@ class Register extends Component {
       firstname: this.state.firstName,
       lastname: this.state.lastName,
     }
-    serverFetch('POST', 'signup', params)
+    serverUpdate('POST', 'signup', params)
       .then((res) => {
         if(!res.auth_token) {
-          console.log(res.message);
           Alert.alert(res.message);
         }
         else {
-          console.log("worked");
           navigate('Set_Goal', { name: this.state.firstName });
         }
     });
 
   }
    render() {
+    const { navigate } = this.props.navigation;
     return(
       <View style={styles.container}>
         <Logo/>
@@ -85,12 +84,7 @@ class Register extends Component {
               fontSize = '30'
               fontWeight = '900'
               onPress={() => {
-                this.props.navigation.dispatch(StackActions.reset({
-                  index: 0,
-                  actions: [
-                    NavigationActions.navigate({ routeName: 'Login' })
-                  ],
-            }))
+                navigate('Login');
           }}
         />
         </View>
