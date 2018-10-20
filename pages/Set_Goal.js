@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Text, View, StyleSheet, Image, TextInput, TouchableOpacity} from 'react-native';
+import {Button, Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Alert} from 'react-native';
 import {StackActions, NavigationActions} from 'react-navigation';
 import CheckBox from 'react-native-check-box'
 
@@ -13,12 +13,13 @@ class Set_Goal extends Component {
         academicChecked: false,
         cookingChecked: false,
         careerChecked: false,
+        customizedGoal: '',
+        
      }
   }
    render() {
     const { navigate } = this.props.navigation;
     const firstName = this.props.navigation.getParam('name', 'BOB');
-    console.log(this.state.socialChecked); 
     
     return(
       <View style={styles.container}>
@@ -99,17 +100,39 @@ class Set_Goal extends Component {
           /> 
 
           <TextInput
-          onChangeText={(value) => this.setState({email: value})}
+          onChangeText={(value) => this.setState({customizedGoal: value})}
           style={styles.inputBox}
           placeholder="Customize your goal here!"
           placeholderTextColor="white"
         /> 
+        
         <View style={styles.button}>
           <Button
                 title= "Next"
                 color='#ffffff'
                 onPress={() => {
-                  navigate('Action', { name: firstName });
+                  if(this.state.socialChecked && !this.state.physicalChecked && !this.state.academicChecked 
+                    && !this.state.cookingChecked && !this.state.careerChecked && this.state.customizedGoal == '') {
+                    navigate('Social_Action', { name: firstName });
+                  } else if(this.state.physicalChecked && !this.state.socicalChecked && !this.state.academicChecked 
+                    && !this.state.cookingChecked && !this.state.careerChecked && this.state.customizedGoal == '') {
+                    navigate('Physical_Action', { name: firstName });
+                  } else if(this.state.academicChecked && !this.state.socicalChecked && !this.state.physicalChecked 
+                    && !this.state.cookingChecked && !this.state.careerChecked && this.state.customizedGoal == '') {
+                    navigate('Academic_Action', { name: firstName });
+                  } else if(this.state.cookingChecked && !this.state.socicalChecked && !this.state.academicChecked 
+                    && !this.state.physicalChecked && !this.state.careerChecked && this.state.customizedGoal == '') {
+                    navigate('Cooking_Action', { name: firstName });
+                  } else if(this.state.careerChecked && !this.state.socicalChecked && !this.state.academicChecked 
+                    && !this.state.cookingChecked && !this.state.physicalChecked && this.state.customizedGoal == '') {
+                    navigate('Career_Action', { name: firstName });
+                  } else if(this.state.customizedGoal != '' && !this.state.socialChecked && !this.state.physicalChecked 
+                    && !this.state.academicChecked && !this.state.cookingChecked && !this.state.careerChecked) {
+                    navigate('Customized_Action', { name: firstName, goal: this.state.customizedGoal });
+                  }
+                   else {
+                    Alert.alert("Select one goal at a time please");
+                  }
             }}
           />       
         </View>   

@@ -6,7 +6,12 @@ import { createStackNavigator, StackActions, NavigationActions } from 'react-nav
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Set_Goal from './pages/Set_Goal';
-import Action from './pages/Action';
+import Social_Action from './pages/Action/Social_Action';
+import Physical_Action from './pages/Action/Physical_Action';
+import Academic_Action from './pages/Action/Academic_Action';
+import Cooking_Action from './pages/Action/Cooking_Action';
+import Career_Action from './pages/Action/Career_Action';
+import Customized_Action from './pages/Action/Customized_Action';
 
 export default createStackNavigator({
   Login: {
@@ -18,9 +23,24 @@ export default createStackNavigator({
   Set_Goal: {
     screen: Set_Goal,
   },
-  Action: {
-    screen: Action,
+  Social_Action: {
+    screen: Social_Action,
+  },
+  Physical_Action: {
+    screen: Physical_Action,
+  },
+  Academic_Action: {
+    screen: Academic_Action,
+  },
+  Cooking_Action: {
+    screen: Cooking_Action,
+  },
+  Career_Action: {
+    screen: Career_Action,
+  },
+  Customized_Action: {
+    screen: Customized_Action,
   },
 }, {
-    initialRouteName: 'Login',
+    initialRouteName: 'Set_Goal',
 });

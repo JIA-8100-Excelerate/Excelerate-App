@@ -3,19 +3,22 @@ import {Button, Text, View, StyleSheet, Image, TextInput, TouchableOpacity} from
 import {StackActions, NavigationActions} from 'react-navigation';
 import CheckBox from 'react-native-check-box'
 
-class Action extends Component {
-    constructor(props){
+class Career_Action extends Component {
+  constructor(props){
      super(props);
-
      this.state = {
         goToEventChecked: false,
+        tryNewClubChecked: false,
+        talkToSomeoneNewChecked: false,
+        hangOutWithFriendChecked: false,
      }
   }
    render() {
     const { navigate } = this.props.navigation;
     const firstName = this.props.navigation.getParam('name', 'BOB');
+    
     console.log(firstName);
-    console.log(this.state.socialChecked); 
+    console.log(this.state.CareerChecked); 
     
     return(
       <View style={styles.container}>
@@ -24,7 +27,7 @@ class Action extends Component {
         <View
           style={styles.line}
         /> 
-        <Text style={styles.actionText}> What Action will your take for your goal? </Text>
+        <Text style={styles.actionText}> What Action will your take for your CAREER goal? </Text>
 
         <CheckBox 
             style={{marginLeft: 40,}}
@@ -37,9 +40,51 @@ class Action extends Component {
             rightText={"Go to an event"}
             rightTextStyle = {{fontSize: 20, color: 'white'}}
             checkBoxColor='white'
-            // checkedImage={<Image source={require('../assets/checked.png')}/>}
-            // unCheckedImage={<Image source={require('../assets/unchecked.png')}/>}
-          />  
+        /> 
+       <CheckBox 
+          style={{marginLeft: 40,}}
+          onClick={()=>{
+              this.setState({
+                   talkToSomeoneNewChecked:!this.state.talkToSomeoneNewChecked
+               })
+             }} 
+          isChecked={this.state.talkToSomeoneNewChecked} 
+          rightText={"Talk to someone new"}
+          rightTextStyle = {{fontSize: 20, color: 'white'}}
+          checkBoxColor='white'
+        /> 
+       <CheckBox 
+          style={{marginLeft: 40,}}
+          onClick={()=>{
+              this.setState({
+                   tryNewClubChecked:!this.state.tryNewClubChecked
+               })
+             }} 
+          isChecked={this.state.tryNewClubChecked} 
+          rightText={"Try a new club"}
+          rightTextStyle = {{fontSize: 20, color: 'white'}}
+          checkBoxColor='white'
+        />
+
+        <CheckBox 
+          style={{marginLeft: 40,}}
+          onClick={()=>{
+              this.setState({
+                   hangOutWithFriendChecked:!this.state.hangOutWithFriendChecked
+               })
+             }} 
+          isChecked={this.state.hangOutWithFriendChecked} 
+          rightText={"Try a new club"}
+          rightTextStyle = {{fontSize: 20, color: 'white'}}
+          checkBoxColor='white'
+        />  
+
+        <TextInput
+          onChangeText={(value) => this.setState({email: value})}
+          style={styles.inputBox}
+          placeholder="Customize your Action here!"
+          placeholderTextColor="white"
+        />
 
         <View style={styles.button}>
           <Button
@@ -111,4 +156,4 @@ const styles = StyleSheet.create({
   
 });
 
-export default Action;
+export default Career_Action;
