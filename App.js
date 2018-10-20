@@ -42,5 +42,8 @@ export default createStackNavigator({
     screen: Customized_Action,
   },
 }, {
-    initialRouteName: 'Set_Goal',
+    initialRouteName: 'Login',
+    navigationOptions: {
+      headerBackTitle: "Back",
+    },
 });
