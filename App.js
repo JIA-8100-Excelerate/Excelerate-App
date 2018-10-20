@@ -12,6 +12,7 @@ import Academic_Action from './pages/Action/Academic_Action';
 import Cooking_Action from './pages/Action/Cooking_Action';
 import Career_Action from './pages/Action/Career_Action';
 import Customized_Action from './pages/Action/Customized_Action';
+import Goal_Summary from './pages/Goal_Summary';
 
 export default createStackNavigator({
   Login: {
@@ -40,6 +41,9 @@ export default createStackNavigator({
   },
   Customized_Action: {
     screen: Customized_Action,
+  },
+  Goal_Summary: {
+    screen: Goal_Summary,
   },
 }, {
     initialRouteName: 'Login',

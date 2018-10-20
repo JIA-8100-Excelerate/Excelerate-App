@@ -82,6 +82,7 @@ class Register extends Component {
               color='#ffffff'
               fontSize = '30'
               fontWeight = '900'
+
               onPress={() => {
                 navigate('Login');
               }}
@@ -104,12 +105,12 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     marginVertical: 16,
     flexDirection: 'row',
-    marginBottom: 30,
+    marginBottom: 60,
     marginTop: 150,
   },
   signupText: {
     color: 'white',
-    fontSize: 16
+    fontSize: 16,
   },
   inputBox: {
     width: 300,

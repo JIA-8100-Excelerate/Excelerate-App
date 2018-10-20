@@ -19,7 +19,7 @@ class Set_Goal extends Component {
   }
    render() {
     const { navigate } = this.props.navigation;
-    const firstName = this.props.navigation.getParam('name', 'BOB');
+    const firstName = this.props.navigation.getParam('name', 'GuitarBob99');
     
     return(
       <View style={styles.container}>
