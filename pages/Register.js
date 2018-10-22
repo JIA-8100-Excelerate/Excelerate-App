@@ -3,7 +3,7 @@ import {Alert, Text, View, StyleSheet, TextInput, TouchableOpacity, Button} from
 import {StackActions, NavigationActions} from 'react-navigation';
 import Logo from '../components/Logo';
 import { serverUpdate } from '../services/Fetch';
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 class Register extends Component {
   constructor(props) {
     super(props);
@@ -39,56 +39,62 @@ class Register extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return(
-      <View style={styles.container}>
-        <Logo/>
-        <TextInput onChangeText={(value) => this.setState({firstName: value})}
-          style={styles.inputBox}
-          placeholder="First Name"
-          placeholderTextColor="white"
-        />
-        <TextInput onChangeText={(value) => this.setState({lastName: value})}
-          style={styles.inputBox}
-          placeholder="Last Name"
-          placeholderTextColor="white"
-        />
-        <TextInput onChangeText={(value) => this.setState({email: value})}
-          style={styles.inputBox}
-          placeholder="Email"
-          placeholderTextColor="white"
-        />
-        <TextInput onChangeText={(value) => this.setState({password: value})}
-          style={styles.inputBox}
-          placeholder="Password"
-          secureTextEntry={true}
-          placeholderTextColor="white"
-        />  
-        <TextInput onChangeText={(value) => this.setState({password_confirmation: value})}
-          style={styles.inputBox}
-          placeholder="Confirm Password"
-          secureTextEntry={true}
-          placeholderTextColor="white"
-        />
-        <View style={styles.button}>
-          <Button   
-            onPress={this.handleSubmit}
-            title= "Register"
-            color='#ffffff'
+      <KeyboardAwareScrollView style={styles.scrollView}>
+        <View style={styles.container}>
+          <Logo/>
+          <TextInput onChangeText={(value) => this.setState({firstName: value})}
+            style={styles.inputBox}
+            placeholder="First Name"
+            placeholderTextColor="white"
           />
-        </View>
-        <View style={styles.signupTextCont}>
-          <Text style={styles.signupText}> Already have an account?</Text>
-            <Button
-              title= "Login here!"
+          <TextInput onChangeText={(value) => this.setState({lastName: value})}
+            style={styles.inputBox}
+            placeholder="Last Name"
+            placeholderTextColor="white"
+          />
+          <TextInput onChangeText={(value) => this.setState({email: value})}
+            style={styles.inputBox}
+            placeholder="Email"
+            placeholderTextColor="white"
+          />
+          <TextInput onChangeText={(value) => this.setState({password: value})}
+            style={styles.inputBox}
+            placeholder="Password"
+            secureTextEntry={true}
+            placeholderTextColor="white"
+          />  
+          
+            
+          <TextInput onChangeText={(value) => this.setState({password_confirmation: value})}
+            style={styles.inputBox}
+            placeholder="Confirm Password"
+            secureTextEntry={true}
+            placeholderTextColor="white"
+          />
+            
+          
+          
+          <View style={styles.button}>
+            <Button   
+              onPress={this.handleSubmit}
+              title= "Register"
               color='#ffffff'
-              fontSize = '30'
-              fontWeight = '900'
-
-              onPress={() => {
-                navigate('Login');
-              }}
             />
+          </View>
+          <View style={styles.signupTextCont}>
+            <Text style={styles.signupText}> Already have an account?</Text>
+              <Button
+                title= "Login here!"
+                color='#ffffff'
+                fontSize = '30'
+                fontWeight = '900'
+                onPress={() => {
+                  navigate('Login');
+                }}
+              />
+          </View>
         </View>
-      </View>);
+      </KeyboardAwareScrollView>);
   }
 }
 
@@ -99,14 +105,18 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent:'center'
   },
+  scrollView: {
+    backgroundColor: '#03a9f4',
+    flex: 1,  
+  },
   signupTextCont: {
     flexGrow: 1,
     alignItems:'center',
     justifyContent:'center',
     marginVertical: 16,
     flexDirection: 'row',
-    marginBottom: 60,
-    marginTop: 150,
+    marginBottom: 70,
+    marginTop: 120,
   },
   signupText: {
     color: 'white',
