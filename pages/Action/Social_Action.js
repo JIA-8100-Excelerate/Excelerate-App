@@ -106,7 +106,7 @@ class Social_Action extends Component {
                       this.state.goalAction[3]='hang out with friends '
                     }
                     if (this.state.customizedAction!='') {
-                      this.state.goalAction[4]= customizedAction
+                      this.state.goalAction[4]= this.state.customizedAction
                     }
                     navigate('Goal_Summary', { name: firstName, actions: this.state.goalAction, goalType: 'Social'});
                   } else {

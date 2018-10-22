@@ -105,7 +105,7 @@ class Physical_Action extends Component {
                       this.state.goalAction[3]='play Basketball '
                     }
                     if (this.state.customizedAction!='') {
-                      this.state.goalAction[4]= customizedAction
+                      this.state.goalAction[4]= this.state.customizedAction
                     }
                     navigate('Goal_Summary', { name: firstName, actions: this.state.goalAction, goalType: 'Physical'});
                   } else {

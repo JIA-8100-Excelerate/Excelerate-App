@@ -50,7 +50,7 @@ export default createStackNavigator({
     screen: Dashboard,
   },
 }, {
-    initialRouteName: 'Dashboard',
+    initialRouteName: 'Login',
     navigationOptions: {
       headerBackTitle: "Back",
     },

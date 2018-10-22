@@ -105,7 +105,7 @@ class Career_Action extends Component {
                       this.state.goalAction[3]='apply to open positions '
                     }
                     if (this.state.customizedAction!='') {
-                      this.state.goalAction[4]= customizedAction
+                      this.state.goalAction[4]= this.state.customizedAction
                     }
                     navigate('Goal_Summary', { name: firstName, actions: this.state.goalAction, goalType: 'Career'});
                   } else {
