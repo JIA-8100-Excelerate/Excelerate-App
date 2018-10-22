@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Text, View, StyleSheet, Image, TextInput, TouchableOpacity} from 'react-native';
+import {Button, Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Alert} from 'react-native';
 import {StackActions, NavigationActions} from 'react-navigation';
 import CheckBox from 'react-native-check-box'
 
@@ -7,19 +7,18 @@ class Career_Action extends Component {
   constructor(props){
      super(props);
      this.state = {
-        goToEventChecked: false,
-        tryNewClubChecked: false,
-        talkToSomeoneNewChecked: false,
-        hangOutWithFriendChecked: false,
+        updateResumeChecked: false,
+        networkingWithCompanyChecked: false,
+        researchCompanyBackgroundChecked: false,
+        applyToOpenPositionChecked: false,
+        customizedAction: '',
+        
      }
   }
    render() {
     const { navigate } = this.props.navigation;
-    const firstName = this.props.navigation.getParam('name', 'BOB');
-    
-    console.log(firstName);
-    console.log(this.state.CareerChecked); 
-    
+    const firstName = this.props.navigation.getParam('name', 'GuitarBob99');
+ 
     return(
       <View style={styles.container}>
         <Text style={styles.titleText}> Hi {firstName},</Text>
@@ -30,69 +29,88 @@ class Career_Action extends Component {
         <Text style={styles.actionText}> What Action will your take for your CAREER goal? </Text>
 
         <CheckBox 
-            style={{marginLeft: 40,}}
-            onClick={()=>{
-                this.setState({
-                     goToEventChecked:!this.state.goToEventChecked
-                 })
-               }} 
-            isChecked={this.state.goToEventChecked} 
-            rightText={"Go to an event"}
-            rightTextStyle = {{fontSize: 20, color: 'white'}}
-            checkBoxColor='white'
-        /> 
-       <CheckBox 
-          style={{marginLeft: 40,}}
+          style={{marginLeft: 40, marginTop: 20}}
           onClick={()=>{
               this.setState({
-                   talkToSomeoneNewChecked:!this.state.talkToSomeoneNewChecked
+                   updateResumeChecked:!this.state.updateResumeChecked
                })
              }} 
-          isChecked={this.state.talkToSomeoneNewChecked} 
-          rightText={"Talk to someone new"}
+          isChecked={this.state.updateResumeChecked} 
+          rightText={"Update your resume"}
           rightTextStyle = {{fontSize: 20, color: 'white'}}
           checkBoxColor='white'
         /> 
        <CheckBox 
-          style={{marginLeft: 40,}}
+          style={{marginLeft: 40, marginTop: 10}}
           onClick={()=>{
               this.setState({
-                   tryNewClubChecked:!this.state.tryNewClubChecked
+                   researchCompanyBackgroundChecked:!this.state.researchCompanyBackgroundChecked
                })
              }} 
-          isChecked={this.state.tryNewClubChecked} 
-          rightText={"Try a new club"}
+          isChecked={this.state.researchCompanyBackgroundChecked} 
+          rightText={"Research Company"}
+          rightTextStyle = {{fontSize: 20, color: 'white'}}
+          checkBoxColor='white'
+        /> 
+       <CheckBox 
+          style={{marginLeft: 40, marginTop: 10}}
+          onClick={()=>{
+              this.setState({
+                   networkingWithCompanyChecked:!this.state.networkingWithCompanyChecked
+               })
+             }} 
+          isChecked={this.state.networkingWithCompanyChecked} 
+          rightText={"Network with company"}
           rightTextStyle = {{fontSize: 20, color: 'white'}}
           checkBoxColor='white'
         />
 
         <CheckBox 
-          style={{marginLeft: 40,}}
+          style={{marginLeft: 40, marginTop: 10}}
           onClick={()=>{
               this.setState({
-                   hangOutWithFriendChecked:!this.state.hangOutWithFriendChecked
+                   applyToOpenPositionChecked:!this.state.applyToOpenPositionChecked
                })
              }} 
-          isChecked={this.state.hangOutWithFriendChecked} 
-          rightText={"Try a new club"}
+          isChecked={this.state.applyToOpenPositionChecked} 
+          rightText={"Apply to open positions"}
           rightTextStyle = {{fontSize: 20, color: 'white'}}
           checkBoxColor='white'
         />  
 
         <TextInput
-          onChangeText={(value) => this.setState({email: value})}
+          onChangeText={(value) => this.setState({customizedAction: value})}
           style={styles.inputBox}
           placeholder="Customize your Action here!"
           placeholderTextColor="white"
         />
-
         <View style={styles.button}>
           <Button
-                title= "back"
+                title= "Submit"
                 color='#ffffff'
-                fontSize = '30'
                 onPress={() => {
-                  navigate('Set_Goal', { name: firstName });
+                  this.state.goalAction =['','','','',''];
+                  if (this.state.updateResumeChecked || this.state.researchCompanyBackgroundChecked || this.state.networkingWithCompanyChecked
+                    || this.state.applyToOpenPositionChecked || this.state.customizedAction!='') {
+                    if (this.state.updateResumeChecked) {
+                      this.state.goalAction[0]='update your resume '
+                    } 
+                    if (this.state.researchCompanyBackgroundChecked) {
+                      this.state.goalAction[1]='Research background of Company '
+                    } 
+                    if (this.state.networkingWithCompanyChecked) {
+                      this.state.goalAction[2]='network with company '
+                    } 
+                    if (this.state.applyToOpenPositionChecked) {
+                      this.state.goalAction[3]='apply to open positions '
+                    }
+                    if (this.state.customizedAction!='') {
+                      this.state.goalAction[4]= customizedAction
+                    }
+                    navigate('Goal_Summary', { name: firstName, actions: this.state.goalAction, goalType: 'Career'});
+                  } else {
+                    Alert.alert('Please set your actions')
+                  }
             }}
           />       
         </View>    
@@ -117,10 +135,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 30
   },
-  box: {
-    marginTop: 50,
-    padding: '50'
-  },
   inputBox: {
     width: 300,
     height: 40,
@@ -142,7 +156,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderWidth: 2, 
     borderColor: '#01579b',
-    marginBottom: 20,
+    marginBottom: 10,
     marginLeft: 40,
   },
   actionText: {

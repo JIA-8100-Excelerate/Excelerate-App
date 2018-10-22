@@ -7,10 +7,11 @@ class Customized_Action extends Component {
   constructor(props){
      super(props);
      this.state = {
-        goToEventChecked: false,
-        tryNewClubChecked: false,
-        talkToSomeoneNewChecked: false,
-        hangOutWithFriendChecked: false,
+        customizedAction1: '',
+        customizedAction2: '',
+        customizedAction3: '',
+        customizedAction4: '',
+        customizedAction5: '',
      }
   }
    render() {
@@ -31,18 +32,52 @@ class Customized_Action extends Component {
         <Text style={styles.actionText}> What Action will your take for your {goal} goal? </Text>
 
         <TextInput
-          onChangeText={(value) => this.setState({customizedGoal: value, customizedChecked: true})}
+          onChangeText={(value) => this.setState({customizedAction1: value})}
           style={styles.inputBox}
-          placeholder="Customize your goal here!"
+          placeholder="Customize your actions here!"
           placeholderTextColor="white"
         /> 
+        <TextInput
+          onChangeText={(value) => this.setState({customizedAction2: value})}
+          style={styles.inputBox}
+          placeholder="Customize your actions here!"
+          placeholderTextColor="white"
+        /> 
+        <TextInput
+          onChangeText={(value) => this.setState({customizedAction3: value})}
+          style={styles.inputBox}
+          placeholder="Customize your actions here!"
+          placeholderTextColor="white"
+        /> 
+        <TextInput
+          onChangeText={(value) => this.setState({customizedAction4: value})}
+          style={styles.inputBox}
+          placeholder="Customize your actions here!"
+          placeholderTextColor="white"
+        /> 
+        <TextInput
+          onChangeText={(value) => this.setState({customizedAction5: value})}
+          style={styles.inputBox}
+          placeholder="Customize your actions here!"
+          placeholderTextColor="white"
+        />
         <View style={styles.button}>
           <Button
-                title= "back"
+                title= "Next"
                 color='#ffffff'
                 fontSize = '30'
                 onPress={() => {
-                  navigate('Set_Goal', { name: firstName });
+                  var customizedAction1 = this.state.customizedAction1;
+                  var customizedAction2 = this.state.customizedAction2;
+                  var customizedAction3 = this.state.customizedAction3;
+                  var customizedAction4 = this.state.customizedAction4;
+                  var customizedAction5 = this.state.customizedAction5;
+                  this.state.goalAction =[customizedAction1,customizedAction2,customizedAction3,customizedAction4,customizedAction5];
+                  if (customizedAction1 == '' && customizedAction2 == '' && customizedAction3 == '' && customizedAction4 == '' && customizedAction5 == '') {
+                    Alert.alert('pelase enter at least one action');
+                  } else {
+                    navigate('Goal_Summary', { name: firstName, actions: this.state.goalAction, goalType: 'Customized'});
+                  }             
             }}
           />       
         </View>    
@@ -79,9 +114,8 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderColor: '#ffffff',
     backgroundColor: 'rgba(255,255,255,0.5)',
-    marginBottom: 20,
     marginLeft: 40,
-    marginTop: 20,
+    marginTop: 10,
     paddingHorizontal: 16,
     color: '#ffffff'
   },
@@ -94,6 +128,7 @@ const styles = StyleSheet.create({
     borderColor: '#01579b',
     marginBottom: 20,
     marginLeft: 40,
+    marginTop: 20
   },
   actionText: {
     fontSize: 30, 

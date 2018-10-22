@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Text, View, StyleSheet, Image, TextInput, TouchableOpacity} from 'react-native';
+import {Button, Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Alert} from 'react-native';
 import {StackActions, NavigationActions} from 'react-navigation';
 import CheckBox from 'react-native-check-box'
 
@@ -7,19 +7,18 @@ class Cooking_Action extends Component {
   constructor(props){
      super(props);
      this.state = {
-        goToEventChecked: false,
-        tryNewClubChecked: false,
-        talkToSomeoneNewChecked: false,
-        hangOutWithFriendChecked: false,
+        learnNewCuisineChecked: false,
+        tryNewRestaurantChecked: false,
+        makeNewDessertChecked: false,
+        cookWithChecked: false,
+        customizedAction: '',
+        
      }
   }
    render() {
     const { navigate } = this.props.navigation;
-    const firstName = this.props.navigation.getParam('name', 'BOB');
-    
-    console.log(firstName);
-    
-    
+    const firstName = this.props.navigation.getParam('name', 'GuitarBob99');
+ 
     return(
       <View style={styles.container}>
         <Text style={styles.titleText}> Hi {firstName},</Text>
@@ -30,62 +29,88 @@ class Cooking_Action extends Component {
         <Text style={styles.actionText}> What Action will your take for your COOKING goal? </Text>
 
         <CheckBox 
-            style={{marginLeft: 40,}}
-            onClick={()=>{
-                this.setState({
-                     goToEventChecked:!this.state.goToEventChecked
-                 })
-               }} 
-            isChecked={this.state.goToEventChecked} 
-            rightText={"Go to an event"}
-            rightTextStyle = {{fontSize: 20, color: 'white'}}
-            checkBoxColor='white'
+          style={{marginLeft: 40, marginTop: 20}}
+          onClick={()=>{
+              this.setState({
+                   learnNewCuisineChecked:!this.state.learnNewCuisineChecked
+               })
+             }} 
+          isChecked={this.state.learnNewCuisineChecked} 
+          rightText={"Learn one new Cuisine"}
+          rightTextStyle = {{fontSize: 20, color: 'white'}}
+          checkBoxColor='white'
         /> 
-         <CheckBox 
-            style={{marginLeft: 40,}}
-            onClick={()=>{
-                this.setState({
-                     talkToSomeoneNewChecked:!this.state.talkToSomeoneNewChecked
-                 })
-               }} 
-            isChecked={this.state.talkToSomeoneNewChecked} 
-            rightText={"Talk to someone new"}
-            rightTextStyle = {{fontSize: 20, color: 'white'}}
-            checkBoxColor='white'
-          /> 
-         <CheckBox 
-            style={{marginLeft: 40,}}
-            onClick={()=>{
-                this.setState({
-                     tryNewClubChecked:!this.state.tryNewClubChecked
-                 })
-               }} 
-            isChecked={this.state.tryNewClubChecked} 
-            rightText={"Try a new club"}
-            rightTextStyle = {{fontSize: 20, color: 'white'}}
-            checkBoxColor='white'
-          />
+       <CheckBox 
+          style={{marginLeft: 40, marginTop: 10}}
+          onClick={()=>{
+              this.setState({
+                   makeNewDessertChecked:!this.state.makeNewDessertChecked
+               })
+             }} 
+          isChecked={this.state.makeNewDessertChecked} 
+          rightText={"Make new Dessert"}
+          rightTextStyle = {{fontSize: 20, color: 'white'}}
+          checkBoxColor='white'
+        /> 
+       <CheckBox 
+          style={{marginLeft: 40, marginTop: 10}}
+          onClick={()=>{
+              this.setState({
+                   tryNewRestaurantChecked:!this.state.tryNewRestaurantChecked
+               })
+             }} 
+          isChecked={this.state.tryNewRestaurantChecked} 
+          rightText={"Try new Restaurant"}
+          rightTextStyle = {{fontSize: 20, color: 'white'}}
+          checkBoxColor='white'
+        />
 
-          <CheckBox 
-            style={{marginLeft: 40,}}
-            onClick={()=>{
-                this.setState({
-                     hangOutWithFriendChecked:!this.state.hangOutWithFriendChecked
-                 })
-               }} 
-            isChecked={this.state.hangOutWithFriendChecked} 
-            rightText={"Try a new club"}
-            rightTextStyle = {{fontSize: 20, color: 'white'}}
-            checkBoxColor='white'
-          />  
+        <CheckBox 
+          style={{marginLeft: 40, marginTop: 10}}
+          onClick={()=>{
+              this.setState({
+                   cookWithChecked:!this.state.cookWithChecked
+               })
+             }} 
+          isChecked={this.state.cookWithChecked} 
+          rightText={"Cook with friends"}
+          rightTextStyle = {{fontSize: 20, color: 'white'}}
+          checkBoxColor='white'
+        />  
 
+        <TextInput
+          onChangeText={(value) => this.setState({customizedAction: value})}
+          style={styles.inputBox}
+          placeholder="Customize your Action here!"
+          placeholderTextColor="white"
+        />
         <View style={styles.button}>
           <Button
-                title= "back"
+                title= "Submit"
                 color='#ffffff'
-                fontSize = '30'
                 onPress={() => {
-                  navigate('Set_Goal', { name: firstName });
+                  this.state.goalAction =['','','','',''];
+                  if (this.state.learnNewCuisineChecked || this.state.makeNewDessertChecked || this.state.tryNewRestaurantChecked
+                    || this.state.cookWithChecked || this.state.customizedAction!='') {
+                    if (this.state.learnNewCuisineChecked) {
+                      this.state.goalAction[0]='learn one new Cuisine '
+                    } 
+                    if (this.state.makeNewDessertChecked) {
+                      this.state.goalAction[1]='make new Dessert '
+                    } 
+                    if (this.state.tryNewRestaurantChecked) {
+                      this.state.goalAction[2]='try new Restaurant '
+                    } 
+                    if (this.state.cookWithChecked) {
+                      this.state.goalAction[3]='cook with friends '
+                    }
+                    if (this.state.customizedAction!='') {
+                      this.state.goalAction[4]= customizedAction
+                    }
+                    navigate('Goal_Summary', { name: firstName, actions: this.state.goalAction, goalType: 'Cooking'});
+                  } else {
+                    Alert.alert('Please set your actions')
+                  }
             }}
           />       
         </View>    
@@ -110,10 +135,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 30
   },
-  box: {
-    marginTop: 50,
-    padding: '50'
-  },
   inputBox: {
     width: 300,
     height: 40,
@@ -135,7 +156,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderWidth: 2, 
     borderColor: '#01579b',
-    marginBottom: 20,
+    marginBottom: 10,
     marginLeft: 40,
   },
   actionText: {

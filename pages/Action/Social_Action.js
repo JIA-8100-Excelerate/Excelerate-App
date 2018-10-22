@@ -89,20 +89,24 @@ class Social_Action extends Component {
                 title= "Submit"
                 color='#ffffff'
                 onPress={() => {
-                  this.state.goalAction = '';
+                  this.state.goalAction =['','','','',''];
+                  var customizedAction = this.state.customizedAction;
                   if (this.state.goToEventChecked || this.state.talkToSomeoneNewChecked || this.state.tryNewClubChecked
                     || this.state.hangOutWithFriendChecked || this.state.customizedAction!='') {
-                      if (this.state.goToEventChecked) {
-                      this.state.goalAction+='go to an event,'
+                    if (this.state.goToEventChecked) {
+                      this.state.goalAction[0]='go to an event '
                     } 
                     if (this.state.talkToSomeoneNewChecked) {
-                      this.state.goalAction+='talk to someone new,'
+                      this.state.goalAction[1]='talk to someone new '
                     } 
                     if (this.state.tryNewClubChecked) {
-                      this.state.goalAction+='try a new club,'
+                      this.state.goalAction[2]='try a new club '
                     } 
                     if (this.state.hangOutWithFriendChecked) {
-                      this.state.goalAction+='hang out with friends'
+                      this.state.goalAction[3]='hang out with friends '
+                    }
+                    if (this.state.customizedAction!='') {
+                      this.state.goalAction[4]= customizedAction
                     }
                     navigate('Goal_Summary', { name: firstName, actions: this.state.goalAction, goalType: 'Social'});
                   } else {
