@@ -86,7 +86,7 @@ class Physical_Action extends Component {
         />
         <View style={styles.button}>
           <Button
-                title= "Submit"
+                title= "Next"
                 color='#ffffff'
                 onPress={() => {
                   this.state.goalAction =['','','','',''];

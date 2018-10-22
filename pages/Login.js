@@ -20,7 +20,7 @@ class Login extends Component {
     const { navigate } = this.props.navigation;
     serverGet('profile', token)
       .then((res) => {
-        navigate('Set_Goal', { name: res.firstname });
+        navigate('Dashboard', { name: res.firstname });
       })
   }
 

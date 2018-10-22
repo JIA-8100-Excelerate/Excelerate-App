@@ -13,6 +13,7 @@ import Cooking_Action from './pages/Action/Cooking_Action';
 import Career_Action from './pages/Action/Career_Action';
 import Customized_Action from './pages/Action/Customized_Action';
 import Goal_Summary from './pages/Goal_Summary';
+import Dashboard from './pages/Dashboard';
 
 export default createStackNavigator({
   Login: {
@@ -45,8 +46,11 @@ export default createStackNavigator({
   Goal_Summary: {
     screen: Goal_Summary,
   },
+  Dashboard: {
+    screen: Dashboard,
+  },
 }, {
-    initialRouteName: 'Login',
+    initialRouteName: 'Dashboard',
     navigationOptions: {
       headerBackTitle: "Back",
     },
