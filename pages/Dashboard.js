@@ -9,6 +9,7 @@ class Dashboard extends Component {
      super(props);
      this.state = {       
         summary: '',
+        arr: '',
      }
   }
 
@@ -21,17 +22,18 @@ class Dashboard extends Component {
     const newGoal = this.props.navigation.getParam('newGoal', false);
     this.state.count = 1;
     this.state.summary = '';
-    console.log(goalType);
-    console.log(newGoal);
-    console.log(actions);
 
+  
     retrieveToken()
       .then((token) => {
-        serverGet('profile', token)
+        serverGet('goals', token)
           .then((res) => {
-            console.log("Token: " + res.firstname);
+            this.setState({arr: res})
         });
       });
+
+    console.log(this.state.arr);
+    console.log(this.state.arr[0]);
     
     for (let i = 0; i < 5; i++) {
       if (actions[i] != '') {
