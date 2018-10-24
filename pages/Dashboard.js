@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import {Button, Text, View, StyleSheet, Image, TextInput, TouchableOpacity} from 'react-native';
+import {Button, Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Alert} from 'react-native';
 import {StackActions, NavigationActions} from 'react-navigation';
+import { retrieveToken } from '../services/Token';
+import { serverGet } from '../services/Fetch';
 
 class Dashboard extends Component {
   constructor(props){
@@ -9,6 +11,7 @@ class Dashboard extends Component {
         summary: '',
      }
   }
+
 
   render() {
     const { navigate } = this.props.navigation;
@@ -21,6 +24,15 @@ class Dashboard extends Component {
     console.log(goalType);
     console.log(newGoal);
     console.log(actions);
+
+    retrieveToken()
+      .then((token) => {
+        serverGet('profile', token)
+          .then((res) => {
+            console.log("Token: " + res.firstname);
+        });
+      });
+    
     for (let i = 0; i < 5; i++) {
       if (actions[i] != '') {
         this.state.summary+= "\n" + this.state.count.toString() + '. ' + actions[i];

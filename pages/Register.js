@@ -4,6 +4,8 @@ import {StackActions, NavigationActions} from 'react-navigation';
 import Logo from '../components/Logo';
 import { serverUpdate } from '../services/Fetch';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { storeToken } from '../services/Token';
+
 class Register extends Component {
   constructor(props) {
     super(props);
@@ -31,7 +33,8 @@ class Register extends Component {
           Alert.alert(res.message);
         }
         else {
-          navigate('Set_Goal', { name: this.state.firstName });
+          storeToken(res.auth_token);
+          navigate('Dashboard', { name: this.state.firstName });
         }
     });
 

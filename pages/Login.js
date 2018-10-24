@@ -4,6 +4,7 @@ import {StackActions, NavigationActions} from 'react-navigation';
 
 import Logo from '../components/Logo';
 import { serverGet, serverUpdate } from '../services/Fetch';
+import { storeToken } from '../services/Token';
 
 class Login extends Component {
   constructor(props) {
@@ -36,6 +37,7 @@ class Login extends Component {
           Alert.alert("Invalid credentials");
         }
         else {
+          storeToken(res.auth_token);
           this.getName(res.auth_token);
         }
     });
