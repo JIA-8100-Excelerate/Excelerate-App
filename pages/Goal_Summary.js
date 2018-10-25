@@ -41,7 +41,7 @@ class Goal_Summary extends Component {
                 color='#ffffff'
                 fontSize = '30'
                 onPress={() => {
-                  navigate('Dashboard', {name: firstName, goalType: goalType, newGoal: true, actions: actions});
+                  navigate('Dashboard', {name: firstName, goalType: goalType, actions: actions});
             }}
           />       
         </View>   

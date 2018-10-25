@@ -8,9 +8,15 @@ class Dashboard extends Component {
   constructor(props){
      super(props);
      this.state = {       
-        summary: '',
-        arr: '',
+        arr: '', 
      }
+     retrieveToken()
+      .then((token) => {
+        serverGet('goals', token)
+          .then((res) => {
+            this.setState({arr: res})
+        });
+      });
   }
 
 
@@ -18,37 +24,38 @@ class Dashboard extends Component {
     const { navigate } = this.props.navigation;
     const firstName = this.props.navigation.getParam('name', 'GuitarBob99');
     const actions = this.props.navigation.getParam('actions', 'nothing');
-    const goalType = this.props.navigation.getParam('goalType', 'Rip');
-    const newGoal = this.props.navigation.getParam('newGoal', false);
-    this.state.count = 1;
-    this.state.summary = '';
+    const goalType = this.props.navigation.getParam('goalType', 'Rip');  
 
-  
-    retrieveToken()
-      .then((token) => {
-        serverGet('goals', token)
-          .then((res) => {
-            this.setState({arr: res})
-        });
-      });
+    const renderButtons = () => {
+      const views = []; 
+      for ( var i =0; i< this.state.arr.length; i++){
+      const tasks = this.state.arr[i].tasks;
+      const goalID = this.state.arr[i].id;
+       views.push(
+        <View style={styles.button} key={this.state.arr[i].category} >
+          <Button      
+             title= {this.state.arr[i].category}
+             color="#ffffff"
+             onPress={() => {
+                navigate('Tasks', { name: firstName, tasks: tasks, goalID: goalID});
+          }}
+          />
+        </View>);
+      }
+      return views;
 
-    console.log(this.state.arr);
-    console.log(this.state.arr[0]);
-    
-    for (let i = 0; i < 5; i++) {
-      if (actions[i] != '') {
-        this.state.summary+= "\n" + this.state.count.toString() + '. ' + actions[i];
-        this.state.count++;
-      } 
-    }
+    } 
     return (
       <View style={styles.container}>
         <Text style={styles.headerText}>
           Welcome, {firstName}!
         </Text> 
-        {newGoal &&
-          <Text style={styles.actionText}>  To accomplish your new {goalType} goal, you will: {this.state.summary} </Text> 
-        }       
+        <View>
+          {renderButtons()}
+        </View>
+        <Text style={styles.headerText}>
+          {this.state.category}
+        </Text>    
         <View style={styles.button}>
           <Button 
             title= "Set a New Goal"
@@ -63,7 +70,7 @@ class Dashboard extends Component {
             title= "View My Goals"
             color= "#ffffff"
             onPress={() => {
-                navigate('Set_Goal');
+                navigate('View_Goals', {name: firstName});
           }}
             />
           </View>

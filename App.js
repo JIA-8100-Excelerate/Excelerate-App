@@ -1,8 +1,6 @@
 import React from 'react';
 import { View, Text, Button } from 'react-native';
 import { createStackNavigator, StackActions, NavigationActions } from 'react-navigation'; 
-
-
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Set_Goal from './pages/Set_Goal';
@@ -14,6 +12,8 @@ import Career_Action from './pages/Action/Career_Action';
 import Customized_Action from './pages/Action/Customized_Action';
 import Goal_Summary from './pages/Goal_Summary';
 import Dashboard from './pages/Dashboard';
+import View_Goals from './pages/View_Goals';
+import Tasks from './pages/Tasks';
 
 export default createStackNavigator({
   Login: {
@@ -48,6 +48,12 @@ export default createStackNavigator({
   },
   Dashboard: {
     screen: Dashboard,
+  },
+  View_Goals: {
+    screen: View_Goals,
+  },
+  Tasks: {
+    screen: Tasks,
   },
 }, {
     initialRouteName: 'Login',

@@ -20,8 +20,7 @@ class Customized_Action extends Component {
     const firstName = this.props.navigation.getParam('name', 'BOB');
     const goal = this.props.navigation.getParam('goal', 'did not get goal');
     console.log(firstName);
-    console.log(goal);
-    
+    console.log(goal); 
     
     return(
       <KeyboardAwareScrollView style={styles.scrollView}>
