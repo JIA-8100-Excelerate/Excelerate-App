@@ -7,6 +7,18 @@ import { serverGet } from '../services/Fetch';
 class Tasks extends Component {
   constructor(props){
      super(props);
+     this.state = {       
+        goalID: this.props.navigation.getParam('goalID', 'noID'),
+        arr: '',
+     }
+
+     retrieveToken()
+      .then((token) => {
+        serverGet('goals/' + this.state.goalID + '/tasks', token)
+          .then((res) => {
+            this.setState({arr: res})
+        });
+      });
   }
 
 
@@ -14,16 +26,21 @@ class Tasks extends Component {
     const { navigate } = this.props.navigation;
     const firstName = this.props.navigation.getParam('name', 'GuitarBob99');
     const tasks = this.props.navigation.getParam('tasks', 'nothing');
-    const goalID = this.props.navigation.getParam('goalID', 'noID');
-    console.log(tasks);
-    console.log(tasks.name);
-    console.log(goalID);
+    //const goalID = this.props.navigation.getParam('goalID', 'noID');
+    //console.log(tasks);
+    //console.log(tasks.name);
+    //console.log("goalID: " + goalID);
+    console.log("Doggo");
+    console.log(this.state.arr);
 
     return (
       <View style={styles.container}>
         <Text style={styles.headerText}>
           Welcome, {firstName}, this is task page!
-        </Text>    
+        </Text>   
+        <View>
+          {this.state.arr}
+        </View> 
       </View>
     );
   }
