@@ -1,51 +1,57 @@
 import React, {Component} from 'react';
 import {Button, Text, View, StyleSheet, Image, TextInput, TouchableOpacity} from 'react-native';
 import {StackActions, NavigationActions} from 'react-navigation';
+import { retrieveToken } from '../services/Token';
+import { serverGet } from '../services/Fetch';
 import CheckBox from 'react-native-check-box'
 
 class View_Goals extends Component {
   constructor(props){
      super(props);
-     this.state = {
-        goToEventChecked: false,
-        tryNewClubChecked: false,
-        talkToSomeoneNewChecked: false,
-        hangOutWithFriendChecked: false,
-        customizedAction: '',
+     this.state = {       
+        arr: '',
      }
+     retrieveToken()
+      .then((token) => {
+        serverGet('goals', token)
+          .then((res) => {
+            this.setState({arr: res})
+        });
+      });
   }
    render() {
     const { navigate } = this.props.navigation;
-    const firstName = this.props.navigation.getParam('name', 'GuitarBob97');
-    const actions = this.props.navigation.getParam('actions', 'NoActionYet');
-    const goalType = this.props.navigation.getParam('goalType', 'Rip');
-    this.state.summary = '';
-    this.state.count = 1;
-    for (let i = 0; i < 5; i++) {
-      if (actions[i] != '') {
-        this.state.summary+= "\n" + this.state.count.toString() + '. ' + actions[i];
-        this.state.count++;
-      } 
-    }
+    const firstName = this.props.navigation.getParam('name', 'GuitarBob99');
+    const actions = this.props.navigation.getParam('actions', 'nothing');
+    const goalType = this.props.navigation.getParam('goalType', 'Rip');  
+
+    const renderGoals = () => {
+      const views = []; 
+      for ( var i =0; i< this.state.arr.length; i++){
+      const tasks = this.state.arr[i].tasks;
+      const goalID = this.state.arr[i].id;
+       views.push(
+        <View style={styles.button} key={this.state.arr[i].category} >
+          <Button      
+             title= {this.state.arr[i].category}
+             color="#ffffff"
+             onPress={() => {
+                navigate('Tasks', { name: firstName, tasks: tasks, goalID: goalID});
+          }}
+          />
+        </View>);
+      }
+      return views;
+
+    } 
 
     return(
       <View style={styles.container}>    
         <Text style={styles.titleText}> Hi {firstName},</Text>
         <Text style={styles.titleText}> Let's see your Goals! </Text> 
-        <View
-          style={styles.line}
-        /> 
-        
-        <View style={styles.button}>
-          <Button
-                title= "Submit"
-                color='#ffffff'
-                fontSize = '30'
-                onPress={() => {
-                  navigate('Dashboard', {name: firstName, goalType: goalType, newGoal: true, actions: actions});
-            }}
-          />       
-        </View>   
+        <View>
+          {renderGoals()}
+        </View> 
       </View>
     );
   }
@@ -72,20 +78,6 @@ const styles = StyleSheet.create({
     marginTop: 50,
     padding: '50'
   },
-  inputBox: {
-    width: 300,
-    height: 40,
-    fontSize: 18,
-    borderWidth: 2, 
-    borderRadius: 20,
-    borderColor: '#ffffff',
-    backgroundColor: 'rgba(255,255,255,0.5)',
-    marginBottom: 20,
-    marginLeft: 40,
-    marginTop: 20,
-    paddingHorizontal: 16,
-    color: '#ffffff'
-  },
   button: {
     width: 300,
     height: 40,
@@ -93,7 +85,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderWidth: 2, 
     borderColor: '#01579b',
-    marginBottom: 10,
     marginLeft: 40,
     marginTop: 20
   },

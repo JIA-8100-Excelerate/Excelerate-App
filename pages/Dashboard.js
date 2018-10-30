@@ -7,55 +7,17 @@ import { serverGet } from '../services/Fetch';
 class Dashboard extends Component {
   constructor(props){
      super(props);
-     this.state = {       
-        arr: '', 
-     }
-     retrieveToken()
-      .then((token) => {
-        serverGet('goals', token)
-          .then((res) => {
-            this.setState({arr: res})
-        });
-      });
   }
 
 
   render() {
     const { navigate } = this.props.navigation;
-    const firstName = this.props.navigation.getParam('name', 'GuitarBob99');
-    const actions = this.props.navigation.getParam('actions', 'nothing');
-    const goalType = this.props.navigation.getParam('goalType', 'Rip');  
-
-    const renderButtons = () => {
-      const views = []; 
-      for ( var i =0; i< this.state.arr.length; i++){
-      const tasks = this.state.arr[i].tasks;
-      const goalID = this.state.arr[i].id;
-       views.push(
-        <View style={styles.button} key={this.state.arr[i].category} >
-          <Button      
-             title= {this.state.arr[i].category}
-             color="#ffffff"
-             onPress={() => {
-                navigate('Tasks', { name: firstName, tasks: tasks, goalID: goalID});
-          }}
-          />
-        </View>);
-      }
-      return views;
-
-    } 
+    const firstName = this.props.navigation.getParam('name', 'GuitarBob99');    
     return (
       <View style={styles.container}>
         <Text style={styles.headerText}>
           Welcome, {firstName}!
-        </Text> 
-        <View>
-          {renderButtons()}
-        </View>
-        <Text style={styles.headerText}>
-          {this.state.category}
-        </Text>    
+        </Text>      
         <View style={styles.button}>
           <Button 
             title= "Set a New Goal"
@@ -134,6 +96,22 @@ const styles = StyleSheet.create({
     borderColor: '#01579b',
     marginBottom: 10,
     alignItems:'center', 
+  },
+  goals: {
+    width: 300,
+    height: 40,
+    backgroundColor: 'black',
+    borderRadius: 20,
+    borderWidth: 2, 
+    borderColor: '#01579b',
+    marginBottom: 10,
+    alignItems:'center', 
+  },
+  line: {
+    borderBottomColor: 'white',
+    borderBottomWidth: 5,
+    marginTop: 10,
+    marginBottom: 50
   },
 });
 

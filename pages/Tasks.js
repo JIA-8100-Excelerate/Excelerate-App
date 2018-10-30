@@ -3,7 +3,7 @@ import {Button, Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Aler
 import {StackActions, NavigationActions} from 'react-navigation';
 import { retrieveToken } from '../services/Token';
 import { serverGet } from '../services/Fetch';
-
+import CheckBox from 'react-native-check-box';
 class Tasks extends Component {
   constructor(props){
      super(props);
@@ -23,23 +23,38 @@ class Tasks extends Component {
 
 
   render() {
+    
     const { navigate } = this.props.navigation;
     const firstName = this.props.navigation.getParam('name', 'GuitarBob99');
-    const tasks = this.props.navigation.getParam('tasks', 'nothing');
-    //const goalID = this.props.navigation.getParam('goalID', 'noID');
-    //console.log(tasks);
-    //console.log(tasks.name);
-    //console.log("goalID: " + goalID);
     console.log("Doggo");
     console.log(this.state.arr);
-
+    const renderTasks = () => {
+      const views = []; 
+      for ( var i =0; i< this.state.arr.length; i++){
+      const done = this.state.arr[i].done;
+      const task = this.state.arr[i].name;
+      const num = this.state.arr.length;
+       views.push(
+        <View style={styles.button} key={this.state.arr[i].id} >
+          <Button      
+             title= {this.state.arr[i].name}
+             color="#ffffff"
+             onPress={() => {
+                navigate('Edit_Tasks', { name: firstName, done: done, task: task}, num: num);
+          }}
+          />
+        </View>);
+      }
+      return views;
+    } 
     return (
+    
       <View style={styles.container}>
         <Text style={styles.headerText}>
           Welcome, {firstName}, this is task page!
         </Text>   
         <View>
-          {this.state.arr}
+          {renderTasks()}
         </View> 
       </View>
     );

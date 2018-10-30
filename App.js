@@ -14,6 +14,7 @@ import Goal_Summary from './pages/Goal_Summary';
 import Dashboard from './pages/Dashboard';
 import View_Goals from './pages/View_Goals';
 import Tasks from './pages/Tasks';
+import Edit_Tasks from './pages/Edit_Tasks';
 
 export default createStackNavigator({
   Login: {
@@ -54,6 +55,9 @@ export default createStackNavigator({
   },
   Tasks: {
     screen: Tasks,
+  },
+  Edit_Tasks: {
+    screen: Edit_Tasks,
   },
 }, {
     initialRouteName: 'Login',

@@ -28,7 +28,7 @@ class Set_Goal extends Component {
       <Text style={styles.titleText}> Let's Set a Goal! </Text> 
       <View
         style={styles.line}
-      /> 
+      />
       <CheckBox 
         style={{marginLeft: 40,}}
         onClick={()=>{
