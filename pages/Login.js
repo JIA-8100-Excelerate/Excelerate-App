@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Button, Text, View, StyleSheet, TextInput, TouchableOpacity, Alert} from 'react-native';
 import {StackActions, NavigationActions} from 'react-navigation';
-
 import Logo from '../components/Logo';
 import { serverGet, serverUpdate } from '../services/Fetch';
 import { storeToken } from '../services/Token';

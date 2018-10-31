@@ -1,20 +1,36 @@
 import React, {Component} from 'react';
-import {Button, Text, View, StyleSheet, Image, TextInput, TouchableOpacity} from 'react-native';
+import {Button, Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Alert} from 'react-native';
 import {StackActions, NavigationActions} from 'react-navigation';
-import CheckBox from 'react-native-check-box'
+import CheckBox from 'react-native-check-box';
+import { retrieveToken } from '../services/Token';
+import { serverUpdate } from '../services/Fetch';
 
 class Goal_Summary extends Component {
   constructor(props){
      super(props);
      this.state = {
-        goToEventChecked: false,
-        tryNewClubChecked: false,
-        talkToSomeoneNewChecked: false,
-        hangOutWithFriendChecked: false,
-        customizedAction: '',
+      id: '',
+      goalType: this.props.navigation.getParam('goalType', 'Rip'),
      }
+   var params = {
+      category: this.state.goalType,   
+    }
+  retrieveToken()
+      .then((token) => {
+        serverUpdate('POST', 'goals', params, token)
+          .then((res) => {
+            if(res.message) {
+              console.log("in if");
+              Alert.alert("It's fucked bro. Throw your phone in the trash!");
+            } 
+            else {
+              console.log("in else");
+              this.setState({id: res.id});
+            }
+          });
+      });
   }
-   render() {
+  render() {
     const { navigate } = this.props.navigation;
     const firstName = this.props.navigation.getParam('name', 'GuitarBob97');
     const actions = this.props.navigation.getParam('actions', 'NoActionYet');
@@ -25,6 +41,14 @@ class Goal_Summary extends Component {
       if (actions[i] != '') {
         this.state.summary+= "\n" + this.state.count.toString() + '. ' + actions[i];
         this.state.count++;
+        var taskParams = {
+          name: actions[i]
+        }
+        retrieveToken()
+          .then((token) => {
+            console.log("Bananas: " + this.state.id);
+            serverUpdate('POST', 'goal/' + this.state.id + '/tasks', taskParams, token);
+        });
       } 
     }
     return(

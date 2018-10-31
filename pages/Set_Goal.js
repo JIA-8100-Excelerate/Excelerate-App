@@ -14,8 +14,7 @@ class Set_Goal extends Component {
       academicChecked: false,
       cookingChecked: false,
       careerChecked: false,
-      customizedGoal: '',
-      
+      customizedGoal: '',    
    }
  }
  render() {
@@ -38,7 +37,7 @@ class Set_Goal extends Component {
            }} 
         isChecked={this.state.socialChecked} 
         rightText={"Social"}
-        rightTextStyle = {{fontSize: 50, color: 'red'}}
+        rightTextStyle = {{fontSize: 50, color: 'white'}}
         checkBoxColor='red'
         checkedImage={<Image source={require('../assets/checked.png')}/>}
         unCheckedImage={<Image source={require('../assets/unchecked.png')}/>}
@@ -52,7 +51,7 @@ class Set_Goal extends Component {
            }} 
         isChecked={this.state.physicalChecked} 
         rightText={"Physical"}
-        rightTextStyle = {{fontSize: 50, color: 'orange'}}
+        rightTextStyle = {{fontSize: 50, color: 'white'}}
         checkBoxColor='orange'
         checkedImage={<Image source={require('../assets/checked.png')}/>}
         unCheckedImage={<Image source={require('../assets/unchecked.png')}/>}
@@ -66,7 +65,7 @@ class Set_Goal extends Component {
            }} 
         isChecked={this.state.academicChecked} 
         rightText={"Academic"}
-        rightTextStyle = {{fontSize: 50, color: 'yellow'}}
+        rightTextStyle = {{fontSize: 50, color: 'white'}}
         checkBoxColor='yellow'
         checkedImage={<Image source={require('../assets/checked.png')}/>}
         unCheckedImage={<Image source={require('../assets/unchecked.png')}/>}
@@ -80,7 +79,7 @@ class Set_Goal extends Component {
            }} 
         isChecked={this.state.cookingChecked} 
         rightText={"Cooking"}
-        rightTextStyle = {{fontSize: 50, color: 'green'}}
+        rightTextStyle = {{fontSize: 50, color: 'white'}}
         checkBoxColor='green'
         checkedImage={<Image source={require('../assets/checked.png')}/>}
         unCheckedImage={<Image source={require('../assets/unchecked.png')}/>}
@@ -94,7 +93,7 @@ class Set_Goal extends Component {
            }} 
         isChecked={this.state.careerChecked} 
         rightText={"Career"}
-        rightTextStyle = {{fontSize: 50, color: 'blue'}}
+        rightTextStyle = {{fontSize: 50, color: 'white'}}
         checkBoxColor='blue'
         checkedImage={<Image source={require('../assets/checked.png')}/>}
         unCheckedImage={<Image source={require('../assets/unchecked.png')}/>}
