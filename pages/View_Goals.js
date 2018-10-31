@@ -4,7 +4,7 @@ import {StackActions, NavigationActions} from 'react-navigation';
 import { retrieveToken } from '../services/Token';
 import { serverGet } from '../services/Fetch';
 import CheckBox from 'react-native-check-box'
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 class View_Goals extends Component {
   constructor(props){
      super(props);
@@ -46,13 +46,15 @@ class View_Goals extends Component {
     } 
 
     return(
-      <View style={styles.container}>    
-        <Text style={styles.titleText}> Hi {firstName},</Text>
-        <Text style={styles.titleText}> Let's see your Goals! </Text> 
-        <View>
-          {renderGoals()}
-        </View> 
-      </View>
+      <KeyboardAwareScrollView style={styles.scrollView}>
+        <View style={styles.container}>    
+          <Text style={styles.titleText}> Hi {firstName},</Text>
+          <Text style={styles.titleText}> Let's see your Goals! </Text> 
+          <View>
+            {renderGoals()}
+          </View> 
+        </View>
+      </KeyboardAwareScrollView>   
     );
   }
 }
@@ -67,6 +69,10 @@ const styles = StyleSheet.create({
     color: '#ffffff', 
     marginLeft: 20,
     textAlign: 'center'
+  },
+  scrollView: {
+    backgroundColor: '#03a9f4',
+    flex: 1,  
   },
   line: {
     borderBottomColor: 'white',

@@ -4,7 +4,7 @@ import {StackActions, NavigationActions} from 'react-navigation';
 import Logo from '../components/Logo';
 import { serverGet, serverUpdate } from '../services/Fetch';
 import { storeToken } from '../services/Token';
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -44,40 +44,42 @@ class Login extends Component {
    render() {
     const { navigate } = this.props.navigation;
     return(
-      <View style={styles.container}>
-        <Logo/>
-        <TextInput
-          onChangeText={(value) => this.setState({email: value})}
-          style={styles.inputBox}
-          placeholder="Email"
-          placeholderTextColor="white"
-        />
-        <TextInput
-          onChangeText={(value) => this.setState({password: value})}
-          style={styles.inputBox}
-          placeholder="Password"
-          secureTextEntry={true}
-          placeholderTextColor="white"
-        />
-        <View style={styles.button}>
-          <Button
-            onPress={this.handleSubmit}
-            title="Login"
-            color="#ffffff"
+      <KeyboardAwareScrollView style={styles.scrollView}>
+        <View style={styles.container}>
+          <Logo/>
+          <TextInput
+            onChangeText={(value) => this.setState({email: value})}
+            style={styles.inputBox}
+            placeholder="Email"
+            placeholderTextColor="white"
           />
+          <TextInput
+            onChangeText={(value) => this.setState({password: value})}
+            style={styles.inputBox}
+            placeholder="Password"
+            secureTextEntry={true}
+            placeholderTextColor="white"
+          />
+          <View style={styles.button}>
+            <Button
+              onPress={this.handleSubmit}
+              title="Login"
+              color="#ffffff"
+            />
+          </View>
+          <View style={styles.signupTextCont}>
+            <Text style={styles.signupText}> Don't have an account yet?</Text> 
+            <Button
+                title= "Sign up here!"
+                color='#ffffff'
+                fontSize = '30'
+                onPress={() => {
+                  navigate('Register');
+            }}
+          />
+          </View>
         </View>
-        <View style={styles.signupTextCont}>
-          <Text style={styles.signupText}> Don't have an account yet?</Text> 
-          <Button
-              title= "Sign up here!"
-              color='#ffffff'
-              fontSize = '30'
-              onPress={() => {
-                navigate('Register');
-          }}
-        />
-        </View>
-      </View>
+      </KeyboardAwareScrollView>   
     );
   }
 }
@@ -88,6 +90,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems:'center',
     justifyContent:'center',
+  },
+  scrollView: {
+    backgroundColor: '#03a9f4',
+    flex: 1,  
   },
   signupTextCont: {
     marginTop: 250,

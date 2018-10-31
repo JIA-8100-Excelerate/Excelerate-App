@@ -4,6 +4,7 @@ import {StackActions, NavigationActions} from 'react-navigation';
 import { retrieveToken } from '../services/Token';
 import { serverGet } from '../services/Fetch';
 import CheckBox from 'react-native-check-box';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 class Tasks extends Component {
   constructor(props){
      super(props);
@@ -48,15 +49,16 @@ class Tasks extends Component {
       return views;
     } 
     return (
-    
-      <View style={styles.container}>
-        <Text style={styles.headerText}>
-          Welcome, {firstName}, this is task page!
-        </Text>   
-        <View>
-          {renderTasks()}
-        </View> 
-      </View>
+      <KeyboardAwareScrollView style={styles.scrollView}>
+        <View style={styles.container}>
+          <Text style={styles.headerText}>
+            Welcome, {firstName}, this is task page!
+          </Text>   
+          <View>
+            {renderTasks()}
+          </View> 
+        </View>
+      </KeyboardAwareScrollView> 
     );
   }
 }
@@ -67,6 +69,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems:'center',
     justifyContent:'center'
+  },
+  scrollView: {
+    backgroundColor: '#03a9f4',
+    flex: 1,  
   },
   headerText: {
     color: 'white',
