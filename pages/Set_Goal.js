@@ -31,7 +31,6 @@ class Set_Goal extends Component {
           .then((res) => {
             if(res.message) {
               console.log("in if");
-              Alert.alert("It's fucked bro. Throw your phone in the trash :)");
               this.setState({
                  continue:!this.state.continue
              })

@@ -6,30 +6,29 @@ import { retrieveToken } from '../services/Token';
 import { serverUpdate } from '../services/Fetch';
 
 class Goal_Summary extends Component {
-  constructor(props){
-     super(props);
-     this.state = {
-      id: '',
+  constructor(props) {
+    super(props);
+    this.state = {
       goalType: this.props.navigation.getParam('goalType', 'Rip'),
-     }
-   var params = {
-      category: this.state.goalType,   
+      id: 36,
     }
-  retrieveToken()
-      .then((token) => {
-        serverUpdate('POST', 'goals', params, token)
-          .then((res) => {
-            if(res.message) {
-              console.log("in if");
-              Alert.alert("It's fucked bro. Throw your phone in the trash :)");
-            } 
-            else {
-              console.log("in else");
-              this.setState({id: res.id});
-            }
-          });
-      });
+    this.postTasks = this.postTasks.bind(this);
   }
+
+  postTasks(actions) {
+    for (let i = 0; i < 5; i++) {
+      if (actions[i] != '') {
+        retrieveToken()
+          .then((token) => {
+            var taskParams = {
+              name: actions[i]
+            }
+            serverUpdate('POST', 'goals/' + this.state.id + '/tasks', taskParams, token);
+        });
+      }
+    }
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     const firstName = this.props.navigation.getParam('name', 'GuitarBob97');
@@ -41,14 +40,6 @@ class Goal_Summary extends Component {
       if (actions[i] != '') {
         this.state.summary+= "\n" + this.state.count.toString() + '. ' + actions[i];
         this.state.count++;
-        var taskParams = {
-          name: actions[i]
-        }
-        retrieveToken()
-          .then((token) => {
-            console.log("Bananas: " + this.state.id);
-            serverUpdate('POST', 'goal/' + this.state.id + '/tasks', taskParams, token);
-        });
       } 
     }
     return(
@@ -65,6 +56,7 @@ class Goal_Summary extends Component {
                 color='#ffffff'
                 fontSize = '30'
                 onPress={() => {
+                  this.postTasks(actions);
                   navigate('Dashboard', {name: firstName, goalType: goalType, actions: actions});
             }}
           />       
