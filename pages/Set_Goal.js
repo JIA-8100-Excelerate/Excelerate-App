@@ -3,6 +3,8 @@ import {Button, Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Aler
 import {StackActions, NavigationActions} from 'react-navigation';
 import CheckBox from 'react-native-check-box';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { retrieveToken } from '../services/Token';
+import { serverUpdate } from '../services/Fetch';
 
 class Set_Goal extends Component {
   constructor(props){
@@ -14,8 +16,29 @@ class Set_Goal extends Component {
       academicChecked: false,
       cookingChecked: false,
       careerChecked: false,
-      customizedGoal: '',    
+      customizedGoal: '', 
+      goalType: '',
+      continue: false,   
    }
+ }
+ checkGoal(g) {
+    var params = {
+      category: g,   
+    }
+    retrieveToken()
+      .then((token) => {
+        serverUpdate('POST', 'goals', params, token)
+          .then((res) => {
+            if(res.message) {
+              console.log("in if");
+              Alert.alert("It's fucked bro. Throw your phone in the trash :)");
+              this.setState({
+                 continue:!this.state.continue
+             })
+             console.log(this.state.continue);
+            } 
+          });
+      });
  }
  render() {
   const { navigate } = this.props.navigation;
@@ -113,22 +136,35 @@ class Set_Goal extends Component {
               onPress={() => {
                 if(this.state.socialChecked && !this.state.physicalChecked && !this.state.academicChecked 
                   && !this.state.cookingChecked && !this.state.careerChecked && this.state.customizedGoal == '') {
-                  navigate('Social_Action', { name: firstName });
+                  this.state.goalType = "Social";
+                  {this.checkGoal(this.state.goalType)}
+                  console.log("after checkGoal()" + this.state.continue);
+                  if (this.state.continue) {
+                    navigate('Social_Action', { name: firstName });
+                  }   
                 } else if(this.state.physicalChecked && !this.state.socialChecked && !this.state.academicChecked 
                   && !this.state.cookingChecked && !this.state.careerChecked && this.state.customizedGoal == '') {
+                  this.state.goalType = "Physical";
                   navigate('Physical_Action', { name: firstName });
                 } else if(this.state.academicChecked && !this.state.socialChecked && !this.state.physicalChecked 
                   && !this.state.cookingChecked && !this.state.careerChecked && this.state.customizedGoal == '') {
+                  this.state.goalType = "Academic";
                   navigate('Academic_Action', { name: firstName });
                 } else if(this.state.cookingChecked && !this.state.socialChecked && !this.state.academicChecked 
                   && !this.state.physicalChecked && !this.state.careerChecked && this.state.customizedGoal == '') {
+                  this.state.goalType = "Cooking";
                   navigate('Cooking_Action', { name: firstName });
                 } else if(this.state.careerChecked && !this.state.socialChecked && !this.state.academicChecked 
                   && !this.state.cookingChecked && !this.state.physicalChecked && this.state.customizedGoal == '') {
+                  this.state.goalType = "Career";
                   navigate('Career_Action', { name: firstName });
                 } else if(this.state.customizedGoal != '' && !this.state.socialChecked && !this.state.physicalChecked 
                   && !this.state.academicChecked && !this.state.cookingChecked && !this.state.careerChecked) {
-                  navigate('Customized_Action', { name: firstName, goal: this.state.customizedGoal });
+                  this.state.goalType = this.state.customizedGoal;
+                  {this.checkGoal(this.state.goalType)}
+                  if (this.state.continue) {
+                    navigate('Customized_Action', { name: firstName, goal: this.state.customizedGoal });
+                  }      
                 }
                  else {
                   Alert.alert("Select one goal at a time please");

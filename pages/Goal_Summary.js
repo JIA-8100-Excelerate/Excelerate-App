@@ -21,7 +21,7 @@ class Goal_Summary extends Component {
           .then((res) => {
             if(res.message) {
               console.log("in if");
-              Alert.alert("It's fucked bro. Throw your phone in the trash!");
+              Alert.alert("It's fucked bro. Throw your phone in the trash :)");
             } 
             else {
               console.log("in else");
