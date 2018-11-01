@@ -18,34 +18,40 @@ class Set_Goal extends Component {
       careerChecked: false,
       customizedGoal: '', 
       goalType: '',
-      continue: false,   
+      goalID:'',
+      firstName: this.props.navigation.getParam('name', 'GuitarBob99'),
    }
+
+   this.checkGoal = this.checkGoal.bind(this);
  }
- checkGoal(g) {
+ checkGoal(nextPage) {
+    const { navigate } = this.props.navigation;
     var params = {
-      category: g,   
+      category: this.state.goalType,   
     }
     retrieveToken()
       .then((token) => {
         serverUpdate('POST', 'goals', params, token)
           .then((res) => {
             if(res.message) {
-              console.log("in if");
-              this.setState({
-                 continue:!this.state.continue
-             })
-             console.log(this.state.continue);
-            } 
+              Alert.alert("This goal already exists!");
+            } else {
+              var navParams = {
+                name: this.props.navigation.getParam('name', 'GuitarBob99'),
+                goalID: res.id,
+                goal: this.state.customizedGoal,
+              }
+              navigate(nextPage, navParams);
+            }
           });
       });
  }
  render() {
   const { navigate } = this.props.navigation;
-  const firstName = this.props.navigation.getParam('name', 'GuitarBob99');
   
   return(
     <KeyboardAwareScrollView style={styles.container}>
-      <Text style={styles.titleText}> Hi {firstName},</Text>
+      <Text style={styles.titleText}> Hi {this.state.firstName},</Text>
       <Text style={styles.titleText}> Let's Set a Goal! </Text> 
       <View
         style={styles.line}
@@ -136,34 +142,27 @@ class Set_Goal extends Component {
                 if(this.state.socialChecked && !this.state.physicalChecked && !this.state.academicChecked 
                   && !this.state.cookingChecked && !this.state.careerChecked && this.state.customizedGoal == '') {
                   this.state.goalType = "Social";
-                  {this.checkGoal(this.state.goalType)}
-                  console.log("after checkGoal()" + this.state.continue);
-                  if (this.state.continue) {
-                    navigate('Social_Action', { name: firstName });
-                  }   
+                  this.checkGoal('Social_Action')
                 } else if(this.state.physicalChecked && !this.state.socialChecked && !this.state.academicChecked 
                   && !this.state.cookingChecked && !this.state.careerChecked && this.state.customizedGoal == '') {
                   this.state.goalType = "Physical";
-                  navigate('Physical_Action', { name: firstName });
+                  this.checkGoal('Physical_Action');
                 } else if(this.state.academicChecked && !this.state.socialChecked && !this.state.physicalChecked 
                   && !this.state.cookingChecked && !this.state.careerChecked && this.state.customizedGoal == '') {
                   this.state.goalType = "Academic";
-                  navigate('Academic_Action', { name: firstName });
+                  this.checkGoal('Academic_Action');
                 } else if(this.state.cookingChecked && !this.state.socialChecked && !this.state.academicChecked 
                   && !this.state.physicalChecked && !this.state.careerChecked && this.state.customizedGoal == '') {
                   this.state.goalType = "Cooking";
-                  navigate('Cooking_Action', { name: firstName });
+                  this.checkGoal('Cooking_Action');
                 } else if(this.state.careerChecked && !this.state.socialChecked && !this.state.academicChecked 
                   && !this.state.cookingChecked && !this.state.physicalChecked && this.state.customizedGoal == '') {
                   this.state.goalType = "Career";
-                  navigate('Career_Action', { name: firstName });
+                  this.checkGoal('Career_Action');
                 } else if(this.state.customizedGoal != '' && !this.state.socialChecked && !this.state.physicalChecked 
                   && !this.state.academicChecked && !this.state.cookingChecked && !this.state.careerChecked) {
                   this.state.goalType = this.state.customizedGoal;
-                  {this.checkGoal(this.state.goalType)}
-                  if (this.state.continue) {
-                    navigate('Customized_Action', { name: firstName, goal: this.state.customizedGoal });
-                  }      
+                  this.checkGoal('Customized_Action');
                 }
                  else {
                   Alert.alert("Select one goal at a time please");

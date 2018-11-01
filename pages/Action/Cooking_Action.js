@@ -19,6 +19,7 @@ class Cooking_Action extends Component {
    render() {
     const { navigate } = this.props.navigation;
     const firstName = this.props.navigation.getParam('name', 'GuitarBob99');
+    const goalID = this.props.navigation.getParam('goalID', 'RipID');
  
     return(
       <KeyboardAwareScrollView style={styles.scrollView}>
@@ -109,7 +110,7 @@ class Cooking_Action extends Component {
                       if (this.state.customizedAction!='') {
                         this.state.goalAction[4]= this.state.customizedAction
                       }
-                      navigate('Goal_Summary', { name: firstName, actions: this.state.goalAction, goalType: 'Cooking'});
+                      navigate('Goal_Summary', { name: firstName, actions: this.state.goalAction, goalType: 'Cooking', goalID: goalID});
                     } else {
                       Alert.alert('Please set your actions')
                     }

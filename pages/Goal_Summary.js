@@ -10,7 +10,7 @@ class Goal_Summary extends Component {
     super(props);
     this.state = {
       goalType: this.props.navigation.getParam('goalType', 'Rip'),
-      id: 36,
+      goalID: this.props.navigation.getParam('goalID', 'RipID'),
     }
     this.postTasks = this.postTasks.bind(this);
   }
@@ -23,7 +23,7 @@ class Goal_Summary extends Component {
             var taskParams = {
               name: actions[i]
             }
-            serverUpdate('POST', 'goals/' + this.state.id + '/tasks', taskParams, token);
+            serverUpdate('POST', 'goals/' + this.state.goalID + '/tasks', taskParams, token);
         });
       }
     }

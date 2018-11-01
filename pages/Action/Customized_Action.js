@@ -19,8 +19,7 @@ class Customized_Action extends Component {
     const { navigate } = this.props.navigation;
     const firstName = this.props.navigation.getParam('name', 'BOB');
     const goal = this.props.navigation.getParam('goal', 'did not get goal');
-    console.log(firstName);
-    console.log(goal); 
+    const goalID = this.props.navigation.getParam('goalID', 'RipID');
     
     return(
       <KeyboardAwareScrollView style={styles.scrollView}>
@@ -77,7 +76,7 @@ class Customized_Action extends Component {
                     if (customizedAction1 == '' && customizedAction2 == '' && customizedAction3 == '' && customizedAction4 == '' && customizedAction5 == '') {
                       Alert.alert('pelase enter at least one action');
                     } else {
-                      navigate('Goal_Summary', { name: firstName, actions: this.state.goalAction, goalType: goal});
+                      navigate('Goal_Summary', { name: firstName, actions: this.state.goalAction, goalType: goal, goalID: goalID});
                     }             
               }}
             />       
