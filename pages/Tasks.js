@@ -23,28 +23,29 @@ class Tasks extends Component {
   }
 
 
-  render() {
-    
+  render() { 
     const { navigate } = this.props.navigation;
-    const firstName = this.props.navigation.getParam('name', 'GuitarBob99');
-    console.log("Doggo");
-    console.log(this.state.arr);
+    const firstName = this.props.navigation.getParam('name', 'GuitarBob99'); 
+    const goalType = this.props.navigation.getParam('goalType', 'Rip');
     const renderTasks = () => {
       const views = []; 
       for ( var i =0; i< this.state.arr.length; i++){
-      const done = this.state.arr[i].done;
-      const task = this.state.arr[i].name;
-      const num = this.state.arr.length;
-       views.push(
-        <View style={styles.button} key={this.state.arr[i].id} >
-          <Button      
-             title= {this.state.arr[i].name}
-             color="#ffffff"
-             onPress={() => {
-                navigate('Edit_Tasks', { name: firstName, done: done, task: task}, num: num);
-          }}
-          />
-        </View>);
+        const done = this.state.arr[i].done;
+        const task = this.state.arr[i].name;
+        const taskID = this.state.arr[i].id;
+        if (!done) {
+          views.push(
+          <View style={styles.button} key={this.state.arr[i].id} >
+            <Button      
+               title= {this.state.arr[i].name}
+               color="#ffffff"
+               onPress={() => { 
+                  navigate('Edit_Tasks', { name: firstName, taskID: taskID, done: done, task: task, 
+                            goalID: this.state.goalID, goalType: goalType});             
+            }}
+            />
+          </View>);
+        }   
       }
       return views;
     } 
@@ -56,6 +57,16 @@ class Tasks extends Component {
           </Text>   
           <View>
             {renderTasks()}
+          </View>
+          <View style={styles.button}>
+            <Button 
+              title= "Add more tasks"
+              color= "#ffffff"       
+              onPress={() => {
+                  const navPage = goalType+'_Action';
+                  navigate(navPage, {name: firstName, goalID: this.state.goalID, goalType: goalType});
+            }}
+            />
           </View> 
         </View>
       </KeyboardAwareScrollView> 

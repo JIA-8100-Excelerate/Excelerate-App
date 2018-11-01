@@ -3,6 +3,8 @@ import {Button, Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Aler
 import {StackActions, NavigationActions} from 'react-navigation';
 import CheckBox from 'react-native-check-box';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { retrieveToken } from '../services/Token';
+import { serverUpdate } from '../services/Fetch';
 
 class Edit_Tasks extends Component {
   constructor(props){
@@ -10,12 +12,13 @@ class Edit_Tasks extends Component {
      this.state = {
         taskName: this.props.navigation.getParam('task', 'notask'),
         taskDone: this.props.navigation.getParam('done', 'notaskDone'),
+        goalID: this.props.navigation.getParam('goalID', 'noID'),
      }
   }
    render() {
     const { navigate } = this.props.navigation;
     const firstName = this.props.navigation.getParam('name', 'GuitarBob99');
- 
+    const taskID = this.props.navigation.getParam('taskID', 'noID');
     return(
       <KeyboardAwareScrollView style={styles.scrollView}>
         <View style={styles.container}>
@@ -24,32 +27,40 @@ class Edit_Tasks extends Component {
           <View
             style={styles.line}
           /> 
-          <CheckBox 
-            style={{marginLeft: 40, marginTop: 20}}
-            onClick={()=>{
-                this.setState({
-                     taskDone:!this.state.taskDone
-                 })
-               }} 
-            isChecked={this.state.taskDone} 
-            rightText={this.state.taskName}
-            rightTextStyle = {{fontSize: 20, color: 'white'}}
-            checkBoxColor='white'
-          /> 
+          <Text style={styles.headerText}> {this.state.taskName} </Text> 
           <View style={styles.button}>
             <Button 
-              title= "Submit"
+              title= "Complete"
               color= "#ffffff"       
               onPress={() => {
-                if (this.state.taskDone) {
-                  Alert.alert("Good job!");
-                  navigate('Dashboard', { name: firstName});
-                } else {
-                  Alert.alert("Please check task!")
-                }           
+                this.setState({
+                     taskDone: true
+                 })
+                var params = {
+                  done: true,   
+                }
+                retrieveToken()
+                  .then((token) => {
+                    serverUpdate('PUT', 'goals/' + this.state.goalID + '/tasks/' + taskID, params, token);
+                    navigate('Dashboard', { name: firstName});    
+                  });          
             }}
             />
+          </View> 
+          <View style={styles.button}>
+            <Button 
+              title= "Delete"
+              color= "#ffffff"       
+              onPress={() => {
+                var params = { 
                 }
+                retrieveToken()
+                  .then((token) => {
+                    serverUpdate('DELETE', 'goals/' + this.state.goalID + '/tasks/' + taskID, params, token)
+                    navigate('Dashboard', { name: firstName})
+                  });          
+            }}
+            />
           </View> 
           <View style={styles.button}>
             <Button 
@@ -60,6 +71,7 @@ class Edit_Tasks extends Component {
             }}
             />
           </View>
+
         </View>
      </KeyboardAwareScrollView>   
     );
