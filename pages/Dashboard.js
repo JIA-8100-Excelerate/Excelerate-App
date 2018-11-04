@@ -19,29 +19,29 @@ class Dashboard extends Component {
           Welcome, {firstName}!
         </Text>      
         <View style={styles.button}>
-          <Button 
-            title= "Set a New Goal"
-            color= "#ffffff"       
-            onPress={() => {
-                navigate('Set_Goal', { name: firstName});
-          }}
-            />
+          <Button
+              title= "View My Goals"
+              color= "#ffffff"
+              onPress={() => {
+                  navigate('View_Goals', {name: firstName});
+            }}
+          />
         </View>
         <View style={styles.button}>
-          <Button
-            title= "View My Goals"
-            color= "#ffffff"
-            onPress={() => {
-                navigate('View_Goals', {name: firstName});
-          }}
-            />
-          </View>
+          <Button 
+              title= "Set a New Goal"
+              color= "#ffffff"       
+              onPress={() => {
+                  navigate('Set_Goal', { name: firstName});
+            }}
+          />
+        </View>
         <View style={styles.button}>
           <Button
             title= "View My Accomplishments"
             color= "#ffffff"
             onPress={() => {
-                navigate('Set_Goal');
+                navigate('View_Accomplishments', { name: firstName});
             }}
           />
         </View>  

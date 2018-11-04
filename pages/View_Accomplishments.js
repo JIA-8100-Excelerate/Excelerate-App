@@ -5,7 +5,7 @@ import { retrieveToken } from '../services/Token';
 import { serverGet } from '../services/Fetch';
 import CheckBox from 'react-native-check-box'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-class View_Goals extends Component {
+class View_Accomplishments extends Component {
   constructor(props){
      super(props);
      this.state = {       
@@ -21,7 +21,8 @@ class View_Goals extends Component {
   }
    render() {
     const { navigate } = this.props.navigation;
-    const firstName = this.props.navigation.getParam('name', 'GuitarBob99'); 
+    const firstName = this.props.navigation.getParam('name', 'GuitarBob99');
+    const actions = this.props.navigation.getParam('actions', 'nothing');  
     const renderGoals = () => {
       const views = []; 
       for ( var i =0; i< this.state.arr.length; i++){
@@ -34,7 +35,7 @@ class View_Goals extends Component {
              title= {this.state.arr[i].category}
              color="#ffffff"
              onPress={() => {
-                navigate('Tasks', { name: firstName, tasks: tasks, goalID: goalID, goalType: goalType});
+                navigate('Done_Tasks', { name: firstName, tasks: tasks, goalID: goalID, goalType: goalType});
             }}
           />
         </View>);
@@ -47,7 +48,7 @@ class View_Goals extends Component {
       <KeyboardAwareScrollView style={styles.scrollView}>
         <View style={styles.container}>    
           <Text style={styles.titleText}> Hi {firstName},</Text>
-          <Text style={styles.titleText}> Let's see your Goals! </Text> 
+          <Text style={styles.titleText}> Here's your accomplishments! </Text> 
           <View>
             {renderGoals()}
           </View> 
@@ -103,4 +104,4 @@ const styles = StyleSheet.create({
   
 });
 
-export default View_Goals;
+export default View_Accomplishments;

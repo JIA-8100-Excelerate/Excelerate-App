@@ -3,6 +3,8 @@ import {Button, Text, View, StyleSheet, Image, TextInput, TouchableOpacity} from
 import {StackActions, NavigationActions} from 'react-navigation';
 import CheckBox from 'react-native-check-box';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { retrieveToken } from '../../services/Token';
+import { serverGet } from '../../services/Fetch';
 
 class Customized_Action extends Component {
   constructor(props){
@@ -13,14 +15,24 @@ class Customized_Action extends Component {
         customizedAction3: '',
         customizedAction4: '',
         customizedAction5: '',
+        goalID: this.props.navigation.getParam('goalID', 'noID'),
+        goal: '',
      }
+
+     retrieveToken()
+      .then((token) => {
+        serverGet('goals/' + this.state.goalID, token)
+          .then((res) => {
+            console.log(res)
+            this.setState({goal: res.category})
+        });
+      });
   }
    render() {
     const { navigate } = this.props.navigation;
     const firstName = this.props.navigation.getParam('name', 'BOB');
-    const goal = this.props.navigation.getParam('goal', 'did not get goal');
-    const goalID = this.props.navigation.getParam('goalID', 'RipID');
-    
+    const goal = this.state.goal;
+    const goalID = this.state.goalID;  
     return(
       <KeyboardAwareScrollView style={styles.scrollView}>
         <View style={styles.container}>

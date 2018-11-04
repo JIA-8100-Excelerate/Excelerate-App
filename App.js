@@ -15,6 +15,8 @@ import Dashboard from './pages/Dashboard';
 import View_Goals from './pages/View_Goals';
 import Tasks from './pages/Tasks';
 import Edit_Tasks from './pages/Edit_Tasks';
+import Done_Tasks from './pages/Done_Tasks';
+import View_Accomplishments from './pages/View_Accomplishments';
 
 export default createStackNavigator({
   Login: {
@@ -59,9 +61,16 @@ export default createStackNavigator({
   Edit_Tasks: {
     screen: Edit_Tasks,
   },
+  Done_Tasks: {
+    screen: Done_Tasks,
+  },
+  View_Accomplishments: {
+    screen: View_Accomplishments,
+  },
 }, {
     initialRouteName: 'Login',
     navigationOptions: {
-      headerBackTitle: "Back",
+    headerBackTitle: "Back",
+
     },
 });

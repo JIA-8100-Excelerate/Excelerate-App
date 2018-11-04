@@ -5,7 +5,7 @@ import { retrieveToken } from '../services/Token';
 import { serverGet } from '../services/Fetch';
 import CheckBox from 'react-native-check-box';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-class Tasks extends Component {
+class Done_Tasks extends Component {
   constructor(props){
      super(props);
      this.state = {       
@@ -33,7 +33,7 @@ class Tasks extends Component {
         const done = this.state.arr[i].done;
         const task = this.state.arr[i].name;
         const taskID = this.state.arr[i].id;
-        if (!done) {
+        if (done) {
           views.push(
           <View style={styles.button} key={this.state.arr[i].id} >
             <Button      
@@ -53,7 +53,7 @@ class Tasks extends Component {
       <KeyboardAwareScrollView style={styles.scrollView}>
         <View style={styles.container}>
           <Text style={styles.headerText}>
-            Welcome, {firstName}, this is task page!
+            Welcome, {firstName}, this is done_task page!
           </Text>   
           <View>
             {renderTasks()}
@@ -123,4 +123,4 @@ const styles = StyleSheet.create({
 
 
 
-export default  Tasks;
+export default  Done_Tasks;
