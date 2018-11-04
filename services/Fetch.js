@@ -12,7 +12,7 @@ export const serverGet = (endpoint, token) => {
   .then((response) => response.json());
 }
 
-export const serverUpdate = (method, endpoint, params, token) => {
+export const serverPost = (endpoint, params, token) => {
   headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -21,11 +21,40 @@ export const serverUpdate = (method, endpoint, params, token) => {
     headers['Authorization'] = token;
   }
   return fetch(apiBaseUrl + endpoint, {
-    method: method,
+    method: 'POST',
     headers: headers,
     body: JSON.stringify(params)
   })
   .then((response) => response.json());
+}
+
+export const serverPut = (endpoint, params, token) => {
+  headers = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  }
+  if (token) {
+    headers['Authorization'] = token;
+  }
+  return fetch(apiBaseUrl + endpoint, {
+    method: 'PUT',
+    headers: headers,
+    body: JSON.stringify(params)
+  })
+}
+
+export const serverDelete = (endpoint, token) => {
+  headers = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  }
+  if (token) {
+    headers['Authorization'] = token;
+  }
+  return fetch(apiBaseUrl + endpoint, {
+    method: 'DELETE',
+    headers: headers,
+  })
 }
 
   // .then(res => res.text())          // convert to plain text

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Alert, Text, View, StyleSheet, TextInput, TouchableOpacity, Button} from 'react-native';
 import {StackActions, NavigationActions} from 'react-navigation';
 import Logo from '../components/Logo';
-import { serverUpdate } from '../services/Fetch';
+import { serverPost } from '../services/Fetch';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { storeToken } from '../services/Token';
 
@@ -27,7 +27,7 @@ class Register extends Component {
       firstname: this.state.firstName,
       lastname: this.state.lastName,
     }
-    serverUpdate('POST', 'signup', params)
+    serverPost('signup', params)
       .then((res) => {
         if(!res.auth_token) {
           Alert.alert(res.message);

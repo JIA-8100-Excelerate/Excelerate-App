@@ -3,7 +3,7 @@ import {Button, Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Aler
 import {StackActions, NavigationActions} from 'react-navigation';
 import CheckBox from 'react-native-check-box';
 import { retrieveToken } from '../services/Token';
-import { serverUpdate } from '../services/Fetch';
+import { serverPost } from '../services/Fetch';
 
 class Goal_Summary extends Component {
   constructor(props) {
@@ -23,7 +23,7 @@ class Goal_Summary extends Component {
             var taskParams = {
               name: actions[i]
             }
-            serverUpdate('POST', 'goals/' + this.state.goalID + '/tasks', taskParams, token);
+            serverPost('goals/' + this.state.goalID + '/tasks', taskParams, token);
         });
       }
     }

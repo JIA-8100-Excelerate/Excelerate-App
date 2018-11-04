@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Button, Text, View, StyleSheet, TextInput, TouchableOpacity, Alert} from 'react-native';
 import {StackActions, NavigationActions} from 'react-navigation';
 import Logo from '../components/Logo';
-import { serverGet, serverUpdate } from '../services/Fetch';
+import { serverGet, serverPost } from '../services/Fetch';
 import { storeToken } from '../services/Token';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 class Login extends Component {
@@ -30,7 +30,7 @@ class Login extends Component {
       email: this.state.email,
       password: this.state.password,
     }
-    serverUpdate('POST', 'auth/login', params)
+    serverPost('auth/login', params)
       .then((res) => {
         if(res.message) {
           Alert.alert("Invalid credentials");

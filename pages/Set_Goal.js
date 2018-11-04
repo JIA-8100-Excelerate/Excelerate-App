@@ -4,7 +4,7 @@ import {StackActions, NavigationActions} from 'react-navigation';
 import CheckBox from 'react-native-check-box';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { retrieveToken } from '../services/Token';
-import { serverUpdate } from '../services/Fetch';
+import { serverPost } from '../services/Fetch';
 
 class Set_Goal extends Component {
   constructor(props){
@@ -31,7 +31,7 @@ class Set_Goal extends Component {
     }
     retrieveToken()
       .then((token) => {
-        serverUpdate('POST', 'goals', params, token)
+        serverPost('goals', params, token)
           .then((res) => {
             if(res.message) {
               Alert.alert("This goal already exists!");

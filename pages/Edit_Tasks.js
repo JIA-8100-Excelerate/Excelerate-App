@@ -4,7 +4,7 @@ import {StackActions, NavigationActions} from 'react-navigation';
 import CheckBox from 'react-native-check-box';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { retrieveToken } from '../services/Token';
-import { serverUpdate } from '../services/Fetch';
+import { serverPut, serverDelete } from '../services/Fetch';
 
 class Edit_Tasks extends Component {
   constructor(props){
@@ -41,7 +41,7 @@ class Edit_Tasks extends Component {
                 }
                 retrieveToken()
                   .then((token) => {
-                    serverUpdate('PUT', 'goals/' + this.state.goalID + '/tasks/' + taskID, params, token);
+                    serverPut('goals/' + this.state.goalID + '/tasks/' + taskID, params, token);
                     navigate('Dashboard', { name: firstName});    
                   });          
             }}
@@ -56,7 +56,7 @@ class Edit_Tasks extends Component {
                 }
                 retrieveToken()
                   .then((token) => {
-                    serverUpdate('DELETE', 'goals/' + this.state.goalID + '/tasks/' + taskID, params, token)
+                    serverDelete('goals/' + this.state.goalID + '/tasks/' + taskID, token)
                     navigate('Dashboard', { name: firstName})
                   });          
             }}
