@@ -40,16 +40,15 @@ class Update_Profile extends Component {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
     }
-    serverPut('profile', params, this.state.token)
-      .then((res) => {
-        if(res.message) {
-          Alert.alert("Invalid credentials");
-        }
-        else {
+    if (this.state.password != this.state.password_confirmation) {
+      Alert.alert("Password confirmation doesn't match Password");
+    } else {
+        serverPut('profile', params, this.state.token)
+        .then((res) => { 
           Alert.alert("You successfully updated your profile");
           navigate('Dashboard', { name: this.state.firstName });
-        }
-    });
+      });
+    } 
   }
   render() {
     const { navigate } = this.props.navigation;
