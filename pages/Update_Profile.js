@@ -37,8 +37,8 @@ class Update_Profile extends Component {
       email: this.state.email,
       password: this.state.password,
       password_confirmation: this.state.password_confirmation,
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
+      firstname: this.state.firstName,
+      lastname: this.state.lastName,
     }
     if (this.state.password != this.state.password_confirmation) {
       Alert.alert("Password confirmation doesn't match Password");
