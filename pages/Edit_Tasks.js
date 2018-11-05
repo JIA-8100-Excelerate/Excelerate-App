@@ -4,7 +4,7 @@ import {StackActions, NavigationActions} from 'react-navigation';
 import CheckBox from 'react-native-check-box';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { retrieveToken } from '../services/Token';
-import { serverPut, serverDelete } from '../services/Fetch';
+import { serverDelete, serverPost } from '../services/Fetch';
 
 class Edit_Tasks extends Component {
   constructor(props){
@@ -22,26 +22,24 @@ class Edit_Tasks extends Component {
     return(
       <KeyboardAwareScrollView style={styles.scrollView}>
         <View style={styles.container}>
-          <Text style={styles.titleText}> Hi {firstName},</Text>
-          <Text style={styles.headerText}> Edit your task here! </Text> 
+          <Text style={styles.titleText1}> Hi {firstName},</Text>
+          <Text style={styles.titleText2}> Edit your task here! </Text> 
           <View
             style={styles.line}
           /> 
-          <Text style={styles.headerText}> {this.state.taskName} </Text> 
+          <Text style={styles.actionText}> {this.state.taskName} </Text> 
           <View style={styles.button}>
             <Button 
               title= "Complete"
               color= "#ffffff"       
               onPress={() => {
-                this.setState({
-                     taskDone: true
-                 })
                 var params = {
-                  done: true,   
+                  name: this.state.taskName   
                 }
                 retrieveToken()
                   .then((token) => {
-                    serverPut('goals/' + this.state.goalID + '/tasks/' + taskID, params, token);
+                    serverDelete('goals/' + this.state.goalID + '/tasks/' + taskID, token);
+                    serverPost('goals/' + this.state.goalID + '/completed_tasks/', params, token);
                     navigate('Dashboard', { name: firstName});    
                   });          
             }}
@@ -56,7 +54,7 @@ class Edit_Tasks extends Component {
                 }
                 retrieveToken()
                   .then((token) => {
-                    serverDelete('goals/' + this.state.goalID + '/tasks/' + taskID, token)
+                    serverDelete('goals/' + this.state.goalID + '/tasks/' + taskID, params, token)
                     navigate('Dashboard', { name: firstName})
                   });          
             }}
@@ -87,15 +85,32 @@ const styles = StyleSheet.create({
     backgroundColor: '#03a9f4',
     flex: 1,  
   },
-  titleText: {
-    fontSize: 50,     
-    color: '#ffffff',
-    alignItems:'center', 
+  titleText1: {
+    fontSize: 40,     
+    color: '#ffffff', 
+    marginTop: 60,
+    marginLeft: 20,
+    marginRight: 20,
+    textAlign: 'center',
+    fontFamily: 'Arial-ItalicMT',
   },
-  headerText: {
-    fontSize: 30,     
+  titleText2: {
+    fontSize: 40,     
+    color: '#ffffff', 
+    marginBottom: 20,
+    marginLeft: 20,
+    marginRight: 20,
+    textAlign: 'center',
+    fontFamily: 'Arial-ItalicMT',
+  },
+  actionText: {
+    fontSize: 30, 
+    fontWeight: 'bold',    
     color: '#ffffff',
     alignItems:'center', 
+    paddingHorizontal: 30,
+    fontFamily: 'AvenirNext-HeavyItalic',
+    textAlign: 'center'
   },
   line: {
     borderBottomColor: 'white',
@@ -112,13 +127,6 @@ const styles = StyleSheet.create({
     borderColor: '#01579b',
     marginTop: 20,
     marginLeft: 40,
-  },
-  actionText: {
-    fontSize: 30, 
-    fontWeight: 'bold',    
-    color: '#ffffff',
-    alignItems:'center', 
-    paddingHorizontal: 30,
   },
 
   

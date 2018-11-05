@@ -4,7 +4,7 @@ import {StackActions, NavigationActions} from 'react-navigation';
 import CheckBox from 'react-native-check-box';
 import { retrieveToken } from '../services/Token';
 import { serverPost } from '../services/Fetch';
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 class Goal_Summary extends Component {
   constructor(props) {
     super(props);
@@ -43,25 +43,27 @@ class Goal_Summary extends Component {
       } 
     }
     return(
-      <View style={styles.container}>
-        
-        <Text style={styles.titleText}>  Here is your Goal Summary! </Text> 
-        <View
-          style={styles.line}
-        /> 
-        <Text style={styles.actionText}>  To accomplish your new {goalType} goal, you will: {this.state.summary} </Text>
-        <View style={styles.button}>
-          <Button
-                title= "Submit"
-                color='#ffffff'
-                fontSize = '30'
-                onPress={() => {
-                  this.postTasks(actions);
-                  navigate('Dashboard', {name: firstName, goalType: goalType, actions: actions});
-            }}
-          />       
-        </View>   
-      </View>
+      <KeyboardAwareScrollView style={styles.scrollView}>
+        <View style={styles.container}>
+          <Text style={styles.titleText1}> Hi {firstName},</Text>
+          <Text style={styles.titleText2}>  Here is your Goal Summary! </Text> 
+          <View
+            style={styles.line}
+          /> 
+          <Text style={styles.actionText}>  To accomplish your new {goalType} goal, you will: {this.state.summary} </Text>
+          <View style={styles.button}>
+            <Button
+                  title= "Submit"
+                  color='#ffffff'
+                  fontSize = '30'
+                  onPress={() => {
+                    this.postTasks(actions);
+                    navigate('Dashboard', {name: firstName, goalType: goalType, actions: actions});
+              }}
+            />       
+          </View>   
+        </View>
+      </KeyboardAwareScrollView>  
     );
   }
 }
@@ -71,10 +73,27 @@ const styles = StyleSheet.create({
     backgroundColor: '#03a9f4',
     flex: 1,
   },
-  titleText: {
-    fontSize: 50,     
+  scrollView: {
+    backgroundColor: '#03a9f4',
+    flex: 1,  
+  },
+  titleText1: {
+    fontSize: 40,     
     color: '#ffffff', 
-    marginLeft: 20
+    marginTop: 60,
+    marginLeft: 20,
+    marginRight: 20,
+    textAlign: 'center',
+    fontFamily: 'Arial-ItalicMT',
+  },
+  titleText2: {
+    fontSize: 40,     
+    color: '#ffffff', 
+    marginBottom: 20,
+    marginLeft: 20,
+    marginRight: 20,
+    textAlign: 'center',
+    fontFamily: 'Arial-ItalicMT',
   },
   line: {
     borderBottomColor: 'white',
@@ -117,6 +136,8 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     alignItems:'center', 
     paddingHorizontal: 30,
+    fontFamily: 'AvenirNext-HeavyItalic',
+    textAlign: 'center'
   },
 
   

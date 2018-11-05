@@ -35,10 +35,10 @@ class Tasks extends Component {
         const taskID = this.state.arr[i].id;
         if (!done) {
           views.push(
-          <View style={styles.button} key={this.state.arr[i].id} >
+          <View style={styles.taskCard} key={this.state.arr[i].id} >
             <Button      
                title= {this.state.arr[i].name}
-               color="#ffffff"
+               color= "gray"
                onPress={() => { 
                   navigate('Edit_Tasks', { name: firstName, taskID: taskID, done: done, task: task, 
                             goalID: this.state.goalID, goalType: goalType});             
@@ -52,9 +52,8 @@ class Tasks extends Component {
     return (
       <KeyboardAwareScrollView style={styles.scrollView}>
         <View style={styles.container}>
-          <Text style={styles.headerText}>
-            Welcome, {firstName}, this is task page!
-          </Text>   
+          <Text style={styles.titleText1}> Hi {firstName},</Text>
+          <Text style={styles.titleText2}> Here are you tasks! </Text>    
           <View>
             {renderTasks()}
           </View>
@@ -89,25 +88,36 @@ const styles = StyleSheet.create({
     backgroundColor: '#03a9f4',
     flex: 1,  
   },
-  headerText: {
-    color: 'white',
-    fontSize: 40,
+  titleText1: {
+    fontSize: 40,     
+    color: '#ffffff', 
+    marginTop: 60,
+    marginLeft: 20,
+    marginRight: 20,
     textAlign: 'center',
-    marginBottom: 50
+    fontFamily: 'Arial-ItalicMT',
   },
-  imageStyle: {
-    backgroundColor: '#03a9f4',
-    width: 207,
-    height: 210,
-    margin: 15,
-    marginBottom: 50,
-  }, 
-  actionText: {
-    fontSize: 30, 
-    fontWeight: 'bold',    
-    color: '#ffffff',
-    alignItems:'center', 
-    paddingHorizontal: 30,
+  titleText2: {
+    fontSize: 40,     
+    color: '#ffffff', 
+    marginBottom: 20,
+    marginLeft: 20,
+    marginRight: 20,
+    textAlign: 'center',
+    fontFamily: 'Arial-ItalicMT',
+  },
+  taskCard: {
+    alignItems:'center',
+    width: 300,
+    height: 40,
+    backgroundColor: 'white',
+    borderColor: 'white',
+    borderWidth: 2, 
+    marginBottom: 10,
+    marginTop: 10,
+    shadowOffset:{ width: 10,  height: 10, },
+    shadowColor: 'black',
+    shadowOpacity: 1.0,
   },
   button: {
     width: 300,
@@ -117,6 +127,7 @@ const styles = StyleSheet.create({
     borderWidth: 2, 
     borderColor: '#01579b',
     marginBottom: 10,
+    marginTop: 20,
     alignItems:'center', 
   },
 });

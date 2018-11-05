@@ -51,8 +51,8 @@ class Set_Goal extends Component {
   
   return(
     <KeyboardAwareScrollView style={styles.container}>
-      <Text style={styles.titleText}> Hi {this.state.firstName},</Text>
-      <Text style={styles.titleText}> Let's Set a Goal! </Text> 
+      <Text style={styles.titleText1}> Hi {this.state.firstName},</Text>
+      <Text style={styles.titleText2}> Let's Set a Goal! </Text> 
       <View
         style={styles.line}
       />
@@ -65,7 +65,7 @@ class Set_Goal extends Component {
            }} 
         isChecked={this.state.socialChecked} 
         rightText={"Social"}
-        rightTextStyle = {{fontSize: 50, color: 'white'}}
+        rightTextStyle = {{fontSize: 40, color: 'white', fontFamily: 'Avenir-Roman'}}
         checkBoxColor='red'
         checkedImage={<Image source={require('../assets/checked.png')}/>}
         unCheckedImage={<Image source={require('../assets/unchecked.png')}/>}
@@ -79,7 +79,7 @@ class Set_Goal extends Component {
            }} 
         isChecked={this.state.physicalChecked} 
         rightText={"Physical"}
-        rightTextStyle = {{fontSize: 50, color: 'white'}}
+        rightTextStyle = {{fontSize: 40, color: 'white', fontFamily: 'Avenir-Roman'}}
         checkBoxColor='orange'
         checkedImage={<Image source={require('../assets/checked.png')}/>}
         unCheckedImage={<Image source={require('../assets/unchecked.png')}/>}
@@ -93,7 +93,7 @@ class Set_Goal extends Component {
            }} 
         isChecked={this.state.academicChecked} 
         rightText={"Academic"}
-        rightTextStyle = {{fontSize: 50, color: 'white'}}
+        rightTextStyle = {{fontSize: 40, color: 'white', fontFamily: 'Avenir-Roman'}}
         checkBoxColor='yellow'
         checkedImage={<Image source={require('../assets/checked.png')}/>}
         unCheckedImage={<Image source={require('../assets/unchecked.png')}/>}
@@ -107,7 +107,7 @@ class Set_Goal extends Component {
            }} 
         isChecked={this.state.cookingChecked} 
         rightText={"Cooking"}
-        rightTextStyle = {{fontSize: 50, color: 'white'}}
+        rightTextStyle = {{fontSize: 40, color: 'white', fontFamily: 'Avenir-Roman'}}
         checkBoxColor='green'
         checkedImage={<Image source={require('../assets/checked.png')}/>}
         unCheckedImage={<Image source={require('../assets/unchecked.png')}/>}
@@ -121,7 +121,7 @@ class Set_Goal extends Component {
            }} 
         isChecked={this.state.careerChecked} 
         rightText={"Career"}
-        rightTextStyle = {{fontSize: 50, color: 'white'}}
+        rightTextStyle = {{fontSize: 40, color: 'white', fontFamily: 'Avenir-Roman'}}
         checkBoxColor='blue'
         checkedImage={<Image source={require('../assets/checked.png')}/>}
         unCheckedImage={<Image source={require('../assets/unchecked.png')}/>}
@@ -179,20 +179,29 @@ const styles = StyleSheet.create({
     backgroundColor: '#03a9f4',
     flex: 1,
   },
-  titleText: {
-    fontSize: 50,     
-    color: '#ffffff',
-    alignItems:'center', 
+  titleText1: {
+    fontSize: 40,     
+    color: '#ffffff', 
+    marginTop: 60,
+    marginLeft: 20,
+    marginRight: 20,
+    textAlign: 'center',
+    fontFamily: 'Arial-ItalicMT',
+  },
+  titleText2: {
+    fontSize: 40,     
+    color: '#ffffff', 
+    marginBottom: 20,
+    marginLeft: 20,
+    marginRight: 20,
+    textAlign: 'center',
+    fontFamily: 'Arial-ItalicMT',
   },
   line: {
     borderBottomColor: 'white',
     borderBottomWidth: 5,
     marginTop: 10,
-    marginBottom: 50
-  },
-  box: {
-    marginTop: 50,
-    padding: '50'
+    marginBottom: 20
   },
   inputBox: {
     width: 300,

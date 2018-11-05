@@ -32,7 +32,7 @@ class View_Goals extends Component {
         <View style={styles.button} key={this.state.arr[i].category} >
           <Button      
              title= {this.state.arr[i].category}
-             color="#ffffff"
+             color="gray"
              onPress={() => {
                 navigate('Tasks', { name: firstName, tasks: tasks, goalID: goalID, goalType: goalType});
             }}
@@ -46,8 +46,8 @@ class View_Goals extends Component {
     return(
       <KeyboardAwareScrollView style={styles.scrollView}>
         <View style={styles.container}>    
-          <Text style={styles.titleText}> Hi {firstName},</Text>
-          <Text style={styles.titleText}> Let's see your Goals! </Text> 
+          <Text style={styles.titleText1}> Hi {firstName},</Text>
+          <Text style={styles.titleText2}> Let's see your Goals! </Text> 
           <View>
             {renderGoals()}
           </View> 
@@ -62,11 +62,23 @@ const styles = StyleSheet.create({
     backgroundColor: '#03a9f4',
     flex: 1,
   },
-  titleText: {
-    fontSize: 50,     
+  titleText1: {
+    fontSize: 40,     
     color: '#ffffff', 
+    marginTop: 60,
     marginLeft: 20,
-    textAlign: 'center'
+    marginRight: 20,
+    textAlign: 'center',
+    fontFamily: 'Arial-ItalicMT',
+  },
+  titleText2: {
+    fontSize: 40,     
+    color: '#ffffff', 
+    marginBottom: 20,
+    marginLeft: 20,
+    marginRight: 20,
+    textAlign: 'center',
+    fontFamily: 'Arial-ItalicMT',
   },
   scrollView: {
     backgroundColor: '#03a9f4',
@@ -85,12 +97,14 @@ const styles = StyleSheet.create({
   button: {
     width: 300,
     height: 40,
-    backgroundColor: '#01579b',
-    borderRadius: 20,
+    backgroundColor: 'white',
     borderWidth: 2, 
-    borderColor: '#01579b',
+    borderColor: 'white',
     marginLeft: 40,
-    marginTop: 20
+    marginTop: 20,
+    shadowOffset:{  width: 10,  height: 10,  },
+    shadowColor: 'black',
+    shadowOpacity: 1.0,
   },
   actionText: {
     fontSize: 30, 
