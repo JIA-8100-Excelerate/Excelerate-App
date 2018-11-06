@@ -62,12 +62,13 @@ class Tasks extends Component {
               title= "Add more tasks"
               color= "#ffffff"       
               onPress={() => {
-                  if (goalType != 'Social' && goalType != 'Physical' && goalType != 'Career' && goalType != 'Academoc'
+                  if (goalType != 'Social' && goalType != 'Physical' && goalType != 'Career' && goalType != 'Academic'
                     && goalType != 'Cooking') {
                     navigate('Customized_Action', {name: firstName, goalID: this.state.goalID, goalType: goalType});
-                  }
-                  const navPage = goalType+'_Action';
-                  navigate(navPage, {name: firstName, goalID: this.state.goalID, goalType: goalType});
+                  } else {
+                    const navPage = goalType+'_Action';
+                    navigate(navPage, {name: firstName, goalID: this.state.goalID, goalType: goalType});
+                  }     
               }}
             />
           </View> 
