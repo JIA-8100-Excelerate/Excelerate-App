@@ -29,17 +29,20 @@ class Done_Tasks extends Component {
     const goalType = this.props.navigation.getParam('goalType', 'Rip');
     const renderTasks = () => {
       const views = []; 
-      this.state.count = 0;
-      this.state.summary = '';
       for ( var i =0; i< this.state.arr.length; i++){
-        const task = this.state.arr[i].name;
-        this.state.count++;
-        this.state.summary = "\n" + this.state.count.toString() + ' .' + this.state.arr[i].name;
+        const accomplishment = this.state.arr[i].name;
+        const accID = this.state.arr[i].id;
         views.push(
-        <View key={i} >
-          <Text style={styles.actionText}> {this.state.summary} </Text>
-        </View>);
-           
+          <View style={styles.taskCard} key={this.state.arr[i].id} >
+            <Button      
+               title= {this.state.arr[i].name}
+               color= "gray"
+               onPress={() => { 
+                  navigate('Edit_Accomplishments', { name: firstName, accomplishment: accomplishment, 
+                            goalID: this.state.goalID, accID: accID});             
+              }}
+            />
+          </View>);   
       }
       return views;
     } 
@@ -86,6 +89,19 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'Arial-ItalicMT',
   },
+  taskCard: {
+    alignItems:'center',
+    width: 300,
+    height: 40,
+    backgroundColor: 'white',
+    borderColor: 'white',
+    borderWidth: 2, 
+    marginBottom: 10,
+    marginTop: 10,
+    shadowOffset:{ width: 10,  height: 10, },
+    shadowColor: 'black',
+    shadowOpacity: 1.0,
+  },
   imageStyle: {
     backgroundColor: '#03a9f4',
     width: 207,
@@ -98,7 +114,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',    
     color: '#ffffff',
     alignItems:'center', 
-    paddingHorizontal: 30,
+    fontFamily: 'AvenirNext-HeavyItalic',
+    marginLeft: 20,
+    marginRight: 20,
+    marginBottom: 20,
   },
   button: {
     width: 300,

@@ -23,7 +23,6 @@ class Customized_Action extends Component {
       .then((token) => {
         serverGet('goals/' + this.state.goalID, token)
           .then((res) => {
-            console.log(res)
             this.setState({goal: res.category})
         });
       });

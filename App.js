@@ -18,6 +18,7 @@ import Edit_Tasks from './pages/Edit_Tasks';
 import Done_Tasks from './pages/Done_Tasks';
 import Update_Profile from './pages/Update_Profile';
 import View_Accomplishments from './pages/View_Accomplishments';
+import Edit_Accomplishments from './pages/Edit_Accomplishments';
 
 export default createStackNavigator({
   Login: {
@@ -67,6 +68,9 @@ export default createStackNavigator({
   },
   View_Accomplishments: {
     screen: View_Accomplishments,
+  },
+  Edit_Accomplishments: {
+    screen: Edit_Accomplishments,
   },
   Update_Profile: {
     screen: Update_Profile,

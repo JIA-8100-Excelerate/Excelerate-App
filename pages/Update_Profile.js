@@ -44,18 +44,21 @@ class Update_Profile extends Component {
       Alert.alert("Password confirmation doesn't match Password");
     } else {
         serverPut('profile', params, this.state.token)
-        .then((res) => { 
-          Alert.alert("You successfully updated your profile");
+        .then((res) => {
+          Alert.alert("You successfully updated your profile, your current email is: " + this.state.email 
+            + ", your current password is: " + this.state.password);
           navigate('Dashboard', { name: this.state.firstName });
       });
     } 
   }
   render() {
     const { navigate } = this.props.navigation;
+    const firstName = this.props.navigation.getParam('name', 'GuitarBob99');
     return(
       <KeyboardAwareScrollView style={styles.scrollView}>
         <View style={styles.container}>
-          <Logo/>
+          <Text style={styles.titleText1}> Hi {firstName},</Text>
+          <Text style={styles.titleText2}> Update your profile here! </Text> 
           <TextInput onChangeText={(value) => this.setState({firstName: value})}
             style={styles.inputBox}
             placeholder="First Name"
@@ -105,6 +108,24 @@ const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: '#03a9f4',
     flex: 1,  
+  },
+  titleText1: {
+    fontSize: 40,     
+    color: '#ffffff', 
+    marginTop: 60,
+    marginLeft: 20,
+    marginRight: 20,
+    textAlign: 'center',
+    fontFamily: 'Arial-ItalicMT',
+  },
+  titleText2: {
+    fontSize: 40,     
+    color: '#ffffff', 
+    marginBottom: 20,
+    marginLeft: 20,
+    marginRight: 20,
+    textAlign: 'center',
+    fontFamily: 'Arial-ItalicMT',
   },
   signupTextCont: {
     flexGrow: 1,

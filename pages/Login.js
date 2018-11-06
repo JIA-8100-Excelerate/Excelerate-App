@@ -96,11 +96,10 @@ const styles = StyleSheet.create({
     flex: 1,  
   },
   signupTextCont: {
-    marginTop: 250,
+    marginTop: 300,
     alignItems:'center',
     justifyContent:'center',
     flexDirection: 'row',
-    marginBottom: 50,
     },
   signupText: {
     color: 'white',

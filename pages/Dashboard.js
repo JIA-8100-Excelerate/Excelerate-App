@@ -31,7 +31,7 @@ class Dashboard extends Component {
               title= "Set a New Goal"
               color= "gray"       
               onPress={() => {
-                  navigate('Set_Goal', { name: firstName});
+                  navigate('Set_Goal', {name: firstName});
             }}
           />
         </View>
@@ -40,7 +40,7 @@ class Dashboard extends Component {
             title= "View My Accomplishments"
             color= "gray"
             onPress={() => {
-                navigate('View_Accomplishments', { name: firstName});
+                navigate('View_Accomplishments', {name: firstName});
             }}
           />
         </View>  
@@ -50,7 +50,7 @@ class Dashboard extends Component {
                 color='gray'
                 fontSize = '30'
                 onPress={() => {
-                  navigate('Update_Profile');
+                  navigate('Update_Profile', {name: firstName});
             }}
           />     
         </View>
@@ -92,13 +92,6 @@ const styles = StyleSheet.create({
     marginRight: 20,
     textAlign: 'center',
     fontFamily: 'Arial-ItalicMT',
-  },
-  actionText: {
-    fontSize: 30, 
-    fontWeight: 'bold',    
-    color: '#ffffff',
-    alignItems:'center', 
-    paddingHorizontal: 30,
   },
   button: {
     alignItems:'center',
