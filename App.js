@@ -20,6 +20,7 @@ import Update_Profile from './pages/Update_Profile';
 import View_Accomplishments from './pages/View_Accomplishments';
 import Edit_Accomplishments from './pages/Edit_Accomplishments';
 
+
 export default createStackNavigator({
   Login: {
     screen: Login,
@@ -78,7 +79,6 @@ export default createStackNavigator({
 }, {
     initialRouteName: 'Login',
     navigationOptions: {
-    headerBackTitle: "Back",
-
+      headerBackTitle: "Back",
     },
 });

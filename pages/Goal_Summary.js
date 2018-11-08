@@ -135,9 +135,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',    
     color: '#ffffff',
     alignItems:'center', 
-    paddingHorizontal: 30,
     fontFamily: 'AvenirNext-HeavyItalic',
-    textAlign: 'center'
+    marginLeft: 30,
+    marginRight: 30,
+    marginBottom: 10,
   },
 
   

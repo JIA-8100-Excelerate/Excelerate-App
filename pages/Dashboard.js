@@ -3,16 +3,21 @@ import {Button, Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Aler
 import {StackActions, NavigationActions} from 'react-navigation';
 import { retrieveToken } from '../services/Token';
 import { serverGet } from '../services/Fetch';
+import Home from '../Home'
 
 class Dashboard extends Component {
   constructor(props){
-     super(props);
+     super(props); 
   }
-
-
+  static navigationOptions = {
+    // headerTitle instead of title
+    headerTitle: <Home />,
+  };
+ 
   render() {
     const { navigate } = this.props.navigation;
-    const firstName = this.props.navigation.getParam('name', 'GuitarBob99');    
+    const firstName = this.props.navigation.getParam('name', 'GuitarBob99'); 
+
     return (
       <View style={styles.container}>
         <Text style={styles.titleText1}> Welcome, {firstName}! </Text>  
@@ -126,4 +131,4 @@ const styles = StyleSheet.create({
 
 
 
-export default  Dashboard;
+export default Dashboard;

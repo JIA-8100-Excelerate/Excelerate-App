@@ -50,11 +50,9 @@ class Edit_Tasks extends Component {
               title= "Delete"
               color= "#ffffff"       
               onPress={() => {
-                var params = { 
-                }
                 retrieveToken()
                   .then((token) => {
-                    serverDelete('goals/' + this.state.goalID + '/tasks/' + taskID, params, token)
+                    serverDelete('goals/' + this.state.goalID + '/tasks/' + taskID, token)
                     navigate('Dashboard', { name: firstName})
                   });          
             }}
