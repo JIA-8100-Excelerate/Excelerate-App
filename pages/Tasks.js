@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Button, Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Alert} from 'react-native';
 import {StackActions, NavigationActions} from 'react-navigation';
 import { retrieveToken } from '../services/Token';
-import { serverGet } from '../services/Fetch';
+import { serverGet, serverDelete } from '../services/Fetch';
 import CheckBox from 'react-native-check-box';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 class Tasks extends Component {
@@ -12,7 +12,6 @@ class Tasks extends Component {
         goalID: this.props.navigation.getParam('goalID', 'noID'),
         arr: '',
      }
-
      retrieveToken()
       .then((token) => {
         serverGet('goals/' + this.state.goalID + '/tasks', token)
@@ -37,7 +36,7 @@ class Tasks extends Component {
           views.push(
           <View style={styles.taskCard} key={this.state.arr[i].id} >
             <Button      
-               title= {this.state.arr[i].name}
+               title= {this.state.arr[i].name }
                color= "gray"
                onPress={() => { 
                   navigate('Edit_Tasks', { name: firstName, taskID: taskID, done: done, task: task, 
@@ -57,7 +56,7 @@ class Tasks extends Component {
           <View>
             {renderTasks()}
           </View>
-          <View style={styles.button}>
+          <View style={styles.button1}>
             <Button 
               title= "Add more tasks"
               color= "#ffffff"       
@@ -72,6 +71,19 @@ class Tasks extends Component {
               }}
             />
           </View> 
+          <View style={styles.button2}>
+            <Button 
+              title= "Delete goal"
+              color= "#ffffff"       
+              onPress={() => {
+                retrieveToken()
+                  .then((token) => {
+                    serverDelete('goals/' + this.state.goalID, token)
+                    navigate('Dashboard', { name: firstName})
+                  });          
+            }}
+            />
+          </View>
         </View>
       </KeyboardAwareScrollView> 
     );
@@ -120,15 +132,26 @@ const styles = StyleSheet.create({
     shadowColor: 'black',
     shadowOpacity: 1.0,
   },
-  button: {
+  button1: {
     width: 300,
     height: 40,
     backgroundColor: '#01579b',
     borderRadius: 20,
     borderWidth: 2, 
     borderColor: '#01579b',
-    marginBottom: 10,
     marginTop: 20,
+    marginBottom: 5,
+    alignItems:'center', 
+  },
+   button2: {
+    width: 300,
+    height: 40,
+    backgroundColor: '#01579b',
+    borderRadius: 20,
+    borderWidth: 2, 
+    borderColor: '#01579b',
+    marginTop: 5,
+    marginBottom: 20,
     alignItems:'center', 
   },
 });

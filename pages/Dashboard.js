@@ -9,10 +9,6 @@ class Dashboard extends Component {
   constructor(props){
      super(props); 
   }
-  static navigationOptions = {
-    // headerTitle instead of title
-    headerTitle: <Home />,
-  };
  
   render() {
     const { navigate } = this.props.navigation;

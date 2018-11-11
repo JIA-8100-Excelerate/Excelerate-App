@@ -14,8 +14,8 @@ class Update_Profile extends Component {
       email: '',
       password: '',
       password_confirmation: '',
-      firstName: '',
-      lastName: '',
+      firstname: '',
+      lastname: '',
       arr: '',
     }
     retrieveToken()
@@ -23,8 +23,7 @@ class Update_Profile extends Component {
         this.state.token = token;
         serverGet('profile', token)
           .then((res) => {
-            this.setState({arr: res})
-            console.log(this.state.arr);
+            this.setState({arr: res, email: res.email, firstname: res.firstname, lastname: res.lastname})
         });
       });  
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -37,41 +36,43 @@ class Update_Profile extends Component {
       email: this.state.email,
       password: this.state.password,
       password_confirmation: this.state.password_confirmation,
-      firstname: this.state.firstName,
-      lastname: this.state.lastName,
+      firstname: this.state.firstname,
+      lastname: this.state.lastname,
     }
     if (this.state.password != this.state.password_confirmation) {
       Alert.alert("Password confirmation doesn't match Password");
     } else {
         serverPut('profile', params, this.state.token)
         .then((res) => {
-          Alert.alert("You successfully updated your profile, your current email is: " + this.state.email 
-            + ", your current password is: " + this.state.password);
-          navigate('Dashboard', { name: this.state.firstName });
+          Alert.alert("You successfully updated your profile");
+          navigate('Dashboard', { name: this.state.firstname });
       });
     } 
   }
   render() {
     const { navigate } = this.props.navigation;
-    const firstName = this.props.navigation.getParam('name', 'GuitarBob99');
+    const firstname = this.props.navigation.getParam('name', 'GuitarBob99');
     return(
       <KeyboardAwareScrollView style={styles.scrollView}>
         <View style={styles.container}>
-          <Text style={styles.titleText1}> Hi {firstName},</Text>
+          <Text style={styles.titleText1}> Hi {firstname},</Text>
           <Text style={styles.titleText2}> Update your profile here! </Text> 
-          <TextInput onChangeText={(value) => this.setState({firstName: value})}
-            style={styles.inputBox}
-            placeholder="First Name"
-            placeholderTextColor="white"
-          />
-          <TextInput onChangeText={(value) => this.setState({lastName: value})}
-            style={styles.inputBox}
-            placeholder="Last Name"
-            placeholderTextColor="white"
-          />
           <TextInput onChangeText={(value) => this.setState({email: value})}
             style={styles.inputBox}
             placeholder="Email"
+            defaultValue = {this.state.arr.email}
+            placeholderTextColor="white"
+          />
+          <TextInput onChangeText={(value) => this.setState({firstname: value})}
+            style={styles.inputBox}
+            placeholder="First Name"
+            defaultValue = {this.state.arr.firstname}
+            placeholderTextColor="white"
+          />
+          <TextInput onChangeText={(value) => this.setState({lastname: value})}
+            style={styles.inputBox}
+            placeholder="Last Name"
+            defaultValue = {this.state.arr.lastname}
             placeholderTextColor="white"
           />
            <TextInput onChangeText={(value) => this.setState({password: value})}
