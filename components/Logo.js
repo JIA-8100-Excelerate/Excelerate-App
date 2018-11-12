@@ -5,8 +5,8 @@ export default class Logo extends Component {
   render() {
     return(
     <View style={styles.container}>
-     <Image style={{width:40, height:70}}
-     source = {require('../assets/Logo.png')}/>
+     <Image style={{width:100, height:100}}
+     source = {require('../assets/gt_logo.png')}/>
      <Text style={styles.logoText}>Welcome to the Excel App</Text>
     </View> 
     )
@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
   logoText: {
     marginVertical: 15,
     fontSize:18,
-    color:'rgba(255,255,255,1)'
+    color:'rgba(255,255,255,1)',
+    fontFamily: 'Arial-ItalicMT',
   }
 });

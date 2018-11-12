@@ -77,7 +77,7 @@ class Register extends Component {
           />
         </View>
         <CheckBox 
-            style={{marginLeft: 40, marginBottom: 20}}
+            style={{marginLeft: 50, marginBottom: 20}}
             onClick={()=>{
                 this.setState({
                      mentor:!this.state.mentor
@@ -137,6 +137,7 @@ const styles = StyleSheet.create({
   signupText: {
     color: 'white',
     fontSize: 16,
+    fontFamily: 'Arial-ItalicMT',
   },
   inputBox: {
     width: 300,

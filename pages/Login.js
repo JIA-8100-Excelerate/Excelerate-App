@@ -5,6 +5,10 @@ import Logo from '../components/Logo';
 import { serverGet, serverPost } from '../services/Fetch';
 import { storeToken } from '../services/Token';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+// This is the login page. User would get a token once they enter the correct credentials,
+// then the app would hit the profile endpoint, which returns the user's basic information. 
+// To learn more about the serverGet method, check Fetch.js
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +19,6 @@ class Login extends Component {
     this.getName = this.getName.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
   getName(token) {
     const { navigate } = this.props.navigation;
     serverGet('profile', token)
@@ -23,7 +26,6 @@ class Login extends Component {
         navigate('Dashboard', { name: res.firstname });
       })
   }
-
   handleSubmit() {
     const { navigate } = this.props.navigation;
     var params = {
@@ -104,6 +106,7 @@ const styles = StyleSheet.create({
   signupText: {
     color: 'white',
     fontSize: 16,
+    fontFamily: 'Arial-ItalicMT',
   },
   inputBox: {
     width: 300,
