@@ -5,6 +5,7 @@ import Logo from '../components/Logo';
 import { serverPost } from '../services/Fetch';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { storeToken } from '../services/Token';
+import CheckBox from 'react-native-check-box';
 
 class Register extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class Register extends Component {
       password_confirmation: '',
       firstName: '',
       lastName: '',
+      mentor: false,
     }
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -66,24 +68,35 @@ class Register extends Component {
             secureTextEntry={true}
             placeholderTextColor="white"
           />  
-          
-            
+               
           <TextInput onChangeText={(value) => this.setState({password_confirmation: value})}
             style={styles.inputBox}
             placeholder="Confirm Password"
             secureTextEntry={true}
             placeholderTextColor="white"
           />
-            
-          
-          
-          <View style={styles.button}>
-            <Button   
-              onPress={this.handleSubmit}
-              title= "Register"
-              color='#ffffff'
-            />
-          </View>
+        </View>
+        <CheckBox 
+            style={{marginLeft: 40, marginBottom: 20}}
+            onClick={()=>{
+                this.setState({
+                     mentor:!this.state.mentor
+                 })
+               }} 
+            isChecked={this.state.mentor} 
+            rightText={"I am a mentor"}
+            rightTextStyle = {{fontSize: 20, color: 'white', fontFamily: 'Arial-ItalicMT', fontWeight: 'bold',}}
+            checkBoxColor='white'
+          />   
+          <View style={styles.buttonContainer}>    
+            <View style={styles.button}>
+              <Button   
+                onPress={this.handleSubmit}
+                title= "Register"
+                color='#ffffff'
+              />
+            </View>
+          </View>  
           <View style={styles.signupTextCont}>
             <Text style={styles.signupText}> Already have an account?</Text>
               <Button
@@ -95,9 +108,9 @@ class Register extends Component {
                   navigate('Login');
                 }}
               />
-          </View>
-        </View>
-      </KeyboardAwareScrollView>);
+          </View> 
+      </KeyboardAwareScrollView>
+    );
   }
 }
 
@@ -119,7 +132,7 @@ const styles = StyleSheet.create({
     marginVertical: 16,
     flexDirection: 'row',
     marginBottom: 70,
-    marginTop: 120,
+    marginTop: 100,
   },
   signupText: {
     color: 'white',
@@ -144,9 +157,12 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderWidth: 2, 
     borderColor: '#01579b',
-    marginBottom: 20,
     justifyContent:'center',
   },
+  buttonContainer: {
+    alignItems:'center',
+    justifyContent:'center',
+ },   
 });
 
 export default Register;

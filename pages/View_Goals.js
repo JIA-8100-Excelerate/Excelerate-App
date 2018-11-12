@@ -3,7 +3,7 @@ import {Button, Text, View, StyleSheet, Image, TextInput, TouchableOpacity} from
 import {StackActions, NavigationActions} from 'react-navigation';
 import { retrieveToken } from '../services/Token';
 import { serverGet } from '../services/Fetch';
-import CheckBox from 'react-native-check-box'
+import CheckBox from 'react-native-check-box';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 class View_Goals extends Component {
   constructor(props){
