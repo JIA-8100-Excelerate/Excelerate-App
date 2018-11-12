@@ -6,12 +6,15 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { retrieveToken } from '../services/Token';
 import { serverDelete, serverPost } from '../services/Fetch';
 
+// Edit_Tasks page. It gets taskName, and goalID from View_Goals.js. 
+// To complete a task, it deletes the task from 'goals/this.state.goalID /tasks/taskID' endpoint
+// and add the task to 'goals/this.state.goalID/completed_tasks/' endpoint.
+
 class Edit_Tasks extends Component {
   constructor(props){
      super(props);
      this.state = {
         taskName: this.props.navigation.getParam('task', 'notask'),
-        taskDone: this.props.navigation.getParam('done', 'notaskDone'),
         goalID: this.props.navigation.getParam('goalID', 'noID'),
      }
   }
