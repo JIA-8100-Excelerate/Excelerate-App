@@ -32,6 +32,7 @@ class Register extends Component {
       password_confirmation: this.state.password_confirmation,
       firstname: this.state.firstName,
       lastname: this.state.lastName,
+      mentor: this.state.mentor,
     }
     serverPost('signup', params)
       .then((res) => {
