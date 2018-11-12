@@ -1,4 +1,6 @@
-const apiBaseUrl = "https://excelerate-api.herokuapp.com/";
+// Server methods. Uses Fetch API for HTTP GET, POST, PUT, DELETE.
+
+const apiBaseUrl = "https://excelerate-api.herokuapp.com/"; // url of the server
 
 export const serverGet = (endpoint, token) => {
   return fetch(apiBaseUrl + endpoint, {
@@ -56,6 +58,3 @@ export const serverDelete = (endpoint, token) => {
     headers: headers,
   })
 }
-
-  // .then(res => res.text())          // convert to plain text
-  // .then(text => console.log(text))  // then log it out
