@@ -6,6 +6,10 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { retrieveToken } from '../services/Token';
 import { serverPost } from '../services/Fetch';
 
+// Goal Setting Page
+// User can select from presuggested goals or create a goal with custom name.
+// POSTs to /goals with chosen category. If goal with that name already exists, user is prompted to choose a different goal name.
+// See Fetch.js for serverPost method
 class Set_Goal extends Component {
   constructor(props){
    super(props);

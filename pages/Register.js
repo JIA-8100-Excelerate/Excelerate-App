@@ -7,6 +7,10 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { storeToken } from '../services/Token';
 import CheckBox from 'react-native-check-box';
 
+// Registration Page
+// POSTs to the /signup endpoint with email, first name, last name, password, password_confirmation,
+// and mentor status upon the user hitting "Register"
+// See Fetch.js for serverPost method.
 class Register extends Component {
   constructor(props) {
     super(props);

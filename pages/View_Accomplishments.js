@@ -5,6 +5,10 @@ import { retrieveToken } from '../services/Token';
 import { serverGet } from '../services/Fetch';
 import CheckBox from 'react-native-check-box'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+// Accomplishments page. Displays all completed tasks for a goal.
+// Hits /goals endpoint. Completed tasks are read from the json response.
+// See Fetch.js for serverGet method.
 class View_Accomplishments extends Component {
   constructor(props){
      super(props);

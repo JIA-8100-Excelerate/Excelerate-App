@@ -5,6 +5,10 @@ import { retrieveToken } from '../services/Token';
 import { serverGet } from '../services/Fetch';
 import CheckBox from 'react-native-check-box';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+// View Goals page. Displays all goal categories.
+// Hits /goals endpoint. Goals are read from the json response.
+// See Fetch.js for serverGet method.
 class View_Goals extends Component {
   constructor(props){
      super(props);

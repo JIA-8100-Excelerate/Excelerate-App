@@ -2,11 +2,16 @@ import React, {Component} from 'react';
 import {Alert, Text, View, StyleSheet, TextInput, TouchableOpacity, Button} from 'react-native';
 import {StackActions, NavigationActions} from 'react-navigation';
 import Logo from '../components/Logo';
-import { serverPost } from '../services/Fetch';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { retrieveToken } from '../services/Token';
-import { serverGet } from '../services/Fetch';
-import { serverPut } from '../services/Fetch';
+import { serverGet, serverPut } from '../services/Fetch';
+
+// Update Profile page
+// Hit's /profile endpoint and prefills email, firstname, and lastname fields with the current user data.
+// User can edit fields, or enter a new password. Upon hitting the "Update" button,
+// the new information is updated in the database using the PUT method.
+// Blank passwords will not update in the database.
+// See Fetch.js for serverGet and serverPut methods.
 class Update_Profile extends Component {
   constructor(props) {
     super(props);

@@ -5,6 +5,10 @@ import { retrieveToken } from '../services/Token';
 import { serverGet, serverDelete } from '../services/Fetch';
 import CheckBox from 'react-native-check-box';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+// Tasks page. Displays all remaining tasks for a goal.
+// Hits /goals/:goal_id/tasks endpoint for the selected goal.
+// See Fetch.js for serverGet and serverDelete methods.
 class Tasks extends Component {
   constructor(props){
      super(props);
