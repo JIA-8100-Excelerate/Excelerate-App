@@ -6,6 +6,11 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { retrieveToken } from '../services/Token';
 import { serverDelete, serverPost } from '../services/Fetch';
 
+// This is Edit_Accomplishments page. Users edit the tasks they have finished. 
+// It gets the accomplishment,accID and goalID param from View_Accomplishments.js, 
+// and then use them to hit 'goals/goalID/completed_tasks/accID endpoint to delete
+// whichever task the users wish to delete
+
 class Edit_Accomplishments extends Component {
   constructor(props){
      super(props);

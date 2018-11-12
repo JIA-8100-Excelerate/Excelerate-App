@@ -5,6 +5,12 @@ import { retrieveToken } from '../services/Token';
 import { serverGet } from '../services/Fetch';
 import CheckBox from 'react-native-check-box';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+// This is Done_Task page. Users can view all tasks they have finished. 
+// It gets the goalID param from View_Accomplishments.js, and then use goalID to hit
+// the 'goals/this.state.goalID/completed_tasks' end point under that goal. It passes 
+// tasks' name and tasks'id to Edit_Accomplishments.js as accomplishment and accID.
+
 class Done_Tasks extends Component {
   constructor(props){
      super(props);

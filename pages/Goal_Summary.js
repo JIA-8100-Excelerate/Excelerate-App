@@ -5,6 +5,11 @@ import CheckBox from 'react-native-check-box';
 import { retrieveToken } from '../services/Token';
 import { serverPost } from '../services/Fetch';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+// Goal_Summary page, shows the new goal user just make and tasks to finish
+// it hits 'goals/this.state.goalID /tasks' endpoint to post all the tasks so that
+// user can view them later
+
 class Goal_Summary extends Component {
   constructor(props) {
     super(props);

@@ -4,6 +4,11 @@ import {StackActions, NavigationActions} from 'react-navigation';
 import { retrieveToken } from '../services/Token';
 import { serverGet } from '../services/Fetch';
 import Home from '../Home'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+// Dashboard page
+// First page users would see once loggedin. They can navigate to other pages to set up new goal
+// ,manage their current goals and update their profile. 
 
 class Dashboard extends Component {
   constructor(props){
@@ -15,57 +20,59 @@ class Dashboard extends Component {
     const firstName = this.props.navigation.getParam('name', 'GuitarBob99'); 
 
     return (
-      <View style={styles.container}>
-        <Text style={styles.titleText1}> Welcome, {firstName}! </Text>  
-        <Text style={styles.titleText2}> This is the Dashboard! </Text>   
-        <View style={styles.button}>
-          <Button
-              title= "View My Goals"
+      <KeyboardAwareScrollView style={styles.scrollView}>
+        <View style={styles.container}>
+          <Text style={styles.titleText1}> Welcome, {firstName}! </Text>  
+          <Text style={styles.titleText2}> This is the Dashboard! </Text>   
+          <View style={styles.button}>
+            <Button
+                title= "View My Goals"
+                color= "gray"
+                onPress={() => {
+                    navigate('View_Goals', {name: firstName});
+              }}
+            />
+          </View>
+          <View style={styles.button}>
+            <Button 
+                title= "Set a New Goal"
+                color= "gray"       
+                onPress={() => {
+                    navigate('Set_Goal', {name: firstName});
+              }}
+            />
+          </View>
+          <View style={styles.button}>
+            <Button
+              title= "View My Accomplishments"
               color= "gray"
               onPress={() => {
-                  navigate('View_Goals', {name: firstName});
-            }}
-          />
+                  navigate('View_Accomplishments', {name: firstName});
+              }}
+            />
+          </View>  
+          <View style={styles.button}>  
+            <Button
+                  title= "Update Profile"
+                  color='gray'
+                  fontSize = '30'
+                  onPress={() => {
+                    navigate('Update_Profile', {name: firstName});
+              }}
+            />     
+          </View>
+          <View style={styles.button}>  
+            <Button
+                  title= "Logout"
+                  color='gray'
+                  fontSize = '30'
+                  onPress={() => {
+                    navigate('Login');
+              }}
+            />     
+          </View>
         </View>
-        <View style={styles.button}>
-          <Button 
-              title= "Set a New Goal"
-              color= "gray"       
-              onPress={() => {
-                  navigate('Set_Goal', {name: firstName});
-            }}
-          />
-        </View>
-        <View style={styles.button}>
-          <Button
-            title= "View My Accomplishments"
-            color= "gray"
-            onPress={() => {
-                navigate('View_Accomplishments', {name: firstName});
-            }}
-          />
-        </View>  
-        <View style={styles.button}>  
-          <Button
-                title= "Update Profile"
-                color='gray'
-                fontSize = '30'
-                onPress={() => {
-                  navigate('Update_Profile', {name: firstName});
-            }}
-          />     
-        </View>
-        <View style={styles.button}>  
-          <Button
-                title= "Logout"
-                color='gray'
-                fontSize = '30'
-                onPress={() => {
-                  navigate('Login');
-            }}
-          />     
-        </View>
-      </View>
+      </KeyboardAwareScrollView> 
     );
   }
 }
@@ -75,6 +82,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#03a9f4',
     flex: 1,
     alignItems:'center',
+  },
+  scrollView: {
+    backgroundColor: '#03a9f4',
+    flex: 1,  
   },
   titleText1: {
     fontSize: 40,     
