@@ -18,60 +18,92 @@ class Dashboard extends Component {
   render() {
     const { navigate } = this.props.navigation;
     const firstName = this.props.navigation.getParam('name', 'GuitarBob99'); 
-
-    return (
-      <KeyboardAwareScrollView style={styles.scrollView}>
-        <View style={styles.container}>
-          <Text style={styles.titleText1}> Welcome, {firstName}! </Text>  
-          <Text style={styles.titleText2}> This is the Dashboard! </Text>   
-          <View style={styles.button}>
-            <Button
-                title= "View My Goals"
+    const ismentor = this.props.navigation.getParam('ismentor', false); 
+    const renderDashboard = () => {
+      if (!ismentor) {
+        return(
+          <View style={styles.container}>
+            <Text style={styles.titleText1}> Welcome, {firstName}! </Text>  
+            <Text style={styles.titleText2}> This is the Dashboard! </Text>   
+            <View style={styles.button}>
+              <Button
+                  title= "View My Goals"
+                  color= "gray"
+                  onPress={() => {
+                      navigate('View_Goals', {name: firstName});
+                }}
+              />
+            </View>
+            <View style={styles.button}>
+              <Button 
+                  title= "Set a New Goal"
+                  color= "gray"       
+                  onPress={() => {
+                      navigate('Set_Goal', {name: firstName});
+                }}
+              />
+            </View>
+            <View style={styles.button}>
+              <Button
+                title= "View My Accomplishments"
                 color= "gray"
                 onPress={() => {
-                    navigate('View_Goals', {name: firstName});
-              }}
-            />
-          </View>
-          <View style={styles.button}>
-            <Button 
-                title= "Set a New Goal"
-                color= "gray"       
-                onPress={() => {
-                    navigate('Set_Goal', {name: firstName});
-              }}
-            />
-          </View>
-          <View style={styles.button}>
-            <Button
-              title= "View My Accomplishments"
-              color= "gray"
-              onPress={() => {
-                  navigate('View_Accomplishments', {name: firstName});
-              }}
-            />
-          </View>  
-          <View style={styles.button}>  
-            <Button
-                  title= "Update Profile"
-                  color='gray'
-                  fontSize = '30'
-                  onPress={() => {
-                    navigate('Update_Profile', {name: firstName});
-              }}
-            />     
-          </View>
-          <View style={styles.button}>  
-            <Button
-                  title= "Logout"
-                  color='gray'
-                  fontSize = '30'
-                  onPress={() => {
-                    navigate('Login');
-              }}
-            />     
-          </View>
-        </View>
+                    navigate('View_Accomplishments', {name: firstName});
+                }}
+              />
+            </View>  
+            <View style={styles.button}>  
+              <Button
+                    title= "Update Profile"
+                    color='gray'
+                    fontSize = '30'
+                    onPress={() => {
+                      navigate('Update_Profile', {name: firstName});
+                }}
+              />     
+            </View>
+            <View style={styles.button}>  
+              <Button
+                    title= "Logout"
+                    color='gray'
+                    fontSize = '30'
+                    onPress={() => {
+                      navigate('Login');
+                }}
+              />     
+            </View>
+          </View>);  
+      } else {
+          return(
+            <View style={styles.container}>
+              <Text style={styles.titleText1}> Welcome, {firstName}! </Text>  
+              <Text style={styles.titleText2}> This is Mentor's Dashboard! </Text> 
+              <View style={styles.button}>
+                <Button
+                    title= "Add Mentees"
+                    color= "gray"
+                    onPress={() => {
+                        navigate('Add_Mentees', {name: firstName});
+                  }}
+                />
+              </View>
+              <View style={styles.button}>  
+                <Button
+                      title= "Logout"
+                      color='gray'
+                      fontSize = '30'
+                      onPress={() => {
+                        navigate('Login');
+                  }}
+                />     
+              </View>
+            </View>);
+      }   
+    } 
+    
+    return (
+      <KeyboardAwareScrollView style={styles.scrollView}>   
+          {renderDashboard()}           
       </KeyboardAwareScrollView> 
     );
   }

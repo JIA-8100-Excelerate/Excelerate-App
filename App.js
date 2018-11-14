@@ -19,7 +19,7 @@ import Done_Tasks from './pages/Done_Tasks';
 import Update_Profile from './pages/Update_Profile';
 import View_Accomplishments from './pages/View_Accomplishments';
 import Edit_Accomplishments from './pages/Edit_Accomplishments';
-
+import Add_Mentees from './pages/mentor/Add_Mentees';
 
 export default createStackNavigator({
   Login: {
@@ -75,6 +75,9 @@ export default createStackNavigator({
   },
   Update_Profile: {
     screen: Update_Profile,
+  },
+  Add_Mentees: {
+    screen: Add_Mentees,
   },
 }, {
     initialRouteName: 'Login',

@@ -23,7 +23,7 @@ class Login extends Component {
     const { navigate } = this.props.navigation;
     serverGet('profile', token)
       .then((res) => {
-        navigate('Dashboard', { name: res.firstname });
+        navigate('Dashboard', { name: res.firstname, ismentor: res.mentor });
       })
   }
   handleSubmit() {
@@ -43,7 +43,7 @@ class Login extends Component {
         }
     });
   }
-   render() {
+  render() {
     const { navigate } = this.props.navigation;
     return(
       <KeyboardAwareScrollView style={styles.scrollView}>
@@ -62,14 +62,14 @@ class Login extends Component {
             secureTextEntry={true}
             placeholderTextColor="white"
           />
-          <View style={styles.button}>
+          <View style={styles.button1}>
             <Button
               onPress={this.handleSubmit}
               title="Login"
               color="#ffffff"
             />
           </View>
-          <View style={styles.button}>
+          <View style={styles.button2}>
             <Button
               title="Register"
               color="#ffffff"
@@ -118,7 +118,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     color: '#ffffff'
   },
-  button: {
+  button1: {
+    width: 300,
+    height: 40,
+    backgroundColor: '#01579b',
+    borderRadius: 20,
+    borderWidth: 2, 
+    borderColor: '#01579b',
+    marginBottom: 10,
+    justifyContent:'center',
+  },
+  button2: {
     width: 300,
     height: 40,
     backgroundColor: '#01579b',

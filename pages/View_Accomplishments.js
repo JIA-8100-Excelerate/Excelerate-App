@@ -45,7 +45,6 @@ class View_Accomplishments extends Component {
         </View>);
       }
       return views;
-
     } 
 
     return(
