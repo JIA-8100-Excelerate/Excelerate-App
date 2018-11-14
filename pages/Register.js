@@ -21,6 +21,7 @@ class Register extends Component {
       firstName: '',
       lastName: '',
       mentor: false,
+      mentee: null,
     }
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -33,6 +34,7 @@ class Register extends Component {
       firstname: this.state.firstName,
       lastname: this.state.lastName,
       mentor: this.state.mentor,
+      mentee: this.state.mentee,
     }
     serverPost('signup', params)
       .then((res) => {
@@ -47,6 +49,20 @@ class Register extends Component {
 
   }
   render() {
+    const renderMenteeTextBox = () => {
+      const views = [];
+      if (this.state.mentor) {
+        return(
+          <TextInput onChangeText={(value) => this.setState({mentee: value})}
+            style={styles.inputBox}
+            placeholder="Mentee email"
+            secureTextEntry={true}
+            placeholderTextColor="white"
+          />
+        )
+      }
+    }
+
     const { navigate } = this.props.navigation;
     return(
       <KeyboardAwareScrollView style={styles.scrollView}>
@@ -92,7 +108,8 @@ class Register extends Component {
             rightText={"I am a mentor"}
             rightTextStyle = {{fontSize: 20, color: 'white', fontFamily: 'Arial-ItalicMT', fontWeight: 'bold',}}
             checkBoxColor='white'
-          />   
+          />
+          <View style={styles.container}>{renderMenteeTextBox()}</View>
           <View style={styles.buttonContainer}>    
             <View style={styles.button}>
               <Button   

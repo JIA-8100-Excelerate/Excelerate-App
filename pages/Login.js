@@ -69,16 +69,14 @@ class Login extends Component {
               color="#ffffff"
             />
           </View>
-          <View style={styles.signupTextCont}>
-            <Text style={styles.signupText}> Don't have an account yet?</Text> 
+          <View style={styles.button}>
             <Button
-                title= "Sign up here!"
-                color='#ffffff'
-                fontSize = '30'
-                onPress={() => {
-                  navigate('Register');
-            }}
-          />
+              title="Register"
+              color="#ffffff"
+              onPress={() => {
+                navigate('Register');
+              }}
+            />
           </View>
         </View>
       </KeyboardAwareScrollView>   
