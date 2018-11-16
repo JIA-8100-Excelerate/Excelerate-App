@@ -20,6 +20,8 @@ import Update_Profile from './pages/Update_Profile';
 import View_Accomplishments from './pages/View_Accomplishments';
 import Edit_Accomplishments from './pages/Edit_Accomplishments';
 import Add_Mentees from './pages/mentor/Add_Mentees';
+import View_Mentees from './pages/mentor/View_Mentees';
+import Mentee_Goals from './pages/mentor/Mentee_Goals';
 
 export default createStackNavigator({
   Login: {
@@ -78,6 +80,12 @@ export default createStackNavigator({
   },
   Add_Mentees: {
     screen: Add_Mentees,
+  },
+  View_Mentees: {
+    screen: View_Mentees,
+  },
+  Mentee_Goals: {
+    screen: Mentee_Goals,
   },
 }, {
     initialRouteName: 'Login',

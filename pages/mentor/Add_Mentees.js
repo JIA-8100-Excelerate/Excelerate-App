@@ -2,15 +2,12 @@ import React, {Component} from 'react';
 import {Alert, Text, View, StyleSheet, TextInput, TouchableOpacity, Button} from 'react-native';
 import {StackActions, NavigationActions} from 'react-navigation';
 import Logo from '../../components/Logo';
-import { serverPost } from '../../services/Fetch';
+import { serverPut } from '../../services/Fetch';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { storeToken } from '../../services/Token';
+import { retrieveToken } from '../../services/Token';
 import CheckBox from 'react-native-check-box';
 
-// Registration Page
-// POSTs to the /signup endpoint with email, first name, last name, password, password_confirmation,
-// and mentor status upon the user hitting "Register"
-// See Fetch.js for serverPost method.
+
 class Add_Mentees extends Component {
   constructor(props) {
     super(props);
@@ -19,25 +16,9 @@ class Add_Mentees extends Component {
     }
   }
 
-  handleSubmit() {
-    const { navigate } = this.props.navigation;
-    var params = {
-      mentee: this.state.mentee,
-    }
-    serverPost('auth/login', params)
-      .then((res) => {
-        if(res.message) {
-          Alert.alert("Invalid credentials");
-        }
-        else {
-          storeToken(res.auth_token);
-          this.getName(res.auth_token);
-        }
-    });
-  }
-
   render() {
     const { navigate } = this.props.navigation;
+    const firstName = this.props.navigation.getParam('name', 'GuitarBob99');
     return(
       <KeyboardAwareScrollView style={styles.scrollView}>
         <View style={styles.container}>
@@ -49,7 +30,16 @@ class Add_Mentees extends Component {
           />
           <View style={styles.button}>
             <Button
-              onPress={this.handleSubmit}
+              onPress={() =>{
+                var params = {
+                  mentee: this.state.mentee,
+                }
+                retrieveToken()
+                  .then((token) => {
+                    serverPut('profile', params, token)
+                    navigate('Dashboard', {name: firstName})
+                  });
+              }}
               title="Submit"
               color="#ffffff"
             />

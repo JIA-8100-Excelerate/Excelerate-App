@@ -23,7 +23,7 @@ class Login extends Component {
     const { navigate } = this.props.navigation;
     serverGet('profile', token)
       .then((res) => {
-        navigate('Dashboard', { name: res.firstname, ismentor: res.mentor });
+        navigate('Dashboard', { name: res.firstname, ismentor: res.mentor, mentees: res.mentees });
       })
   }
   handleSubmit() {

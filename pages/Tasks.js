@@ -35,20 +35,18 @@ class Tasks extends Component {
       for ( var i =0; i< this.state.arr.length; i++){
         const done = this.state.arr[i].done;
         const task = this.state.arr[i].name;
-        const taskID = this.state.arr[i].id;
-        if (!done) {
-          views.push(
-          <View style={styles.taskCard} key={this.state.arr[i].id} >
-            <Button      
-               title= {this.state.arr[i].name }
-               color= "gray"
-               onPress={() => { 
-                  navigate('Edit_Tasks', { name: firstName, taskID: taskID, done: done, task: task, 
-                            goalID: this.state.goalID, goalType: goalType});             
-              }}
-            />
-          </View>);
-        }   
+        const taskID = this.state.arr[i].id; 
+        views.push(
+        <View style={styles.taskCard} key={this.state.arr[i].id} >
+          <Button      
+             title= {this.state.arr[i].name }
+             color= "gray"
+             onPress={() => { 
+                navigate('Edit_Tasks', { name: firstName, taskID: taskID, done: done, task: task, 
+                          goalID: this.state.goalID, goalType: goalType});             
+            }}
+          />
+        </View>);     
       }
       return views;
     } 

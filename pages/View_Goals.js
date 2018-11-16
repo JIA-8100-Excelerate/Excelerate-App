@@ -26,25 +26,9 @@ class View_Goals extends Component {
    render() {
     const { navigate } = this.props.navigation;
     const firstName = this.props.navigation.getParam('name', 'GuitarBob99'); 
+    const mentee_email = this.props.navigation.getParam('mentee_email', 'no email'); 
     const renderGoals = () => {
-      const views = []; 
-      for ( var i =0; i< this.state.arr.length; i++){
-      const tasks = this.state.arr[i].tasks;
-      const goalID = this.state.arr[i].id;
-      const goalType = this.state.arr[i].category;
-       views.push(
-        <View style={styles.button} key={this.state.arr[i].category} >
-          <Button      
-             title= {this.state.arr[i].category}
-             color="gray"
-             onPress={() => {
-                navigate('Tasks', { name: firstName, tasks: tasks, goalID: goalID, goalType: goalType});
-            }}
-          />
-        </View>);
-      }
-      return views;
-
+      const goals = this.state.arr[mentee_email];
     } 
 
     return(

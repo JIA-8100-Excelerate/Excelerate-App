@@ -18,7 +18,8 @@ class Dashboard extends Component {
   render() {
     const { navigate } = this.props.navigation;
     const firstName = this.props.navigation.getParam('name', 'GuitarBob99'); 
-    const ismentor = this.props.navigation.getParam('ismentor', false); 
+    const ismentor = this.props.navigation.getParam('ismentor', false);
+    const mentees = this.props.navigation.getParam('mentees', 'Rip NO mentte'); 
     const renderDashboard = () => {
       if (!ismentor) {
         return(
@@ -84,6 +85,15 @@ class Dashboard extends Component {
                     color= "gray"
                     onPress={() => {
                         navigate('Add_Mentees', {name: firstName});
+                  }}
+                />
+              </View>
+              <View style={styles.button}>
+                <Button
+                    title= "View Mentees"
+                    color= "gray"
+                    onPress={() => {
+                        navigate('View_Mentees', {name: firstName, mentees: mentees});
                   }}
                 />
               </View>
