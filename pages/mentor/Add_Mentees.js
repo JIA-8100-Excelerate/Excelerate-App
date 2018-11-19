@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Alert, Text, View, StyleSheet, TextInput, TouchableOpacity, Button} from 'react-native';
 import {StackActions, NavigationActions} from 'react-navigation';
 import Logo from '../../components/Logo';
-import { serverPut } from '../../services/Fetch';
+import { serverPutResponse } from '../../services/Fetch';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { retrieveToken } from '../../services/Token';
 import CheckBox from 'react-native-check-box';
@@ -36,8 +36,22 @@ class Add_Mentees extends Component {
                 }
                 retrieveToken()
                   .then((token) => {
-                    serverPut('profile', params, token)
-                    navigate('Dashboard', {name: firstName})
+                    serverPutResponse('add_mentee', params, token)
+                      .then((res) => {
+                        console.log(res);
+                        if (res.mentee_dne) {
+                          Alert.alert("Mentee does not exist");
+                        } else if (res.mentee_is_current_user) {
+                          Alert.alert("That's your account.");
+                        } else if (res.mentee_added) {
+                          Alert.alert("Mentee added successfully");
+                          navigate('Dashboard', {name: firstName});
+                        } else if (res.mentee_already_exists) {
+                          Alert.alert("Mentee has already been added to your account");
+                        } else {
+                          Alert.alert("Please try again.");
+                        }
+                      });
                   });
               }}
               title="Submit"

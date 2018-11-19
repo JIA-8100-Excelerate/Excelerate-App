@@ -45,6 +45,22 @@ export const serverPut = (endpoint, params, token) => {
   })
 }
 
+export const serverPutResponse = (endpoint, params, token) => {
+  headers = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  }
+  if (token) {
+    headers['Authorization'] = token;
+  }
+  return fetch(apiBaseUrl + endpoint, {
+    method: 'PUT',
+    headers: headers,
+    body: JSON.stringify(params)
+  })
+  .then((response) => response.json());
+}
+
 export const serverDelete = (endpoint, token) => {
   headers = {
     Accept: 'application/json',
