@@ -7,7 +7,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { retrieveToken } from '../../services/Token';
 import CheckBox from 'react-native-check-box';
 
-class Mentees_Goals extends Component {
+class Mentee_Accomplishments extends Component {
   constructor(props) {
     super(props);
     this.state = {      
@@ -38,7 +38,7 @@ class Mentees_Goals extends Component {
                  title= {this.state.mentee_goals[i].category}
                  color="gray"
                  onPress={() => {
-                    navigate('Tasks', { name: firstName, mentee: mentee, goalID: goalID, 
+                    navigate('Done_Tasks', { name: firstName, mentee: mentee, goalID: goalID, 
                       goalType: goalType, ismentor: true});
             }}
           />
@@ -104,4 +104,4 @@ const styles = StyleSheet.create({
   
 });
 
-export default Mentees_Goals;
+export default Mentee_Accomplishments;

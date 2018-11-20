@@ -30,62 +30,101 @@ class Tasks extends Component {
     const { navigate } = this.props.navigation;
     const firstName = this.props.navigation.getParam('name', 'GuitarBob99'); 
     const goalType = this.props.navigation.getParam('goalType', 'Rip');
+    const ismentor = this.props.navigation.getParam('ismentor', false);
+    const mentee = this.props.navigation.getParam('mentee', 'GuitarBob99');
     const renderTasks = () => {
-      const views = []; 
+      const views = [];
+      if (!ismentor) {
+        views.push(
+        <View style={styles.container} key={ismentor}>
+          <Text style={styles.titleText1}> Hi {firstName},</Text>
+          <Text style={styles.titleText2}> Here are you tasks! </Text>  
+        </View>);
+      } else {
+        views.push(
+        <View style={styles.container} key={ismentor}>
+          <Text style={styles.titleText1}> Hi {firstName},</Text>
+          <Text style={styles.titleText2}> Here are {mentee}'s' tasks! </Text>  
+        </View>);
+      }
       for ( var i =0; i< this.state.arr.length; i++){
         const done = this.state.arr[i].done;
         const task = this.state.arr[i].name;
         const taskID = this.state.arr[i].id; 
+        const comment = this.state.arr[i].comment;
         views.push(
-        <View style={styles.taskCard} key={this.state.arr[i].id} >
-          <Button      
-             title= {this.state.arr[i].name }
-             color= "gray"
-             onPress={() => { 
-                navigate('Edit_Tasks', { name: firstName, taskID: taskID, done: done, task: task, 
-                          goalID: this.state.goalID, goalType: goalType});             
-            }}
-          />
+          <View style={styles.container} key={this.state.arr[i].id}>  
+          <View style={styles.taskCard} key={this.state.arr[i].id} >
+            <Button      
+               title= {this.state.arr[i].name }
+               color= "gray"
+               onPress={() => { 
+                  navigate('Edit_Tasks', { name: firstName, taskID: taskID, done: done, task: task, comment: comment,
+                            goalID: this.state.goalID, goalType: goalType, ismentor: ismentor, mentee: mentee});             
+              }}
+            />
+          </View>
         </View>);     
       }
       return views;
     } 
+
+    const renderButtons = () => {
+      if (ismentor) {
+        return(
+          <View style={styles.container}>
+            <View style={styles.button1}>
+                <Button 
+                  title= "Back"
+                  color= "#ffffff"       
+                  onPress={() => {
+                     navigate('Dashboard', {name: firstName}); 
+                  }}
+                />
+              </View>  
+            </View>); 
+      } else {
+          return(
+            <View style={styles.container}>
+              <View style={styles.button1}>
+                <Button 
+                  title= "Add more tasks"
+                  color= "#ffffff"       
+                  onPress={() => {
+                      if (goalType != 'Social' && goalType != 'Physical' && goalType != 'Career' && goalType != 'Academic'
+                        && goalType != 'Cooking') {
+                        navigate('Customized_Action', {name: firstName, goalID: this.state.goalID, goalType: goalType});
+                      } else {
+                        const navPage = goalType+'_Action';
+                        navigate(navPage, {name: firstName, goalID: this.state.goalID, goalType: goalType});
+                      }     
+                  }}
+                />
+              </View> 
+              <View style={styles.button2}>
+                <Button 
+                  title= "Delete goal"
+                  color= "#ffffff"       
+                  onPress={() => {
+                    retrieveToken()
+                      .then((token) => {
+                        serverDelete('goals/' + this.state.goalID, token)
+                        navigate('Dashboard', { name: firstName})
+                      });          
+                  }}
+                />
+              </View>
+            </View>); 
+      }
+    }
+
     return (
       <KeyboardAwareScrollView style={styles.scrollView}>
         <View style={styles.container}>
-          <Text style={styles.titleText1}> Hi {firstName},</Text>
-          <Text style={styles.titleText2}> Here are you tasks! </Text>    
           <View>
             {renderTasks()}
-          </View>
-          <View style={styles.button1}>
-            <Button 
-              title= "Add more tasks"
-              color= "#ffffff"       
-              onPress={() => {
-                  if (goalType != 'Social' && goalType != 'Physical' && goalType != 'Career' && goalType != 'Academic'
-                    && goalType != 'Cooking') {
-                    navigate('Customized_Action', {name: firstName, goalID: this.state.goalID, goalType: goalType});
-                  } else {
-                    const navPage = goalType+'_Action';
-                    navigate(navPage, {name: firstName, goalID: this.state.goalID, goalType: goalType});
-                  }     
-              }}
-            />
+            {renderButtons()}
           </View> 
-          <View style={styles.button2}>
-            <Button 
-              title= "Delete goal"
-              color= "#ffffff"       
-              onPress={() => {
-                retrieveToken()
-                  .then((token) => {
-                    serverDelete('goals/' + this.state.goalID, token)
-                    navigate('Dashboard', { name: firstName})
-                  });          
-            }}
-            />
-          </View>
         </View>
       </KeyboardAwareScrollView> 
     );

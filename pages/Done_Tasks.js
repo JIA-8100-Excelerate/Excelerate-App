@@ -33,34 +33,58 @@ class Done_Tasks extends Component {
     const { navigate } = this.props.navigation;
     const firstName = this.props.navigation.getParam('name', 'GuitarBob99'); 
     const goalType = this.props.navigation.getParam('goalType', 'Rip');
+    const ismentor = this.props.navigation.getParam('ismentor', false);
+    const mentee = this.props.navigation.getParam('mentee', 'Rip');
+    this.state.count = 0;
     const renderTasks = () => {
       const views = []; 
-      for ( var i =0; i< this.state.arr.length; i++){
+      if (ismentor) {
+        views.push(
+          <View style={styles.container} key={ismentor}>
+            <Text style={styles.titleText1}> Here are the tasks {mentee} has finished!</Text> 
+        </View>);
+      } else {
+        views.push(
+          <View style={styles.container} key={ismentor}>
+            <Text style={styles.titleText1}> Hi {firstName},</Text>
+            <Text style={styles.titleText2}> Here are the tasks you have finished! </Text>  
+        </View>);
+      }
+      for ( var i = 0; i< this.state.arr.length; i++){
         const accomplishment = this.state.arr[i].name;
         const accID = this.state.arr[i].id;
-        views.push(
-          <View style={styles.taskCard} key={this.state.arr[i].id} >
-            <Button      
-               title= {this.state.arr[i].name}
-               color= "gray"
-               onPress={() => { 
-                  navigate('Edit_Accomplishments', { name: firstName, accomplishment: accomplishment, 
-                            goalID: this.state.goalID, accID: accID});             
-              }}
-            />
-          </View>);   
+        this.state.count++;
+        if(ismentor) {
+          views.push(<View key={this.state.arr[i].id}>
+            <View style={styles.container}> 
+              <Text style={styles.titleText2}>{"\n" + this.state.count.toString() + '. ' 
+              + this.state.arr[i].name}</Text>
+            </View>
+          </View>);
+        } else {
+          views.push(
+            <View style={styles.container}>  
+              <View style={styles.taskCard} key={this.state.arr[i].id} >
+                <Button      
+                   title= {this.state.arr[i].name}
+                   color= "gray"
+                   onPress={() => { 
+                      navigate('Edit_Accomplishments', { name: firstName, accomplishment: accomplishment, 
+                                goalID: this.state.goalID, accID: accID,});             
+                  }}
+                />
+              </View>
+            </View>  
+          );  
+        } 
       }
       return views;
     } 
     return (
-      <KeyboardAwareScrollView style={styles.scrollView}>
-        <View style={styles.container}>
-          <Text style={styles.titleText1}> Hi {firstName},</Text>
-          <Text style={styles.titleText2}> Here are the tasks you have finished! </Text>    
+      <KeyboardAwareScrollView style={styles.scrollView}>      
           <View>
             {renderTasks()}
-          </View>
-        </View>
+          </View>       
       </KeyboardAwareScrollView> 
     );
   }
@@ -115,16 +139,6 @@ const styles = StyleSheet.create({
     margin: 15,
     marginBottom: 50,
   }, 
-  actionText: {
-    fontSize: 30, 
-    fontWeight: 'bold',    
-    color: '#ffffff',
-    alignItems:'center', 
-    fontFamily: 'AvenirNext-HeavyItalic',
-    marginLeft: 20,
-    marginRight: 20,
-    marginBottom: 20,
-  },
   button: {
     width: 300,
     height: 40,

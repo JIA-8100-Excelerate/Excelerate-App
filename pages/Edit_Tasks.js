@@ -4,7 +4,7 @@ import {StackActions, NavigationActions} from 'react-navigation';
 import CheckBox from 'react-native-check-box';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { retrieveToken } from '../services/Token';
-import { serverDelete, serverPost } from '../services/Fetch';
+import { serverDelete, serverPost, serverPut } from '../services/Fetch';
 
 // Edit_Tasks page. It gets taskName, and goalID from View_Goals.js. 
 // To complete a task, it deletes the task from 'goals/this.state.goalID /tasks/taskID' endpoint
@@ -16,62 +16,104 @@ class Edit_Tasks extends Component {
      this.state = {
         taskName: this.props.navigation.getParam('task', 'notask'),
         goalID: this.props.navigation.getParam('goalID', 'noID'),
+        comment: '',
      }
   }
    render() {
     const { navigate } = this.props.navigation;
     const firstName = this.props.navigation.getParam('name', 'GuitarBob99');
     const taskID = this.props.navigation.getParam('taskID', 'noID');
+    const ismentor = this.props.navigation.getParam('ismentor', false);
+    const mentee = this.props.navigation.getParam('mentee', 'GuitarBob99');
+    const task_comment = this.props.navigation.getParam('comment', 'notask');
+    const renderButtons = () => {
+      if (ismentor) {
+        return(
+          <View style={styles.container}>
+            <Text style={styles.titleText1}> Make your suggestion for {mentee} here! </Text> 
+            <View
+              style={styles.line}
+            /> 
+            <Text style={styles.actionText}> {this.state.taskName} </Text>
+             <TextInput
+              onChangeText={(value) => this.setState({comment: value})}
+              style={styles.inputBox}
+              placeholder="Make your suggestion here!"
+              placeholderTextColor="white"
+            /> 
+            <View style={styles.button}>
+              <Button 
+                title= "Make suggestion"
+                color= "#ffffff"       
+                onPress={() => {
+                  var params = {
+                    name: this.state.taskName,
+                    comment: this.state.comment,   
+                  }
+                  retrieveToken()
+                    .then((token) => {
+                      serverPut('goals/' + this.state.goalID + '/tasks/' + taskID, params, token);
+                      navigate('Dashboard', { name: firstName});    
+                    });          
+                }}
+              />
+            </View> 
+          </View>);
+      } else {
+        return(
+          <View style={styles.container}>
+            <Text style={styles.titleText1}> Hi {firstName},</Text>
+            <Text style={styles.titleText2}> Edit your task here! </Text> 
+            <View
+              style={styles.line}
+            /> 
+            <Text style={styles.actionText}> {this.state.taskName} </Text> 
+            <Text style={styles.actionText}> {task_comment} </Text> 
+            <View style={styles.button}>
+              <Button 
+                title= "Complete"
+                color= "#ffffff"       
+                onPress={() => {
+                  var params = {
+                    name: this.state.taskName   
+                  }
+                  retrieveToken()
+                    .then((token) => {
+                      serverDelete('goals/' + this.state.goalID + '/tasks/' + taskID, token);
+                      serverPost('goals/' + this.state.goalID + '/completed_tasks/', params, token);
+                      navigate('Dashboard', { name: firstName});    
+                    });          
+              }}
+              />
+            </View> 
+            <View style={styles.button}>
+              <Button 
+                title= "Delete"
+                color= "#ffffff"       
+                onPress={() => {
+                  retrieveToken()
+                    .then((token) => {
+                      serverDelete('goals/' + this.state.goalID + '/tasks/' + taskID, token)
+                      navigate('Dashboard', { name: firstName})
+                    });          
+              }}
+              />
+            </View> 
+            <View style={styles.button}>
+              <Button 
+                title= "Back"
+                color= "#ffffff"       
+                onPress={() => {
+                    navigate('Dashboard', { name: firstName});
+              }}
+              />
+            </View>
+        </View>);
+      }
+    }
     return(
       <KeyboardAwareScrollView style={styles.scrollView}>
-        <View style={styles.container}>
-          <Text style={styles.titleText1}> Hi {firstName},</Text>
-          <Text style={styles.titleText2}> Edit your task here! </Text> 
-          <View
-            style={styles.line}
-          /> 
-          <Text style={styles.actionText}> {this.state.taskName} </Text> 
-          <View style={styles.button}>
-            <Button 
-              title= "Complete"
-              color= "#ffffff"       
-              onPress={() => {
-                var params = {
-                  name: this.state.taskName   
-                }
-                retrieveToken()
-                  .then((token) => {
-                    serverDelete('goals/' + this.state.goalID + '/tasks/' + taskID, token);
-                    serverPost('goals/' + this.state.goalID + '/completed_tasks/', params, token);
-                    navigate('Dashboard', { name: firstName});    
-                  });          
-            }}
-            />
-          </View> 
-          <View style={styles.button}>
-            <Button 
-              title= "Delete"
-              color= "#ffffff"       
-              onPress={() => {
-                retrieveToken()
-                  .then((token) => {
-                    serverDelete('goals/' + this.state.goalID + '/tasks/' + taskID, token)
-                    navigate('Dashboard', { name: firstName})
-                  });          
-            }}
-            />
-          </View> 
-          <View style={styles.button}>
-            <Button 
-              title= "Back"
-              color= "#ffffff"       
-              onPress={() => {
-                  navigate('Dashboard', { name: firstName});
-            }}
-            />
-          </View>
-
-        </View>
+        {renderButtons()}
      </KeyboardAwareScrollView>   
     );
   }
@@ -129,7 +171,19 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginLeft: 40,
   },
-
+  inputBox: {
+    width: 300,
+    height: 40,
+    fontSize: 18,
+    borderWidth: 2, 
+    borderRadius: 20,
+    borderColor: '#ffffff',
+    backgroundColor: 'rgba(255,255,255,0.5)',
+    marginLeft: 40,
+    marginTop: 20,
+    paddingHorizontal: 16,
+    color: '#ffffff'
+  },
   
 });
 

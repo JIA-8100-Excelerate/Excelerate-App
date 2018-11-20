@@ -8,7 +8,7 @@ import { retrieveToken } from '../../services/Token';
 import CheckBox from 'react-native-check-box';
 
 
-class View_Mentees extends Component {
+class View_Options extends Component {
   constructor(props) {
     super(props);
   }
@@ -16,32 +16,31 @@ class View_Mentees extends Component {
   render() {
     const { navigate } = this.props.navigation;
     const firstName = this.props.navigation.getParam('name', 'GuitarBob99');
-    const mentees = this.props.navigation.getParam('mentees', 'GuitarBob99');
-    const renderMentees = () => {
-      const views = []; 
-      for ( var i =0; i< mentees.length; i++){
-        const mentee = mentees[i].name;
-        const mentee_email = mentees[i].email;
-          views.push(
-          <View style={styles.taskCard} key={mentee_email} >
-            <Button      
-               title= {mentees[i].name}
-               color= "gray"
-               onPress={() => { 
-                  navigate("View_Options", {name: firstName, mentee: mentee, mentee_email: mentee_email });          
-              }}
-            />
-          </View>);   
-      }
-      return views;
-    } 
+    const mentee = this.props.navigation.getParam('mentee', 'GuitarBob99');
+    const mentee_email = this.props.navigation.getParam('mentee_email', 'no email');
     return(
       <KeyboardAwareScrollView style={styles.scrollView}>
         <View style={styles.container}>
-          <Text style={styles.titleText1}> Hi {firstName},</Text>
-          <Text style={styles.titleText2}> View your mentees! </Text>
-          {renderMentees()}
-        </View>
+          <Text style={styles.titleText1}> View your {mentee}'s information here! </Text> 
+          <View style={styles.taskCard}>
+            <Button      
+                 title= "View Mentee's Goals"
+                 color= "gray"
+                 onPress={() => { 
+                    navigate("Mentee_Goals", {name: firstName, mentee: mentee, mentee_email: mentee_email });          
+                }}
+              />
+          </View>
+          <View style={styles.taskCard}>
+            <Button      
+                 title= "View Mentee's Accomplishments"
+                 color= "gray"
+                 onPress={() => { 
+                    navigate("Mentee_Accomplishments", {name: firstName, mentee: mentee, mentee_email: mentee_email });          
+                }}
+              />
+          </View>
+        </View>  
       </KeyboardAwareScrollView>
     );
   }
@@ -58,21 +57,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#03a9f4',
     flex: 1,  
   },
+  line: {
+    borderBottomColor: 'white',
+    borderBottomWidth: 5,
+    marginTop: 10,
+    marginBottom: 30
+  },
   titleText1: {
     fontSize: 40,     
     color: '#ffffff', 
     marginTop: 60,
     marginLeft: 20,
     marginRight: 20,
-    textAlign: 'center',
-    fontFamily: 'Arial-ItalicMT',
-  },
-  titleText2: {
-    fontSize: 40,     
-    color: '#ffffff', 
     marginBottom: 50,
-    marginLeft: 20,
-    marginRight: 20,
     textAlign: 'center',
     fontFamily: 'Arial-ItalicMT',
   },
@@ -104,4 +101,4 @@ const styles = StyleSheet.create({
  },   
 });
 
-export default View_Mentees;
+export default View_Options;

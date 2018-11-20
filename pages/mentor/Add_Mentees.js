@@ -66,6 +66,7 @@ class Add_Mentees extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 50,
     backgroundColor: '#03a9f4',
     flex: 1,
     alignItems:'center',
@@ -74,20 +75,6 @@ const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: '#03a9f4',
     flex: 1,  
-  },
-  signupTextCont: {
-    flexGrow: 1,
-    alignItems:'center',
-    justifyContent:'center',
-    marginVertical: 16,
-    flexDirection: 'row',
-    marginBottom: 70,
-    marginTop: 100,
-  },
-  signupText: {
-    color: 'white',
-    fontSize: 16,
-    fontFamily: 'Arial-ItalicMT',
   },
   inputBox: {
     width: 300,
@@ -110,10 +97,6 @@ const styles = StyleSheet.create({
     borderColor: '#01579b',
     justifyContent:'center',
   },
-  buttonContainer: {
-    alignItems:'center',
-    justifyContent:'center',
- },   
 });
 
 export default Add_Mentees;

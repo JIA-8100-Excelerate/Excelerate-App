@@ -26,7 +26,6 @@ class View_Accomplishments extends Component {
    render() {
     const { navigate } = this.props.navigation;
     const firstName = this.props.navigation.getParam('name', 'GuitarBob99');
-    const actions = this.props.navigation.getParam('actions', 'nothing');  
     const renderGoals = () => {
       const views = []; 
       for ( var i =0; i< this.state.arr.length; i++){
