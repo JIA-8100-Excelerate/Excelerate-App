@@ -38,7 +38,6 @@ class Add_Mentees extends Component {
                   .then((token) => {
                     serverPutResponse('add_mentee', params, token)
                       .then((res) => {
-                        console.log(res);
                         if (res.mentee_dne) {
                           Alert.alert("Mentee does not exist");
                         } else if (res.mentee_is_current_user) {

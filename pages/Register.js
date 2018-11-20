@@ -21,7 +21,6 @@ class Register extends Component {
       firstName: '',
       lastName: '',
       mentor: false,
-      mentee: null,
     }
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -34,7 +33,6 @@ class Register extends Component {
       firstname: this.state.firstName,
       lastname: this.state.lastName,
       mentor: this.state.mentor,
-      mentee: this.state.mentee,
     }
     serverPost('signup', params)
       .then((res) => {
