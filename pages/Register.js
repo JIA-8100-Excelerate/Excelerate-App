@@ -41,7 +41,7 @@ class Register extends Component {
         }
         else {
           storeToken(res.auth_token);
-          navigate('Dashboard', { name: this.state.firstName });
+          navigate('Dashboard', { name: this.state.firstName, ismentor: this.state.mentor });
         }
     });
 
