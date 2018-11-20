@@ -12,14 +12,26 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 class Dashboard extends Component {
   constructor(props){
-     super(props); 
+     super(props);
+     this.state = {
+        mentees: ''
+     }
   }
- 
+
   render() {
     const { navigate } = this.props.navigation;
     const firstName = this.props.navigation.getParam('name', 'GuitarBob99'); 
-    const ismentor = this.props.navigation.getParam('ismentor', false);
-    const mentees = this.props.navigation.getParam('mentees', 'Rip NO mentte'); 
+    const ismentor = this.props.navigation.getParam('ismentor', false); 
+    const toViewMentees = () => {
+      retrieveToken()
+      .then((token) => {
+        serverGet('profile', token)
+          .then((res) => {
+            this.setState({mentees: res.mentees})
+            navigate('View_Mentees', {name: firstName, mentees: this.state.mentees})
+        });
+      });
+    }
     const renderDashboard = () => {
       if (!ismentor) {
         return(
@@ -93,7 +105,7 @@ class Dashboard extends Component {
                     title= "View Mentees"
                     color= "gray"
                     onPress={() => {
-                        navigate('View_Mentees', {name: firstName, mentees: mentees});
+                        toViewMentees();  
                   }}
                 />
               </View>

@@ -25,7 +25,19 @@ class Edit_Tasks extends Component {
     const taskID = this.props.navigation.getParam('taskID', 'noID');
     const ismentor = this.props.navigation.getParam('ismentor', false);
     const mentee = this.props.navigation.getParam('mentee', 'GuitarBob99');
-    const task_comment = this.props.navigation.getParam('comment', 'notask');
+    const task_comment = this.props.navigation.getParam('comment', false);
+    const renderComments = () => {
+      if (task_comment) {
+        return(
+          <View style={styles.container}>
+            <Text style={styles.commentText}> {"Comment: " + task_comment} </Text>
+          </View>);
+      } else {
+        return(
+            <Text style={styles.commentText}> {"(This task does not have any commets yet!)"} </Text>
+          );
+      }
+    }
     const renderButtons = () => {
       if (ismentor) {
         return(
@@ -68,7 +80,7 @@ class Edit_Tasks extends Component {
               style={styles.line}
             /> 
             <Text style={styles.actionText}> {this.state.taskName} </Text> 
-            <Text style={styles.actionText}> {task_comment} </Text> 
+            <Text style={styles.actionText}> {renderComments()} </Text> 
             <View style={styles.button}>
               <Button 
                 title= "Complete"
@@ -123,6 +135,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#03a9f4',
     flex: 1,
+    alignItems:'center',
+    justifyContent:'center',
   },
   scrollView: {
     backgroundColor: '#03a9f4',
@@ -153,7 +167,15 @@ const styles = StyleSheet.create({
     alignItems:'center', 
     paddingHorizontal: 30,
     fontFamily: 'AvenirNext-HeavyItalic',
-    textAlign: 'center'
+    textAlign: 'center',
+  },
+  commentText: {
+    fontSize: 20,     
+    color: '#ffffff',
+    alignItems:'center', 
+    fontFamily: 'Arial-ItalicMT',
+    textAlign: 'center',
+    marginTop: 30,
   },
   line: {
     borderBottomColor: 'white',
@@ -169,7 +191,6 @@ const styles = StyleSheet.create({
     borderWidth: 2, 
     borderColor: '#01579b',
     marginTop: 20,
-    marginLeft: 40,
   },
   inputBox: {
     width: 300,
