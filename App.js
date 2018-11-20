@@ -22,7 +22,8 @@ import Edit_Accomplishments from './pages/Edit_Accomplishments';
 import Add_Mentees from './pages/mentor/Add_Mentees';
 import View_Mentees from './pages/mentor/View_Mentees';
 import Mentee_Goals from './pages/mentor/Mentee_Goals';
-
+import View_Options from './pages/mentor/View_Options';
+import Mentee_Accomplishments from './pages/mentor/Mentee_Accomplishments';
 export default createStackNavigator({
   Login: {
     screen: Login,
@@ -86,6 +87,12 @@ export default createStackNavigator({
   },
   Mentee_Goals: {
     screen: Mentee_Goals,
+  },
+  View_Options: {
+    screen: View_Options,
+  },
+  Mentee_Accomplishments: {
+    screen: Mentee_Accomplishments,
   },
 }, {
     initialRouteName: 'Login',

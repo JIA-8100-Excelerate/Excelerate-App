@@ -49,20 +49,6 @@ class Register extends Component {
 
   }
   render() {
-    const renderMenteeTextBox = () => {
-      const views = [];
-      if (this.state.mentor) {
-        return(
-          <TextInput onChangeText={(value) => this.setState({mentee: value})}
-            style={styles.inputBox}
-            placeholder="Mentee email"
-            secureTextEntry={true}
-            placeholderTextColor="white"
-          />
-        )
-      }
-    }
-
     const { navigate } = this.props.navigation;
     return(
       <KeyboardAwareScrollView style={styles.scrollView}>
@@ -109,7 +95,6 @@ class Register extends Component {
             rightTextStyle = {{fontSize: 20, color: 'white', fontFamily: 'Arial-ItalicMT', fontWeight: 'bold',}}
             checkBoxColor='white'
           />
-          <View style={styles.container}>{renderMenteeTextBox()}</View>
           <View style={styles.buttonContainer}>    
             <View style={styles.button}>
               <Button   
