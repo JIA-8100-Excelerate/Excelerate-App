@@ -34,7 +34,7 @@ class Edit_Tasks extends Component {
           </View>);
       } else {
         return(
-            <Text style={styles.commentText}> {"(This task does not have any comment yet!)"} </Text>
+            <Text style={styles.commentText}> {"(This task does not have a comment yet!)"} </Text>
           );
       }
     }
