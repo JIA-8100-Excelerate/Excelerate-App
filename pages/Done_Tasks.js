@@ -63,8 +63,8 @@ class Done_Tasks extends Component {
           </View>);
         } else {
           views.push(
-            <View style={styles.container}>  
-              <View style={styles.taskCard} key={this.state.arr[i].id} >
+            <View style={styles.container} key={this.state.arr[i].id}>  
+              <View style={styles.taskCard}>
                 <Button      
                    title= {this.state.arr[i].name}
                    color= "gray"

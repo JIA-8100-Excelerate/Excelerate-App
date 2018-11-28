@@ -34,7 +34,7 @@ class Edit_Tasks extends Component {
           </View>);
       } else {
         return(
-            <Text style={styles.commentText}> {"(This task does not have any commets yet!)"} </Text>
+            <Text style={styles.commentText}> {"(This task does not have any commet yet!)"} </Text>
           );
       }
     }
@@ -47,12 +47,14 @@ class Edit_Tasks extends Component {
               style={styles.line}
             /> 
             <Text style={styles.actionText}> {this.state.taskName} </Text>
-             <TextInput
-              onChangeText={(value) => this.setState({comment: value})}
-              style={styles.inputBox}
-              placeholder="Make your suggestion here!"
-              placeholderTextColor="white"
-            /> 
+            <View style={styles.container}>
+              <TextInput
+                onChangeText={(value) => this.setState({comment: value})}
+                style={styles.inputBox}
+                placeholder="Make your suggestion here!"
+                placeholderTextColor="white"
+              /> 
+            </View>
             <View style={styles.button}>
               <Button 
                 title= "Make suggestion"
@@ -200,7 +202,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderColor: '#ffffff',
     backgroundColor: 'rgba(255,255,255,0.5)',
-    marginLeft: 40,
     marginTop: 20,
     paddingHorizontal: 16,
     color: '#ffffff'
