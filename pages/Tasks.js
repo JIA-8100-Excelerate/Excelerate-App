@@ -44,7 +44,7 @@ class Tasks extends Component {
         views.push(
         <View style={styles.container} key={ismentor}>
           <Text style={styles.titleText1}> Hi {firstName},</Text>
-          <Text style={styles.titleText2}> Here are {mentee}'s' tasks! </Text>  
+          <Text style={styles.titleText2}> Here are {mentee}'s tasks! </Text>  
         </View>);
       }
       for ( var i =0; i< this.state.arr.length; i++){

@@ -53,6 +53,16 @@ class Mentees_Goals extends Component {
           <Text style={styles.titleText1}> Hi {firstName},</Text>
           <Text style={styles.titleText2}> Here are {mentee}'s goals! </Text>
           {renderGoals()}
+          <View style={styles.button}>  
+                <Button
+                      title= "Back"
+                      color='gray'
+                      fontSize = '30'
+                      onPress={() => {
+                        navigate('Dashboard', , {mentor: firstName, ismentor: true});
+                  }}
+                />     
+          </View>
         </View>
       </KeyboardAwareScrollView>
     );
@@ -87,6 +97,17 @@ const styles = StyleSheet.create({
     marginRight: 20,
     textAlign: 'center',
     fontFamily: 'Arial-ItalicMT',
+  },
+  button: {
+    width: 300,
+    height: 40,
+    backgroundColor: '#01579b',
+    borderRadius: 20,
+    borderWidth: 2, 
+    borderColor: '#01579b',
+    marginTop: 10,
+    marginBottom: 10,
+    alignItems:'center', 
   },
   taskCard: {
     alignItems:'center',
