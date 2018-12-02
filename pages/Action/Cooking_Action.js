@@ -29,7 +29,7 @@ class Cooking_Action extends Component {
           <View
             style={styles.line}
           /> 
-          <Text style={styles.actionText}> What Action will your take for your COOKING goal? </Text>
+          <Text style={styles.actionText}> What Actions will you take for your COOKING goal? </Text>
 
           <CheckBox 
             style={{marginLeft: 60, marginTop: 20}}

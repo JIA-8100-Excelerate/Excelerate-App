@@ -21,7 +21,7 @@ class View_Options extends Component {
     return(
       <KeyboardAwareScrollView style={styles.scrollView}>
         <View style={styles.container}>
-          <Text style={styles.titleText1}> View your {mentee}'s information here! </Text> 
+          <Text style={styles.titleText1}> View {mentee}'s goals or accomplishments! </Text> 
           <View style={styles.taskCard}>
             <Button      
                  title= "View Mentee's Goals"

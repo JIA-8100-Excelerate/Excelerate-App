@@ -93,7 +93,7 @@ class Dashboard extends Component {
               <Text style={styles.titleText2}> This is Mentor's Dashboard! </Text> 
               <View style={styles.button}>
                 <Button
-                    title= "Add Mentees"
+                    title= "Add Mentee"
                     color= "gray"
                     onPress={() => {
                         navigate('Add_Mentees', {name: firstName});

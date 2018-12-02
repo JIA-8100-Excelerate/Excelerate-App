@@ -50,7 +50,7 @@ class View_Accomplishments extends Component {
       <KeyboardAwareScrollView style={styles.scrollView}>
         <View style={styles.container}>    
           <Text style={styles.titleText1}> Hi {firstName},</Text>
-          <Text style={styles.titleText2}> Here's your accomplishments! </Text> 
+          <Text style={styles.titleText2}> Please select a goal! </Text> 
           <View>
             {renderGoals()}
           </View> 

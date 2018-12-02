@@ -40,7 +40,7 @@ class Customized_Action extends Component {
           <View
             style={styles.line}
           /> 
-          <Text style={styles.actionText}> What Action will your take for your {goal} goal? </Text>
+          <Text style={styles.actionText}> What Actions will you take for your {goal} goal? </Text>
 
           <TextInput
             onChangeText={(value) => this.setState({customizedAction1: value})}

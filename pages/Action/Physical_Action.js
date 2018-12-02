@@ -29,7 +29,7 @@ class Physical_Action extends Component {
           <View
             style={styles.line}
           /> 
-          <Text style={styles.actionText}> What Action will your take for your PHYSICAL goal? </Text>
+          <Text style={styles.actionText}> What Actions will you take for your PHYSICAL goal? </Text>
 
           <CheckBox 
             style={{marginLeft: 40, marginTop: 20}}
