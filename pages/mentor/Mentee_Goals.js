@@ -56,10 +56,10 @@ class Mentees_Goals extends Component {
           <View style={styles.button}>  
                 <Button
                       title= "Back"
-                      color='gray'
+                      color='white'
                       fontSize = '30'
                       onPress={() => {
-                        navigate('Dashboard', , {mentor: firstName, ismentor: true});
+                        navigate('Dashboard', {name: firstName, ismentor: true});
                   }}
                 />     
           </View>
