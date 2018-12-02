@@ -111,6 +111,16 @@ class Dashboard extends Component {
               </View>
               <View style={styles.button}>  
                 <Button
+                      title= "Update Profile"
+                      color='gray'
+                      fontSize = '30'
+                      onPress={() => {
+                        navigate('Update_Profile', {name: firstName});
+                  }}
+                />     
+              </View>
+              <View style={styles.button}>  
+                <Button
                       title= "Logout"
                       color='gray'
                       fontSize = '30'
